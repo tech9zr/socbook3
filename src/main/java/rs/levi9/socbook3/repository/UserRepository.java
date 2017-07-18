@@ -7,9 +7,7 @@ import rs.levi9.socbook3.domain.User;
 @Repository
 public interface UserRepository  extends JpaRepository<User, Long>{
 	
-	public User findByUsername(String username);
-	public User findByStatus(boolean status);
-	public void deleteByUsername(String username);
+
 	
 
 }

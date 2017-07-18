@@ -15,10 +15,10 @@ import javax.validation.constraints.NotNull;
 @Table(name = "user")
 public class User extends BaseEntity implements Serializable {
 
-	public static final long seralVersionUID = 512343432423423l;
+	public static final long seralVersionUID = 5128632882797623323L;
 
 	@NotNull()
-	@Column(unique = true, nullable = false, name = "USER_NAME")
+	@Column(unique = true, nullable = false, name = "user_name")
 	private String username;
 	@NotNull()
 	@Column(name = "user_password")
@@ -29,7 +29,7 @@ public class User extends BaseEntity implements Serializable {
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name ="role_id")
+	//@Column(name ="role_id")
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<Role> roles;

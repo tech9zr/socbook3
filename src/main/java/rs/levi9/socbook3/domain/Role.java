@@ -7,22 +7,21 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "role")
 public class Role extends BaseEntity {
-	
-	   @Column(name = "type")
-	   @Enumerated(EnumType.STRING)
-	    private RoleType type;
 
-	    public RoleType getType() {
-	        return type;
-	    }
+    @Enumerated(EnumType.STRING)
+    private RoleType type;
 
-	    public void setType(RoleType type) {
-	        this.type = type;
-	    }
+    public RoleType getType() {
+        return type;
+    }
 
-	    public enum RoleType {
-	        ROLE_USER, ROLE_ADMIN
-	    }
+    public void setType(RoleType type) {
+        this.type = type;
+    }
+
+    public enum RoleType {
+        ROLE_USER, ROLE_ADMIN
+    }
+
 }

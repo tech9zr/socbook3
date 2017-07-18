@@ -9,7 +9,7 @@ import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserService  {
 
 	private UserRepository userRepository;
 
@@ -26,9 +26,9 @@ public class UserService {
 		return userRepository.findOne(id);
 	}
 
-	public User findByName(String username) {
-		return userRepository.findByUsername(username);
-	}
+//	public User findByName(String username) {
+//		return userRepository.findByUsername(username);
+//	}
 
 	public User save(User user) {
 		return userRepository.save(user);
@@ -38,8 +38,8 @@ public class UserService {
 		userRepository.delete(id);
 	}
 	
-	public void deleteByUsername(String username){
-		userRepository.deleteByUsername(username);
-	}
+//	public void deleteByUsername(String username){
+//		userRepository.deleteByUsername(username);
+//	}
 
 }
