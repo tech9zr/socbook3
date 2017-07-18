@@ -1,48 +1,69 @@
-<div class="container" ng-if="!checked">
-    <form role="form" ng-submit="vm.login()">
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" id="username" name="username" ng-model="vm.credentials.username"/>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password" name="password" ng-model="vm.credentials.password"/>
-        </div>
-        <div class="alert alert-danger" ng-if="vm.error">
-            Bad credentials!
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+<div class="container">
+    	<div class="row">
+			<div class="col-md-4 col-md-offset-4">
 
- 
- Register <input type="checkbox" ng-model="checked" aria-label="Toggle ngHide"><br />
- 
-<div class="check-element register" ng-if="checked">
- <div class="container">
-    <form role="form" ng-submit="vm.signup()">
-          <div class="form-group">
-            <label for="firstname">	Firstname:</label>
-            <input type="text" class="form-control" id="firstname" name="firstname" ng-model="vm.user.firstname"/>
-            </div>
-          <div class="form-group">
-            <label for="lastname">Lastname:</label>
-            <input type="text" class="form-control" id="lastname" name="lastname" ng-model="vm.user.lastname"/>
-        </div>
-          <div class="form-group">
-            <label for="email">	Email:</label>
-            <input type="email" class="form-control" id="email" name="email" ng-model="vm.user.email"/>
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" id="username" name="username" ng-model="vm.user.username"/>
-         </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password" name="password" ng-model="vm.user.password"/>
-        <div class="alert alert-danger" ng-if="vm.error">
-            Bad credentials!
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+			<div class="page-header">
+				<h1 class="text-center">Social Bookmarks</h1>
+			</div>
+			
+			<div ng-switch on="vm.toggleLoginRegister">
+			
+				<div ng-switch-when="login">
+				
+					<form name="vm.loginUserForm" role="form" ng-submit="vm.login()">
+		
+						<div class="form-group">
+							<label for="username">Username:</label> <input type="text" class="form-control" id="username" name="username" ng-model="vm.credentials.username" />
+						</div>
+		
+						<div class="form-group">
+							<label for="password">Password:</label> <input type="password" class="form-control" id="password" name="password" ng-model="vm.credentials.password" />
+						</div>
+		
+						<div class="alert alert-danger" ng-if="vm.loginError">Bad credentials!</div>
+		
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<a href="javascript:void(0)" ng-click="vm.toggleLoginRegister = 'register'" class=pull-right>Login</a>
+					</form>
+					
+				</div>
+			
+				<div ng-switch-when="register">
+				
+					<form name="vm.registerUserForm" role="form" ng-submit="vm.register(vm.registerInput)">
+		
+						<div class="form-group">
+							<label for="username">Username:</label> <input type="text" class="form-control" id="username" name="username" ng-model="vm.registerInput.username" />
+						</div>
+		
+						<div class="form-group">
+							<label for="password">Password:</label> <input type="password" class="form-control" id="password" name="password" ng-model="vm.registerInput.password" />
+						</div>
+		
+						<div class="form-group">
+							<label for="firstname"> Firstname:</label> <input type="text" class="form-control" id="firstname" name="firstname" ng-model="vm.registerInput.firstName" />
+						</div>
+		
+						<div class="form-group">
+							<label for="lastname">Lastname:</label> <input type="text" class="form-control" id="lastname" name="lastname" ng-model="vm.registerInput.lastName" />
+						</div>
+		
+						<div class="form-group">
+							<label for="email"> Email:</label> <input type="email" class="form-control" id="email" name="email"	ng-model="vm.registerInput.email" />
+						</div>
+		
+						<div class="alert alert-danger" ng-if="vm.registrationError">Registration failed!</div>
+		
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<a href="javascript:void(0)" ng-click="vm.toggleLoginRegister = 'login'" class=pull-right>Register</a>
+					</form>
+						
+				</div>
+				
+			</div>
+		
+		</div>
+	
+	</div>
+	
 </div>

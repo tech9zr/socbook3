@@ -11,14 +11,14 @@
                 controller: 'HomeController',
                 controllerAs: 'vm'
             })
-            .when('/signup', {
-                templateUrl: '/views/signup.html',
-                controller: 'SignupController',
+            .when('/books', {
+                templateUrl: '/views/books.html',
+                controller: 'BookController',
                 controllerAs: 'vm'
             })
-            .when('/login', {
-                templateUrl: '/views/login.html',
-                controller: 'MainController',
+            .when('/categories', {
+                templateUrl: '/views/categories.html',
+                controller: 'CategoryController',
                 controllerAs: 'vm'
             })
             .otherwise('/');

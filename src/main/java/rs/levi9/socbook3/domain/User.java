@@ -30,6 +30,10 @@ public class User extends BaseEntity implements Serializable {
 	
 	@Column(name = "last_name")
 	private String lastName;
+	
+	@NotNull()
+	@Column(unique = true, nullable = false, name = "email")
+	private String email;
 
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -40,14 +44,6 @@ public class User extends BaseEntity implements Serializable {
 
 	public List<Role> getRoles() {
 		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
-	public String getUsername() {
-		return username;
 	}
 
 	public void setUsername(String username) {
@@ -78,12 +74,28 @@ public class User extends BaseEntity implements Serializable {
 		this.lastName = lastName;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public boolean isStatus() {
 		return status;
 	}
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+	
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public String getUsername() {
+		return username;
 	}
 
 }
