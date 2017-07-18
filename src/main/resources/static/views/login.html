@@ -1,0 +1,48 @@
+<div class="container" ng-if="!checked">
+    <form role="form" ng-submit="vm.login()">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" ng-model="vm.credentials.username"/>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" ng-model="vm.credentials.password"/>
+        </div>
+        <div class="alert alert-danger" ng-if="vm.error">
+            Bad credentials!
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+ 
+ Register <input type="checkbox" ng-model="checked" aria-label="Toggle ngHide"><br />
+ 
+<div class="check-element register" ng-if="checked">
+ <div class="container">
+    <form role="form" ng-submit="vm.signup()">
+          <div class="form-group">
+            <label for="firstname">	Firstname:</label>
+            <input type="text" class="form-control" id="firstname" name="firstname" ng-model="vm.user.firstname"/>
+            </div>
+          <div class="form-group">
+            <label for="lastname">Lastname:</label>
+            <input type="text" class="form-control" id="lastname" name="lastname" ng-model="vm.user.lastname"/>
+        </div>
+          <div class="form-group">
+            <label for="email">	Email:</label>
+            <input type="email" class="form-control" id="email" name="email" ng-model="vm.user.email"/>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" ng-model="vm.user.username"/>
+         </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" ng-model="vm.user.password"/>
+        <div class="alert alert-danger" ng-if="vm.error">
+            Bad credentials!
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</div>
