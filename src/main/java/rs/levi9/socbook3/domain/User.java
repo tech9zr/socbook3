@@ -20,19 +20,23 @@ public class User extends BaseEntity implements Serializable {
 	@NotNull()
 	@Column(unique = true, nullable = false, name = "USER_NAME")
 	private String username;
+	
 	@NotNull()
 	@Column(name = "user_password")
 	private String password;
 
 	@Column(name = "first_name")
 	private String firstName;
+	
 	@Column(name = "last_name")
 	private String lastName;
 
-	@Column(name ="role_id")
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private List<Role> roles;
+	
+	@Column(name = "status")
+	private boolean status;
 
 	public List<Role> getRoles() {
 		return roles;
@@ -41,9 +45,6 @@ public class User extends BaseEntity implements Serializable {
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-
-	@Column(name = "status")
-	private boolean status;
 
 	public String getUsername() {
 		return username;

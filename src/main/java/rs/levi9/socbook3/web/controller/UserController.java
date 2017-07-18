@@ -1,5 +1,7 @@
 package rs.levi9.socbook3.web.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +27,10 @@ public class UserController {
 	@RequestMapping(method = RequestMethod.POST)
 	public User save(@Valid @RequestBody User user) {
 		return userService.save(user);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public List<User> findAll() {
+		return userService.findAll();
 	}
 }
