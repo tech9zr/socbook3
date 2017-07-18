@@ -1,12 +1,16 @@
 package rs.levi9.socbook3.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "role")
 public class Role extends BaseEntity {
 	
+	   @Column(name = "type")
 	   @Enumerated(EnumType.STRING)
 	    private RoleType type;
 

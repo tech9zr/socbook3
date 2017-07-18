@@ -1,32 +1,48 @@
 package rs.levi9.socbook3.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 public class User extends BaseEntity implements Serializable {
 
 	public static final long seralVersionUID = 512343432423423l;
-	
+
 	@NotNull()
 	@Column(unique = true, nullable = false, name = "USER_NAME")
 	private String username;
 	@NotNull()
-	@Column(name = "USER_PASSWORD")
+	@Column(name = "user_password")
 	private String password;
 
-	@Column(name = "FIRST_NAME")
+	@Column(name = "first_name")
 	private String firstName;
-	@Column(name = "LAST_NAME")
+	@Column(name = "last_name")
 	private String lastName;
-	// private Role role;
 
-	@Column(name = "STATUS")
+	@Column(name ="role_id")
+	@ManyToMany
+	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private List<Role> roles;
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	@Column(name = "status")
 	private boolean status;
 
 	public String getUsername() {
