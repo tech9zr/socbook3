@@ -2,6 +2,7 @@ package rs.levi9.socbook3.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -43,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             // ignore the static files
             .antMatchers("/", "/bower_components/**", "/css/**", "/js/**", "/views/**", "/images/**").permitAll()
+            .antMatchers(HttpMethod.POST, "/users").permitAll()
             // authenticate all remaining URLS
             .anyRequest().fullyAuthenticated().and()
             // enabling the basic authentication

@@ -54,7 +54,7 @@
             var base64Credential = btoa(self.credentials.username + ':' + self.credentials.password);
 
             // calling GET request for getting the user details
-            $http.get('user', {
+            $http.get('users/user', {
                 headers: {
                     // setting the Authorization Header
                     'Authorization': 'Basic ' + base64Credential
@@ -65,6 +65,7 @@
                 // setting the same header value for all request calling from this app
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + base64Credential;
                 self.user = res;
+                console.log(self.user);
                 init();
             }).error(function (error) {
                 self.loginError = 'Bad credentials!';

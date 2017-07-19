@@ -35,12 +35,12 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	 @RequestMapping(method = RequestMethod.GET)
+	 	@RequestMapping(method = RequestMethod.GET)
 	    public List<User> findAll() {
 	        return userService.findAll();
 	    }
 	
-	 @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+	 	@RequestMapping(path = "/{id}", method = RequestMethod.GET)
 	    public ResponseEntity findOne(@PathVariable("id") Long id) {
 	        User user = userService.findOne(id);
 	        if (user == null) {
@@ -48,7 +48,7 @@ public class UserController {
 	        }
 	        return new ResponseEntity(user, HttpStatus.OK);
 	    }
-	 
+	 	
 	 	@RequestMapping(method = RequestMethod.POST)
 	    public User save(@Valid @RequestBody User user) {
 	        return userService.save(user);
@@ -72,9 +72,8 @@ public class UserController {
 	    @RequestMapping("/user")
 	    public Map<String, Object> user(Authentication user) {
 	      Map<String, Object> map = new LinkedHashMap<String, Object>();
-	      map.put("name", user.getName());
-	      map.put("roles", AuthorityUtils.authorityListToSet(( user)
-	          .getAuthorities()));
+	      map.put("username", user.getName());
+	      map.put("roles", AuthorityUtils.authorityListToSet((user).getAuthorities()));
 	      return map;
 	    }
 }
