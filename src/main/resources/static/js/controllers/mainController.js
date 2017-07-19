@@ -38,7 +38,7 @@
         	user.roles = [{"id":1,"type":"ROLE_USER"}];
         	console.log(user);
         	RegisterService.saveUser(user).then(function(response){
-
+        	self.toggleLoginRegister = "login";
             }, function(error){
             	self.registrationError = {};
                 angular.forEach(error.data.exceptions, function(e){
