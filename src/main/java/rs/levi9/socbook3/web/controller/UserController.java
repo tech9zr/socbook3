@@ -41,7 +41,7 @@ public class UserController {
 	        return new ResponseEntity(user, HttpStatus.OK);
 	    }
 	 
-	 @RequestMapping(method = RequestMethod.POST)
+	 	@RequestMapping(method = RequestMethod.POST)
 	    public User save(@Valid @RequestBody User user) {
 	        return userService.save(user);
 	    }
@@ -50,6 +50,11 @@ public class UserController {
 	    public ResponseEntity delete(@PathVariable("id") Long id) {
 	        userService.delete(id);
 	        return new ResponseEntity(HttpStatus.OK);
+	    }
+	    
+	    @RequestMapping(path = "/username/{username}", method = RequestMethod.GET)
+	    public User findByUsername(@PathVariable("username") String username) {
+	    	return userService.findByUsername(username);
 	    }
 	    
 	    @RequestMapping(method = RequestMethod.PUT)

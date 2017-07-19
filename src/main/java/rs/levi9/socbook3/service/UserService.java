@@ -25,10 +25,10 @@ public class UserService  {
 	public User findOne(Long id) {
 		return userRepository.findOne(id);
 	}
-
-//	public User findByName(String username) {
-//		return userRepository.findByUsername(username);
-//	}
+	
+	public User findByUsername(String username){
+		return userRepository.findByUsername(username);
+	}
 
 	public User save(User user) {
 		return userRepository.save(user);
@@ -38,8 +38,5 @@ public class UserService  {
 		userRepository.delete(id);
 	}
 	
-//	public void deleteByUsername(String username){
-//		userRepository.deleteByUsername(username);
-//	}
 
 }
