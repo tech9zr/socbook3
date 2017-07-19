@@ -11,7 +11,7 @@
         self.register = register;
         self.login = login;
         self.logout = logout;
-        self.toggleLoginRegister = "register";
+        self.toggleLoginRegister = "login";
         self.user;
         self.loginError;
         self.registrationError;
