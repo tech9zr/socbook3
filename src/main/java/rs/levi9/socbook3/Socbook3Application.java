@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 
 @EnableGlobalMethodSecurity(prePostEnabled =true)
 @SpringBootApplication
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class Socbook3Application
 {
 

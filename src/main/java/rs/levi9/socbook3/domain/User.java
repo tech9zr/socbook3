@@ -1,7 +1,9 @@
 package rs.levi9.socbook3.domain;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,11 +13,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+
+
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity implements Serializable {
 
 	public static final long seralVersionUID = 5128632882797623323L;
+	
 
 	@NotNull()
 	@Column(unique = true, nullable = false, name = "user_name")
@@ -37,12 +42,12 @@ public class User extends BaseEntity implements Serializable {
 
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<Role> roles;
+	private Set<Role> roles;
 	
 	@Column(name = "status")
 	private boolean status;
 
-	public List<Role> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
@@ -90,12 +95,14 @@ public class User extends BaseEntity implements Serializable {
 		this.status = status;
 	}
 	
-	public void setRoles(List<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 
 	public String getUsername() {
 		return username;
 	}
+
+
 
 }

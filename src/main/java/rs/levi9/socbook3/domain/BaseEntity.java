@@ -5,8 +5,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
+import org.springframework.security.core.userdetails.UserDetails;
 
+@MappedSuperclass
 public abstract class BaseEntity {
 
 	@Id
