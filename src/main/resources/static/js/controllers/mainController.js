@@ -81,6 +81,17 @@
             delete self.error;
         }
         
+        function errorHandler(error){
+            switch(error.field){
+                case 'username':
+                    self.registrationError.username = error.message;
+                    break;
+                case 'email':
+                    self.registrationError.email = error.message;
+                    break;
+            }
+        }
+        
     }
 
 })();

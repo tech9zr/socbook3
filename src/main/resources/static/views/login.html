@@ -31,10 +31,16 @@
 				<div ng-switch-when="register">
 				
 					<form name="vm.registerUserForm" role="form" ng-submit="vm.register(vm.registerInput)">
-		
+						
 						<div class="form-group">
-							<label for="username">Username:</label> <input type="text" class="form-control" id="username" name="username" ng-model="vm.registerInput.username" />
-						</div>
+							<label for="username">Username:</label>
+							
+	                        <div class="modal-item" ng-class="{ 'has-error' : vm.registerUserForm.username.$invalid && !vm.registerUserForm.username.$pristine }">
+	                            <input name="username" type="text" class="form-control" required ng-model="vm.registerInput.username"/>
+	                            <span class="error" ng-show="vm.registerUserForm.username.$invalid && !vm.registerUserForm.username.$pristine">* Username is required!</span>
+	                            <span ng-if="vm.registrationError.username" class="error">* {{vm.registrationError.username}}</span>
+	                        </div>
+                        </div>
 		
 						<div class="form-group">
 							<label for="password">Password:</label> <input type="password" class="form-control" id="password" name="password" ng-model="vm.registerInput.password" />
@@ -47,10 +53,16 @@
 						<div class="form-group">
 							<label for="lastname">Lastname:</label> <input type="text" class="form-control" id="lastname" name="lastname" ng-model="vm.registerInput.lastName" />
 						</div>
-		
+
 						<div class="form-group">
-							<label for="email"> Email:</label> <input type="email" class="form-control" id="email" name="email"	ng-model="vm.registerInput.email" />
-						</div>
+							<label for="username">Email:</label>
+							
+	                        <div class="modal-item" ng-class="{ 'has-error' : vm.registerUserForm.email.$invalid && !vm.registerUserForm.email.$pristine }">
+	                            <input name="email" type="text" class="form-control" required ng-model="vm.registerInput.email"/>
+	                            <span class="error" ng-show="vm.registerUserForm.email.$invalid && !vm.registerUserForm.email.$pristine">* Email is required!</span>
+	                            <span ng-if="vm.registrationError.email" class="error">* {{vm.registrationError.email}}</span>
+	                        </div>
+                        </div>
 		
 						<div class="alert alert-danger" ng-if="vm.registrationError">Registration failed!</div>
 		

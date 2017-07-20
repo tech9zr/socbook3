@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.service.UserService;
+import rs.levi9.socbook3.web.validation.EmailAlreadyExistsException;
+import rs.levi9.socbook3.web.validation.UsernameAlreadyExistsException;
 
 @RestController
 @RequestMapping("/users")
@@ -50,7 +52,15 @@ public class UserController {
 	    }
 	 	
 	 	@RequestMapping(method = RequestMethod.POST)
-	    public User save(@Valid @RequestBody User user) {
+	    public User save(@Valid @RequestBody User user) throws UsernameAlreadyExistsException, EmailAlreadyExistsException {
+	 		User userByUsername = userService.findByUsername(user.getUsername());
+	 		if (userByUsername != null) {
+	 			throw new UsernameAlreadyExistsException("Username already taken!");
+	 		}
+	 		User userByEmail = userService.findByEmail(user.getEmail());
+	 		if (userByEmail != null) {
+	 			throw new EmailAlreadyExistsException("Email already in use!");
+	 		}
 	        return userService.save(user);
 	    }
 	    
