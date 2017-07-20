@@ -1,7 +1,5 @@
 package rs.levi9.socbook3.web.controller;
 
-import java.security.Principal;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.service.UserService;
-import rs.levi9.socbook3.web.validation.EmailAlreadyExistsException;
-import rs.levi9.socbook3.web.validation.UsernameAlreadyExistsException;
+import rs.levi9.socbook3.web.validation.exceptions.EmailAlreadyExistsException;
+import rs.levi9.socbook3.web.validation.exceptions.UsernameAlreadyExistsException;
 
 @RestController
 @RequestMapping("/users")
@@ -55,11 +52,11 @@ public class UserController {
 	    public User save(@Valid @RequestBody User user) throws UsernameAlreadyExistsException, EmailAlreadyExistsException {
 	 		User userByUsername = userService.findByUsername(user.getUsername());
 	 		if (userByUsername != null) {
-	 			throw new UsernameAlreadyExistsException("Username already taken!");
+	 			throw new UsernameAlreadyExistsException("Username already taken, choose another one!");
 	 		}
 	 		User userByEmail = userService.findByEmail(user.getEmail());
 	 		if (userByEmail != null) {
-	 			throw new EmailAlreadyExistsException("Email already in use!");
+	 			throw new EmailAlreadyExistsException("User with this email already exists!");
 	 		}
 	        return userService.save(user);
 	    }

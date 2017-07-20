@@ -41,10 +41,15 @@
 	                            <span ng-if="vm.registrationError.username" class="error">* {{vm.registrationError.username}}</span>
 	                        </div>
                         </div>
-		
+						
 						<div class="form-group">
-							<label for="password">Password:</label> <input type="password" class="form-control" id="password" name="password" ng-model="vm.registerInput.password" />
-						</div>
+							<label for="password">Password:</label>
+							
+	                        <div class="modal-item" ng-class="{ 'has-error' : vm.registerUserForm.password.$invalid && !vm.registerUserForm.password.$pristine }">
+	                            <input name="password" type="text" class="form-control" required ng-model="vm.registerInput.password"/>
+	                            <span class="error" ng-show="vm.registerUserForm.password.$invalid && !vm.registerUserForm.password.$pristine">* Password is required!</span>
+	                        </div>
+                        </div>
 		
 						<div class="form-group">
 							<label for="firstname"> Firstname:</label> <input type="text" class="form-control" id="firstname" name="firstname" ng-model="vm.registerInput.firstName" />
@@ -55,7 +60,7 @@
 						</div>
 
 						<div class="form-group">
-							<label for="username">Email:</label>
+							<label for="email">Email:</label>
 							
 	                        <div class="modal-item" ng-class="{ 'has-error' : vm.registerUserForm.email.$invalid && !vm.registerUserForm.email.$pristine }">
 	                            <input name="email" type="text" class="form-control" required ng-model="vm.registerInput.email"/>
