@@ -11,9 +11,9 @@
                 controller: 'HomeController',
                 controllerAs: 'vm'
             })
-            .when('/books', {
-                templateUrl: '/views/books.html',
-                controller: 'BookController',
+            .when('/bookmarks', {
+                templateUrl: '/views/bookmark.html',
+                controller: 'BookmarkController',
                 controllerAs: 'vm'
             })
             .when('/categories', {

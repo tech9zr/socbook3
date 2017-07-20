@@ -14,6 +14,7 @@ angular.module('app')
         vm.saveBookmark = saveBookmark;
         vm.selectBookmark = selectBookmark;
         vm.operation;
+        
 
         init();
 
@@ -23,7 +24,7 @@ angular.module('app')
             vm.error = {};
             //Create new book
             vm.bookmark = {
-                publishDate: new Date()
+                creationDate: new Date()
             };
             vm.closeModal = false;
         }
@@ -97,9 +98,9 @@ angular.module('app')
         }
 
         function saveBookmark(bookmark){
-            bookmark.publishDate = $filter('date')(bookmark.publishDate, "yyyy-MM-dd");
+            bookmark.creationDate = $filter('date')(bookmark.creationDate, "yyyy-MM-dd");
             BookmarkService.saveBookmark(bookmark).then(function(response){
-                getBookmarkss();
+                getBookmarks();
                 $('#add-bookmark-modal').modal('hide');
             }, function(error){
                 vm.error = {};
@@ -108,7 +109,7 @@ angular.module('app')
                 });
             })
             //remove input value after submit
-            vm.addBookForm.$setPristine();
+            vm.addBookmarkForm.$setPristine();
             vm.error = {};
         }
         
