@@ -25,7 +25,7 @@
                     	<p ng-repeat="tag in bookmark.tags">{{tag.name}}</p>
                     </td>
                     <td>{{bookmark.url}}</td>
-                    <td>{{bookmark.creationDate}}</td>
+                    <td>{{bookmark.creationDate | date : "d MMM y"}}</td>
                     <td>{{bookmark.visible}}</td>
                     <td class="option">
                         <button class="btn btn-default" data-toggle="modal" data-target="#add-bookmark-modal" type="button" ng-click="vm.editBookmark(bookmark)">
@@ -61,7 +61,7 @@
                         <h4 class="modal-title">Delete bookmark</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Do you want to delete <i>{{vm.bookmark.title}}</i>, by <i>{{vm.bookmark.author}}</i> ?</p>
+                        <p>Do you want to delete <i>{{vm.bookmark.title}}</i> ?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.deleteBookmark(vm.selectedBookmark.id)">OK</button>
@@ -79,7 +79,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">{{vm.operation}} category</h4>
+                        <h4 class="modal-title">{{vm.operation}} Bookmark</h4>
                     </div>
                     <div class="modal-body">
                         <!-- Category Form -->
@@ -123,7 +123,7 @@
                                 <span class="input-group error "input-group"" ng-show="vm.addBookmarkForm.datePicker.$invalid && !vm.addBookmarkForm.$pristine">* Date is in wrong format!</span>
                                    <label>Visible:</label>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.visible.$invalid && !vm.addBookmarkForm.visible.$pristine }">
-                                    <input name="visible" type="text" class="form-control" required ng-model="vm.bookmark.visible"/>
+                                    <input name="visible" type="checkbox" class="form-control" required ng-model="vm.bookmark.visible"/>
                                     <span class="error" ng-show="vm.addBookmarkForm.visible.$invalid && !vm.addBookmarkForm.visible.$pristine">* Description is required! </span>
                                 </div>
                             </div>

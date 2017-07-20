@@ -57,7 +57,7 @@ angular.module('app')
         	vm.error = {};
             vm.operation = "Edit";
             vm.bookmark = angular.copy(bookmark);
-            vm.bookmark.publishDate = new Date(vm.bookmark.publishDate.split('-').join(' '));
+            vm.bookmark.creationDate = new Date(vm.bookmark.creationDate.split('-').join(' '));
         }
 
         function getCategories(){
@@ -99,6 +99,8 @@ angular.module('app')
 
         function saveBookmark(bookmark){
             bookmark.creationDate = $filter('date')(bookmark.creationDate, "yyyy-MM-dd");
+            var tag = bookmark.tags;
+            bookmark.tags = {"name":tag};
             BookmarkService.saveBookmark(bookmark).then(function(response){
                 getBookmarks();
                 $('#add-bookmark-modal').modal('hide');
