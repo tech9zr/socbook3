@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import rs.levi9.socbook3.domain.User;
+import rs.levi9.socbook3.domain.Bookmark;
 import rs.levi9.socbook3.service.BookmarkService;
 
 @RestController

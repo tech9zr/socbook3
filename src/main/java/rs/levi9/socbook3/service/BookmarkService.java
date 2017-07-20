@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import rs.levi9.socbook3.domain.User;
+import rs.levi9.socbook3.domain.Bookmark;
 import rs.levi9.socbook3.repository.BookmarkRepository;
 
 @Service
@@ -27,7 +27,7 @@ public class BookmarkService
 		return bookmarkRepository.findOne(id);
 	}
 	
-	public Bookmark save(Bookmakr bookmark) {
+	public Bookmark save(Bookmark bookmark) {
 		return bookmarkRepository.save(bookmark);
 	}
 	
