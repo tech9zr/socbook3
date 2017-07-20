@@ -16,9 +16,6 @@ import javax.validation.constraints.NotNull;
 public class Bookmark extends BaseEntity implements Serializable {
 
 
-
-	
-
 	private static final long serialVersionUID = 817056055809397349L;
 
 	@NotNull
