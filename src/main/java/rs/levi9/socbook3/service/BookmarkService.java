@@ -9,16 +9,15 @@ import rs.levi9.socbook3.domain.Bookmark;
 import rs.levi9.socbook3.repository.BookmarkRepository;
 
 @Service
-public class BookmarkService
-{
-   private BookmarkRepository bookmarkRepository;
+public class BookmarkService {
+	private BookmarkRepository bookmarkRepository;
 
-   @Autowired
-   public BookmarkService(BookmarkRepository bookmarkRepository) {
-	
-	this.bookmarkRepository = bookmarkRepository;
-}
-   
+	@Autowired
+	public BookmarkService(BookmarkRepository bookmarkRepository) {
+
+		this.bookmarkRepository = bookmarkRepository;
+	}
+
 	public List<Bookmark> findAll() {
 		return bookmarkRepository.findAll();
 	}
@@ -26,13 +25,13 @@ public class BookmarkService
 	public Bookmark findOne(Long id) {
 		return bookmarkRepository.findOne(id);
 	}
-	
+
 	public Bookmark save(Bookmark bookmark) {
 		return bookmarkRepository.save(bookmark);
 	}
-	
-	public void delete(Long id){
+
+	public void delete(Long id) {
 		bookmarkRepository.delete(id);
 	}
-	
+
 }
