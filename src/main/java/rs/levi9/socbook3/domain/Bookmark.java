@@ -3,10 +3,13 @@ package rs.levi9.socbook3.domain;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -14,10 +17,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "bookmark")
 public class Bookmark extends BaseEntity implements Serializable {
-
-
-
-	
 
 	private static final long serialVersionUID = 817056055809397349L;
 
@@ -29,21 +28,36 @@ public class Bookmark extends BaseEntity implements Serializable {
 	@NotNull()
 	@Column(unique = false, nullable = false, name = "title")
 	private String title;
+
 	@NotNull()
 	@Column(unique = false, nullable = false, name = "description")
 	private String description;
+
 	@NotNull()
-	@Column(unique = false, nullable = false, name = "tags")
-	private List<String> tags;
+	@ManyToOne
+	@JoinColumn(name = "category_id", nullable = false,unique = false)
+	private Category category;
+
+	@ManyToMany
+	@Column (name= "tags")
+	@JoinTable(joinColumns = @JoinColumn(name = "bookmark_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
+	private Set<Tag> tags;
+
 	@NotNull()
 	@Column(unique = false, nullable = false, name = "url")
 	private String url;
+	
 	@NotNull()
 	@Column(unique = false, nullable = false, name = "visible")
 	private boolean visible;
+
 	@NotNull()
 	@Column(unique = false, nullable = false, name = "creation_date")
 	private Date creationDate;
+
+	public Bookmark() {
+
+	}
 
 	public User getUser() {
 		return user;
@@ -69,11 +83,13 @@ public class Bookmark extends BaseEntity implements Serializable {
 		this.description = description;
 	}
 
-	public List<String> getTags() {
+	
+
+	public Set<Tag> getTags() {
 		return tags;
 	}
 
-	public void setTags(List<String> tags) {
+	public void setTags(Set<Tag> tags) {
 		this.tags = tags;
 	}
 
@@ -100,5 +116,14 @@ public class Bookmark extends BaseEntity implements Serializable {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
 
 }
