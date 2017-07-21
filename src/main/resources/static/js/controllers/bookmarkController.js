@@ -2,9 +2,9 @@
 angular.module('app')
     .controller('BookmarkController', BookmarkController);
     
-    BookmarkController.$inject = ['$filter', 'CategoryService', 'BookmarkService', 'uibDateParser'];
+    BookmarkController.$inject = ['$filter', 'CategoryService', 'BookmarkService', 'uibDateParser', 'TagService'];
    
-    function BookmarkController($filter, CategoryService, BookmarkService, uibDateParser) {
+    function BookmarkController($filter, CategoryService, BookmarkService, TagService, uibDateParser) {
         
         var vm = this;
         vm.addBookmark = addBookmark;
@@ -13,6 +13,7 @@ angular.module('app')
         vm.openCalendar = openCalendar;
         vm.saveBookmark = saveBookmark;
         vm.selectBookmark = selectBookmark;
+        vm.addTag = addTag;
         vm.operation;
         
 
@@ -86,19 +87,21 @@ angular.module('app')
             return '* ' + error[0].toUpperCase() + error.slice(1); 
         }
 
-        function errorHandler(error){
-            switch(error.field){
-                case 'title':
-                    vm.error.title = capitalize(error.message);
-                    break;
-                case 'isbn':
-                    vm.error.isbn = capitalize(error.message);
-                    break;
-            }
-        }
-
         function saveBookmark(bookmark){
             bookmark.creationDate = $filter('date')(bookmark.creationDate, "yyyy-MM-dd");
+            console.log(vm.bookmark.tags);
+            
+            //Add new tags
+            
+            angular.forEach(vm.bookmark.tags, function(tag){
+            	if("undefined" === typeof tag.id)
+            		TagService.saveTag(tag).then(function(response){
+
+                    }, function(error){
+
+                    });
+            });
+            		
             var tag = bookmark.tags;
             bookmark.tags = {"name":tag};
             BookmarkService.saveBookmark(bookmark).then(function(response){
@@ -115,8 +118,27 @@ angular.module('app')
             vm.error = {};
         }
         
+        function addTag() {
+        	console.log(vm.bookmark.tag.name)
+        	if("undefined" === typeof vm.bookmark.tags)
+        		vm.bookmark.tags = [];
+        	vm.bookmark.tags.push({"name":vm.bookmark.tag.name});
+        	console.log(vm.bookmark.tags);
+        }
+        
         function selectBookmark(bookmark){
             vm.bookmark = bookmark;
+        }
+        
+        function errorHandler(error){
+            switch(error.field){
+                case 'title':
+                    vm.error.title = capitalize(error.message);
+                    break;
+                case 'isbn':
+                    vm.error.isbn = capitalize(error.message);
+                    break;
+            }
         }
     };
 })();

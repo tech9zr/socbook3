@@ -17,16 +17,23 @@
             </thead>
             <tbody ng-repeat="bookmark in vm.bookmarks track by $index">
                 <tr>
-                    <td>{{$index}}</td>
+                    <td>{{$index + 1}}</td>
                     <td>{{bookmark.category.name}}</td>
                     <td>{{bookmark.title}}</td>
                     <td>{{bookmark.description}}</td>
                     <td>
-                    	<p ng-repeat="tag in bookmark.tags">{{tag.name}}</p>
+                    	<span ng-repeat="tag in bookmark.tags">
+	                    	<label class="label-primary">{{tag.name}}</label>
+                    	</span>
                     </td>
-                    <td>{{bookmark.url}}</td>
+                    <td>
+                    	<a href="http://{{bookmark.url}}">{{bookmark.url}}</a>
+                    </td>
                     <td>{{bookmark.creationDate | date : "d MMM y"}}</td>
-                    <td>{{bookmark.visible}}</td>
+                    <td>
+                    	<input type="checkbox" class="form-control" ng-model="bookmark.visible" ng-true-value="true" ng-false-value="false" disabled>
+                    		 
+                    	</input>
                     <td class="option">
                         <button class="btn btn-default" data-toggle="modal" data-target="#add-bookmark-modal" type="button" ng-click="vm.editBookmark(bookmark)">
                             <span class="glyphicon glyphicon-pencil"></span>
@@ -88,7 +95,7 @@
                                 <label>Category: </label>
                                 <div class="modal-item">
                                     <select class="form-control" name="selectCategory" ng-options="category.name for category in vm.categories track by category.id"
-                                            ng-model="vm.book.category" required>
+                                            ng-model="vm.bookmark.category" required>
                                         <option value="" ng-disabled="true" disabled>---Must select category---</option>
                                     </select>
                                 </div>
@@ -104,14 +111,21 @@
                                     <span class="error" ng-show="vm.addBookmarkForm.description.$invalid && !vm.addBookmarkForm.description.$pristine">* Description is required! </span>
                                 </div>
                                       <label>Tags:</label>
-                                <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.tags.$invalid && !vm.addBookmarkForm.tags.$pristine }">
-                                    <input name="tags" type="text" class="form-control" required ng-model="vm.bookmark.tags"/>
-                                    <span class="error" ng-show="vm.addBookmarkForm.tags.$invalid && !vm.addBookmarkForm.tags.$pristine">* Description is required! </span>
+								<div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.tags.$invalid && !vm.addBookmarkForm.tags.$pristine }"> 
+                                	<div class="input-group">
+	      								<input name="tags" type="text" class="form-control" placeholder="Add tag..." ng-model="vm.bookmark.tag.name">
+								      <span class="input-group-btn">
+								        <button class="btn btn-primary" type="button" ng-click="vm.addTag()"><strong>Add</strong></button>
+								      </span>
+								    </div>
+								    <span ng-repeat="tag in vm.bookmark.tags">
+	                    				<label class="label-primary">{{tag.name}}</label>
+                    				</span>
                                 </div>
                                       <label>URL:</label>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.url.$invalid && !vm.addBookmarkForm.url.$pristine }">
                                     <input name="url" type="text" class="form-control" required ng-model="vm.bookmark.url"/>
-                                    <span class="error" ng-show="vm.addBookmarkForm.url.$invalid && !vm.addBookmarkForm.url.$pristine">* Description is required! </span>
+                                    <span class="error" ng-show="vm.addBookmarkForm.url.$invalid && !vm.addBookmarkForm.url.$pristine">* URL is required! </span>
                                 </div>
                                 <label>Date:</label>
                                 <div class="modal-item input-group" ng-class="{ 'has-error' : vm.addBookMarkForm.datePicker.$invalid && !vm.addBookmarkForm.$pristine }">
@@ -124,7 +138,6 @@
                                    <label>Visible:</label>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.visible.$invalid && !vm.addBookmarkForm.visible.$pristine }">
                                     <input name="visible" type="checkbox" class="form-control" required ng-model="vm.bookmark.visible"/>
-                                    <span class="error" ng-show="vm.addBookmarkForm.visible.$invalid && !vm.addBookmarkForm.visible.$pristine">* Description is required! </span>
                                 </div>
                             </div>
                         </form>
