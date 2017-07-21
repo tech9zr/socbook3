@@ -35,8 +35,8 @@ INSERT INTO `tag` (`name`) values("Prskanje");
 INSERT INTO `tag` (`name`) values("Odrzavanje");
 
 INSERT INTO `bookmark` (`creation_date`,`description`,`title`,`url`,`visible`,`category_id`,`user_id`) VALUES (NOW(),"Sve zivo o kuvanju na nas nacin...","Kulinarstvo","www.kulinarstvo.rs", true,1,2);
-INSERT INTO `bookmark` (`creation_date`,`description`,`title`,`url`,`visible`,`category_id`,`user_id`) VALUES (NOW(),"Sve o sportu...","Sport","www.sport.rs", true,2,2);
-INSERT INTO `bookmark` (`creation_date`,`description`,`title`,`url`,`visible`,`category_id`,`user_id`) VALUES (NOW(),"TV stream ...","Stream","www.stream.rs", true,3,2);
+INSERT INTO `bookmark` (`creation_date`,`description`,`title`,`url`,`visible`,`category_id`,`user_id`) VALUES (NOW(),"Sve o sportu...","Sport","www.sport.rs", false,2,2);
+INSERT INTO `bookmark` (`creation_date`,`description`,`title`,`url`,`visible`,`category_id`,`user_id`) VALUES (NOW(),"TV stream ...","Stream","www.stream.rs", false,3,2);
 INSERT INTO `bookmark` (`creation_date`,`description`,`title`,`url`,`visible`,`category_id`,`user_id`) VALUES (NOW(),"Sve o vocarstvu...","Vocarstvo","www.vocarstvo.rs", true,4,1);
 
 
