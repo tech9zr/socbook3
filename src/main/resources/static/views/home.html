@@ -19,7 +19,9 @@
                     <td>{{bookmark.title}}</td>
                     <td>{{bookmark.description}}</td>
                     <td>
-                    	<p ng-repeat="tag in bookmark.tags">{{tag.name}}</p>
+           				<span ng-repeat="tag in bookmark.tags">
+            				<label class="label-primary">{{tag.name}}</label>
+           				</span>
                     </td>
                     <td>{{bookmark.url}}</td>
                     <td>{{bookmark.creationDate | date : "d MMM y"}}</td>
