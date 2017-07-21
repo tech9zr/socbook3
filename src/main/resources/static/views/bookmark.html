@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody ng-repeat="bookmark in vm.bookmarks track by $index">
-                <tr>
+                <tr ng-if="bookmark.user.name ==">
                     <td>{{$index + 1}}</td>
                     <td>{{bookmark.category.name}}</td>
                     <td>{{bookmark.title}}</td>
