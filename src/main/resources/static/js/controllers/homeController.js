@@ -2,45 +2,61 @@
     angular.module('app')
             .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['CategoryService', 'BookService', '$location', '$http'];
+    HomeController.$inject = ['CategoryService', 'BookmarkService', '$location', '$http'];
 
-    function HomeController(CategoryService, BookService, $location) {
+    function HomeController(CategoryService, BookmarkService, $location) {
 
         var vm = this;
         vm.isActive = isActive;
         vm.categories;
-        vm.books;
-
+        vm.bookmarks;
+        vm.getBookmarkByVisible= getBookmarkByVisible;
+       
         init();
 
         function init() {
             getCategories();
-            getBooks();
+            getBookmarkByVisible();
+            
         }
 
         function getCategories() {
             CategoryService.getCategories().then(handleSuccessCategories);
         }
 
-        function getBooks() {
-            BookService.getBooks().then(handleSuccessBooks);
+        function getBookmarks() {
+            BookmarkService.getBookmarks().then(handleSuccessBookmarks);
         }
 
         //Get all category
-        function handleSuccessCategories(data, status) {
+        function handleSuccessCategories(data, status)
+        {
             vm.categories = data;
         }
 
         //Get all books
-        function handleSuccessBooks(data, status) {
-            vm.books = data.data;
+        function handleSuccessBookmarks(data, status)
+        {
+            vm.bookmarks = data.data;
         }
 
 
         //nav-bar
-        function isActive(viewLocation) {
+        function isActive(viewLocation) 
+        {
             return viewLocation === $location.path();
         }
-    }
+        
+        function getBookmarkByVisible(){
+            BookmarkService.getBookmarkByVisible(true).then(function(response){
+               vm.bookmarks=response.data;
+            }, function(error){
+
+            });
+        }
+
+        
+     
+        }
 
 })();
