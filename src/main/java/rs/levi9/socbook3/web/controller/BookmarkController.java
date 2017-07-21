@@ -61,21 +61,23 @@ public class BookmarkController {
 		return bookmarkService.save(bookmark);
 	}
 
-	
+	// pretraga po korisnickom imenu, vraca sve bookmarke javne i privatne
 	  @RequestMapping(path = "/username/{user}", method = RequestMethod.GET)
 	    public List<Bookmark> findByUser(@PathVariable("user") String username) {
 		  	User foundUser = userService.findByUsername(username);
 	    	return bookmarkService.findByUser(foundUser);
 	    }
 	  
+	  // pretraga po vidljivosti, vraca  javne 
 	  @RequestMapping(path = "/visible/{vis}", method = RequestMethod.GET)
 	  public List<Bookmark> findByVisible (@PathVariable("vis") boolean visible){
 		  return bookmarkService.findByVisible(visible);
 	  }
 	  
+	  // pretraga po korisniku, vraca samo njegove javne bookmark-e
 	  @RequestMapping(path = "/user/{user}", method = RequestMethod.GET)
 	  public List<Bookmark> findByUserAndVisible(@PathVariable("user") String username, boolean visible){
 		  User foundUser = userService.findByUsername(username);
-		  return bookmarkService.findByUserAndVisible(foundUser, true);
+		  return bookmarkService.findByUserAndVisible(foundUser, visible);
 	  }
 }

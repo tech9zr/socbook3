@@ -3,7 +3,7 @@
         <div>
             <table class="table table-bordered table-hover">
                 <thead>
-                    <tr>
+                    <tr class="success">
                         <th>#</th>
                         <th>Category</th>
                         <th>Edit</th>
@@ -45,14 +45,14 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <button type="button" class="btn btn-primary"  class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">Delete category</h4>
                     </div>
                     <div class="modal-body">
                         <p>Do you want to delete <i>{{vm.category.name}}</i> ?</p>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.deleteCategory()">OK</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="vm.deleteCategory()">OK</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
 
@@ -67,7 +67,7 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <button type="button" class="btn btn-primary"  class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">{{vm.operation}} category</h4>
                     </div>
                     <div class="modal-body">
@@ -83,8 +83,8 @@
                             </div>
                         </form>
                         <div class="modal-footer">
-                            <button type="button" ng-disabled="vm.addCategoryForm.name.$invalid" data-dismiss="modal" class="btn btn-default" ng-click="vm.saveCategory(vm.category)">OK</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.cancelForm()">Cancel</button>
+                            <button type="button" ng-disabled="vm.addCategoryForm.name.$invalid" data-dismiss="modal" class="btn btn-primary" ng-click="vm.saveCategory(vm.category)">OK</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="vm.cancelForm()">Cancel</button>
                         </div>
                     </div>
                 </div>

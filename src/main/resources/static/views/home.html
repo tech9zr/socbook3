@@ -1,33 +1,30 @@
 <div class="row">
-    <div class="col-sm-9">
-        <div class="jumbotron">
+ <div class="col-sm-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr class="success">
+                    <th>#</th>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Tags</th>
+                    <th>URL</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="bookmark in vm.bookmarks track by $index">
+                <tr>
+                    <td>{{$index}}</td>
+                    <td>{{bookmark.category.name}}</td>
+                    <td>{{bookmark.title}}</td>
+                    <td>{{bookmark.description}}</td>
+                    <td>
+                    	<p ng-repeat="tag in bookmark.tags">{{tag.name}}</p>
+                    </td>
+                    <td>{{bookmark.url}}</td>
+                    <td>{{bookmark.creationDate | date : "d MMM y"}}</td>
+             </tr>
+            </tbody>
+        </table>
         </div>
-        <div>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Image</th>
-                        <th>Author</th>
-                        <th>Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="book in vm.books track by $index">
-                        <td>{{$index}}</td>
-                        <td>{{book.title}}</td>
-                        <td>{{book.author}}</td>
-                        <td>{{book.publishDate}}</td>
-                    </tr>
-                </tbody>
-            </table> 
         </div>
-    </div>
-    <div class="col-sm-3">
-        <div class="list-group">
-            <button type="button" class="list-group-item">All</button>
-            <button ng-repeat="category in vm.categories| orderBy: 'name'" type="button" class="list-group-item">{{category.name}}</button>
-        </div>
-    </div>
-</div>

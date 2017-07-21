@@ -11,11 +11,25 @@
 
         var bookmarksList = [];
 
+
         this.getBookmarks = function () {
             var def = $q.defer();
             var req = {
                 method: 'GET',
                 url: "bookmarks"
+            }
+            return $http(req).success(function (response) {
+                return bookmarksList = response.data;
+            }).error(function () {
+                return def.reject("Failed to get bookmark");
+            });
+        } 
+        
+        this.getBookmarkByVisible = function (visible) {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: "bookmarks/visible/" + visible
             }
             return $http(req).success(function (response) {
                 return bookmarksList = response.data;

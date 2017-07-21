@@ -14,7 +14,7 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
 
 	public List<Bookmark> findByUser(User user);// pretraga po imenu korisnika, svi privatni i javni 
 
-	public List<Bookmark> findByVisible(boolean visible);  // pretraga po vidljivosti svi javni ili privatni za sve korisnike
+	public List<Bookmark> findByVisible(boolean visible);  // pretraga po vidljivosti svi javni za sve korisnike
 
 	public List<Bookmark> findByUserAndVisible(User user, boolean visible); // pretraga po imenu korisnika i samo javni 
 
