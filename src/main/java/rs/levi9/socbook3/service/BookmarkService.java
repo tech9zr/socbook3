@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rs.levi9.socbook3.domain.Bookmark;
+import rs.levi9.socbook3.domain.Category;
 import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.repository.BookmarkRepository;
 
@@ -45,6 +46,18 @@ public class BookmarkService {
 	
 	public List<Bookmark> findByUserAndVisible(User user, boolean visible){
 		return bookmarkRepository.findByUserAndVisible(user, visible);
+	}
+	
+	public List<Bookmark> findByDescriptionContainingAndVisible(String desc,boolean visible){
+		return bookmarkRepository.findByDescriptionContainingAndVisible(desc,visible);
+	}
+	
+	public List<Bookmark> findByTitleAndVisible(String title, boolean visible){
+		return bookmarkRepository.findByTitleAndVisible(title, visible);
+	}
+	
+	public List<Bookmark> findByCategoryAndVisible(Category category, boolean visible){
+		return bookmarkRepository.findByCategoryAndVisible(category, visible);
 	}
 
 	
