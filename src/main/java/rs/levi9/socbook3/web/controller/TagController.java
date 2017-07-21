@@ -57,4 +57,9 @@ public class TagController {
     public Tag put(@Valid @RequestBody Tag tag) {
         return tagService.save(tag);
     }
+    
+    @RequestMapping(path = "/name/{name}", method = RequestMethod.GET)
+    public List<Tag> findByName(@PathVariable("name")String name){
+    	return tagService.findByName(name);
+    }
 }

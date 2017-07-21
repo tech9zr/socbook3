@@ -36,4 +36,8 @@ public class CategoryService {
 		categoryRepository.delete(id);
 	}
 	
+	public Category findByName(String name){
+		return categoryRepository.findByName(name);
+	}
+	
 }

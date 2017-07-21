@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import rs.levi9.socbook3.domain.Category;
+import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.service.CategoryService;
 
 @RestController
@@ -56,6 +57,11 @@ public class CategoryController {
     @RequestMapping(method = RequestMethod.PUT)
     public Category put(@Valid @RequestBody Category category) {
         return categoryService.save(category);
+    }
+    
+    @RequestMapping(path = "/category/{cat}", method = RequestMethod.GET)
+    public Category findByName(@PathVariable("cat") String cat) {
+    	return categoryService.findByName(cat);
     }
 	
 }

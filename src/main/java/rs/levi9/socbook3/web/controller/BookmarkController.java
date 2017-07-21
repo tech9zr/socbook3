@@ -76,8 +76,8 @@ public class BookmarkController {
 	  
 	  // pretraga po korisniku, vraca samo njegove javne bookmark-e
 	  @RequestMapping(path = "/user/{user}", method = RequestMethod.GET)
-	  public List<Bookmark> findByUserAndVisible(@PathVariable("user") String username, boolean visible){
+	  public List<Bookmark> findByUserAndVisible(@PathVariable("user") String username){
 		  User foundUser = userService.findByUsername(username);
-		  return bookmarkService.findByUserAndVisible(foundUser, visible);
+		  return bookmarkService.findByUserAndVisible(foundUser, true);
 	  }
 }
