@@ -55,7 +55,7 @@ public class BookmarkController {
 		return bookmarkService.save(bookmark);
 	}
 
-	@RequestMapping(path = "/username{id}", method = RequestMethod.DELETE)
+	@RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity delete(@PathVariable("id") Long id) {
 		bookmarkService.delete(id);
 		return new ResponseEntity(HttpStatus.OK);
@@ -74,7 +74,6 @@ public class BookmarkController {
 				return bookmarkService.findAll();
 			}
 		}
-		
 		return bookmarkService.findByUser(foundUser);
 	}
 	
