@@ -36,7 +36,6 @@
         function register(user) {
         	user.status = true;
         	user.roles = [{"id":1,"type":"ROLE_USER"}];
-        	console.log(user);
         	RegisterService.saveUser(user).then(function(response){
         	self.toggleLoginRegister = "login";
             }, function(error){
@@ -66,7 +65,6 @@
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + base64Credential;
                 self.user = res;
                 $rootScope.user = self.user;
-                console.log(self.user);
                 init();
             }).error(function (error) {
                 self.loginError = 'Bad credentials!';

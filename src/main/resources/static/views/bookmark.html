@@ -32,8 +32,7 @@
                     <td>{{bookmark.creationDate | date : "d MMM y"}}</td>
                     <td>
                     	<input type="checkbox" class="form-control" ng-model="bookmark.visible" ng-true-value="true" ng-false-value="false" disabled>
-                    		 
-                    	</input>
+                    </td>
                     <td class="option">
                         <button class="btn btn-default" data-toggle="modal" data-target="#add-bookmark-modal" type="button" ng-click="vm.editBookmark(bookmark)">
                             <span class="glyphicon glyphicon-pencil"></span>
@@ -114,7 +113,7 @@
                                       <span class="label label-primary">Tags</span>
 								<div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.tags.$invalid && !vm.addBookmarkForm.tags.$pristine }"> 
                                 	<div class="input-group">
-	      								<input name="tags" type="text" class="form-control" placeholder="Add tag..." ng-model="vm.bookmark.tag.name">
+	      								<input name="tags" type="text" class="form-control" placeholder="Add tag..." ng-model="vm.tag.name">
 								      <span class="input-group-btn">
 								        <button class="btn btn-primary" type="button" ng-click="vm.addTag()"><strong>Add</strong></button>
 								      </span>
@@ -122,6 +121,9 @@
 								    <span ng-repeat="tag in vm.bookmark.tags">
 	                    				<label class="label-primary">{{tag.name}}</label>
                     				</span>
+                                    <span ng-repeat="tag in vm.newTags">
+		                				<label class="label-primary">{{tag.name}}</label>
+		               				</span>
                                 </div>
                                 
                                      <span class="label label-primary">URL</span>
@@ -129,17 +131,19 @@
                                     <input name="url" type="text" class="form-control" required ng-model="vm.bookmark.url"/>
                                     <span class="error" ng-show="vm.addBookmarkForm.url.$invalid && !vm.addBookmarkForm.url.$pristine">* URL is required! </span>
                                 </div>
+                                
                                <span class="label label-primary">Date</span>
                                 <div class="modal-item input-group" ng-class="{ 'has-error' : vm.addBookMarkForm.datePicker.$invalid && !vm.addBookmarkForm.$pristine }">
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-secondary" ng-click="vm.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
                                     </span>
-                                    <input name="datePicker" type="text" class="form-control" uib-datepicker-popup ng-model="vm.book.creationDate" is-open="vm.popupCalendar.opened" datepicker-options="vm.datePickerOptions" ng-required="true" close-text="Close" date-parser required/>
+                                    <input name="datePicker" type="text" class="form-control" uib-datepicker-popup ng-model="vm.bookmark.creationDate" is-open="vm.popupCalendar.opened" datepicker-options="vm.datePickerOptions" ng-required="true" close-text="Close" date-parser required/>
                                 </div>
                                 <span class="input-group error "input-group"" ng-show="vm.addBookmarkForm.datePicker.$invalid && !vm.addBookmarkForm.$pristine">* Date is in wrong format!</span>
-                                  <span class="label label-primary">Visible</span>
+                                  
+                                <span class="label label-primary">Visible</span>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.visible.$invalid && !vm.addBookmarkForm.visible.$pristine }">
-                                    <input name="visible" type="checkbox" class="form-control" required ng-model="vm.bookmark.visible"/>
+                                    <input name="visible" type="checkbox" class="form-control" ng-model="vm.bookmark.visible" ng-true-value="true" ng-false-value="false"/>
                                 </div>
                             </div>
                         </form>

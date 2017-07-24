@@ -28,9 +28,8 @@
                 url: "tags",
                 data: tag
             }
-            return $http(req).success(function (response) {
-                //booksList.push(response);
-                return response;
+            return $http(req).success(function (data) {
+                def.resolve(data);
             }).error(function () {
                 def.reject("Failed");
             });
