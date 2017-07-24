@@ -4,6 +4,7 @@
             <thead>
                 <tr class="success">
                     <th>#</th>
+                    <th>User</th>
                     <th>Category</th>
                     <th>Title</th>
                     <th>Description</th>
@@ -15,6 +16,7 @@
             <tbody ng-repeat="bookmark in vm.bookmarks track by $index">
                 <tr>
                     <td>{{$index + 1}}</td>
+                    <td><a href="pub.html">{{bookmark.user.username}}</a></td>
                     <td>{{bookmark.category.name}}</td>
                     <td>{{bookmark.title}}</td>
                     <td>{{bookmark.description}}</td>
@@ -23,7 +25,7 @@
             				<label class="label-primary">{{tag.name}}</label>
            				</span>
                     </td>
-                    <td>{{bookmark.url}}</td>
+                    <td><a href="http://{{bookmark.url}}">{{bookmark.url}}</a></td>  
                     <td>{{bookmark.creationDate | date : "d MMM y"}}</td>
              </tr>
             </tbody>

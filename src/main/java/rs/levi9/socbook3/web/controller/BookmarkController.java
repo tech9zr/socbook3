@@ -83,6 +83,7 @@ public class BookmarkController {
 	public List<Bookmark> findByVisble(){
 		return bookmarkService.findByVisible();
 	}
+	
 	@RequestMapping(path = "/user/{user}", method = RequestMethod.GET)
     public List<Bookmark> finByUserAndVisible(@PathVariable("user") String username){
 		User foundUser = userService.findByUsername(username);
