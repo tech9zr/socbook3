@@ -137,7 +137,7 @@
                                     <span class="input-group-btn">
                                         <button type="button" class="btn btn-secondary" ng-click="vm.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
                                     </span>
-                                    <input name="datePicker" type="text" class="form-control" uib-datepicker-popup ng-model="vm.bookmark.creationDate" is-open="vm.popupCalendar.opened" datepicker-options="vm.datePickerOptions" ng-required="true" close-text="Close" date-parser required/>
+                                    <input name="datePicker" type="text" class="form-control" uib-datepicker-popup ng-model="vm.bookmark.creationDate" is-open="vm.popupCalendar.opened" datepicker-options="vm.datePickerOptions" ng-required="true" close-text="Close" date-parser disabled required/>
                                 </div>
                                 <span class="input-group error "input-group"" ng-show="vm.addBookmarkForm.datePicker.$invalid && !vm.addBookmarkForm.$pristine">* Date is in wrong format!</span>
                                   
