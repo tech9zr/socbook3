@@ -1,7 +1,6 @@
 package rs.levi9.socbook3.web.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import rs.levi9.socbook3.domain.Bookmark;
+import rs.levi9.socbook3.domain.Role.RoleType;
 import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.service.BookmarkService;
 import rs.levi9.socbook3.service.UserService;
@@ -65,7 +65,16 @@ public class BookmarkController {
 	  @RequestMapping(path = "/username/{user}", method = RequestMethod.GET)
 	    public List<Bookmark> findByUser(@PathVariable("user") String username) {
 		  	User foundUser = userService.findByUsername(username);
-	    	return bookmarkService.findByUser(foundUser);
+		    if (foundUser.getRoles().contains(RoleType.ROLE_ADMIN)) {
+				  return bookmarkService.findAll();
+	          } 
+		    else 
+		    {
+		    	 return bookmarkService.findByUser(foundUser);
+	          } 
+	   
+		    
+		    
 	    }
 	  
 	  // pretraga po vidljivosti, vraca  javne 
@@ -80,4 +89,16 @@ public class BookmarkController {
 		  User foundUser = userService.findByUsername(username);
 		  return bookmarkService.findByUserAndVisible(foundUser, true);
 	  }
+	  
+	  /*
+	// pretraga po korisniku, vraca samo njegove javne bookmark-e
+		  @RequestMapping(path = "/user/{user}/role", method = RequestMethod.GET)
+		  public List<Bookmark> findByUserAndVisible(@PathVariable("user") String username){
+			  User foundUser = userService.findByUsername(username);
+			  if (foundUser.getRoles().contains(RoleType.ROLE_ADMIN)) {
+				  return bookmarkService.findAll();
+	          } 
+			  return bookmarkService.findByUserAndVisible(foundUser, true);
+		  }
+	  */
 }

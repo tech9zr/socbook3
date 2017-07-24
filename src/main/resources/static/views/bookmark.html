@@ -15,7 +15,7 @@
                     <th>Delete</th>
                 </tr>
             </thead>
-            <tbody ng-repeat="bookmark in vm.bookmarks track by $index">
+            <tbody ng-repeat="bookmark in vm.bookmarks track by $index" >
                 <tr>
                     <td>{{$index + 1}}</td>
                     <td>{{bookmark.category.name}}</td>
@@ -111,7 +111,7 @@
                                     <span class="error" ng-show="vm.addBookmarkForm.description.$invalid && !vm.addBookmarkForm.description.$pristine">* Description is required! </span>
                                 </div>
 
-                                      <label>Tags:</label>
+                                      <span class="label label-primary">Tags</span>
 								<div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.tags.$invalid && !vm.addBookmarkForm.tags.$pristine }"> 
                                 	<div class="input-group">
 	      								<input name="tags" type="text" class="form-control" placeholder="Add tag..." ng-model="vm.bookmark.tag.name">

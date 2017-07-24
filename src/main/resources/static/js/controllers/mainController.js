@@ -2,9 +2,9 @@
     angular.module('app')
             .controller('MainController', MainController);
 
-    MainController.$inject = ['RegisterService', '$location', '$http', '$route'];
+    MainController.$inject = ['$rootScope', 'RegisterService', '$location', '$http', '$route'];
 
-    function MainController(RegisterService, $location, $http, $route) {
+    function MainController($rootScope, RegisterService, $location, $http, $route) {
 
         var self = this;
         self.isActive = isActive;
@@ -65,6 +65,7 @@
                 // setting the same header value for all request calling from this app
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + base64Credential;
                 self.user = res;
+                $rootScope.user = self.user;
                 console.log(self.user);
                 init();
             }).error(function (error) {

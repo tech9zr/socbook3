@@ -2,9 +2,9 @@
 angular.module('app')
     .controller('BookmarkController', BookmarkController);
     
-    BookmarkController.$inject = ['$filter', 'CategoryService', 'BookmarkService', 'uibDateParser', 'TagService'];
+    BookmarkController.$inject = ['$rootScope', '$filter', 'CategoryService', 'BookmarkService', 'uibDateParser', 'TagService'];
    
-    function BookmarkController($filter, CategoryService, BookmarkService, TagService, uibDateParser) {
+    function BookmarkController($rootScope, $filter, CategoryService, BookmarkService, uibDateParser, TagService) {
         
         var vm = this;
         vm.addBookmark = addBookmark;
@@ -15,13 +15,15 @@ angular.module('app')
         vm.selectBookmark = selectBookmark;
         vm.addTag = addTag;
         vm.operation;
-        
+        vm.getBookmarkByUsername=getBookmarkByUsername;
+        vm.user;
+       
 
         init();
 
         function init() {
             getCategories();
-            getBookmarks();
+            getBookmarkByUsername($rootScope.user.username);
             vm.error = {};
             //Create new book
             vm.bookmark = {
@@ -139,6 +141,17 @@ angular.module('app')
                     vm.error.isbn = capitalize(error.message);
                     break;
             }
+        }
+        
+        
+        function getBookmarkByUsername(username)
+        {
+            BookmarkService.getBookmarkByUsername(username).then(function(response)
+           {
+               vm.bookmarks=response.data;
+            }, function(error){
+
+            });
         }
     };
 })();
