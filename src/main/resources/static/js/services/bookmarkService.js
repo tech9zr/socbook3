@@ -25,11 +25,11 @@
             });
         } 
         
-        this.getBookmarkByVisible = function (visible) {
+        this.getBookmarkByVisible = function () {
             var def = $q.defer();
             var req = {
                 method: 'GET',
-                url: "bookmarks/visible/" + visible
+                url: "bookmarks/visible" 
             }
             return $http(req).success(function (response) {
                 return bookmarksList = response.data;

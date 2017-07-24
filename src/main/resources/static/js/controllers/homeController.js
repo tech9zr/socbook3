@@ -48,7 +48,7 @@
         }
         
         function getBookmarkByVisible(){
-            BookmarkService.getBookmarkByVisible(true).then(function(response){
+            BookmarkService.getBookmarkByVisible().then(function(response){
                vm.bookmarks=response.data;
             }, function(error){
 

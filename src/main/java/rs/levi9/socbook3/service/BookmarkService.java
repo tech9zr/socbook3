@@ -40,24 +40,24 @@ public class BookmarkService {
 	public List<Bookmark> findByUser(User user) {
 		return bookmarkRepository.findByUser(user);
 	}
-	public List<Bookmark> findByVisible(boolean visible) {
-		return bookmarkRepository.findByVisible(visible);
+	public List<Bookmark> findByVisible() {
+		return bookmarkRepository.findByVisibleIsTrue();
 	}
 	
-	public List<Bookmark> findByUserAndVisible(User user, boolean visible){
-		return bookmarkRepository.findByUserAndVisible(user, visible);
+	public List<Bookmark> findByUserAndVisible(User user){
+		return bookmarkRepository.findByUserAndVisibleIsTrue(user);
 	}
 	
-	public List<Bookmark> findByDescriptionContainingAndVisible(String desc,boolean visible){
-		return bookmarkRepository.findByDescriptionContainingAndVisible(desc,visible);
+	public List<Bookmark> findByDescriptionContainingAndVisible(String desc){
+		return bookmarkRepository.findByDescriptionContainingAndVisibleIsTrue(desc);
 	}
 	
-	public List<Bookmark> findByTitleAndVisible(String title, boolean visible){
-		return bookmarkRepository.findByTitleAndVisible(title, visible);
+	public List<Bookmark> findByTitleAndVisible(String title){
+		return bookmarkRepository.findByTitleAndVisibleIsTrue(title);
 	}
 	
-	public List<Bookmark> findByCategoryAndVisible(Category category, boolean visible){
-		return bookmarkRepository.findByCategoryAndVisible(category, visible);
+	public List<Bookmark> findByCategoryAndVisible(Category category){
+		return bookmarkRepository.findByCategoryAndVisibleIsTrue(category);
 	}
 
 	

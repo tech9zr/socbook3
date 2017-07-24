@@ -15,14 +15,14 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
 	public List<Bookmark> findByUser(User user);
 
 
-	public List<Bookmark> findByVisible(boolean visible); 
-	public List<Bookmark> findByUserAndVisible(User user, boolean visible);
+	public List<Bookmark> findByVisibleIsTrue(); 
+	public List<Bookmark> findByUserAndVisibleIsTrue(User user);
 
-	public List<Bookmark> findByDescriptionContainingAndVisible(String desc, boolean visible); 
+	public List<Bookmark> findByDescriptionContainingAndVisibleIsTrue(String desc); 
 	
-	public List<Bookmark> findByTitleAndVisible(String title, boolean visible);
+	public List<Bookmark> findByTitleAndVisibleIsTrue(String title);
 	
-	public List<Bookmark> findByCategoryAndVisible(Category category, boolean visible);
+	public List<Bookmark> findByCategoryAndVisibleIsTrue(Category category);
 	
-	
+
 }
