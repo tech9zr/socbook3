@@ -1,7 +1,6 @@
 package rs.levi9.socbook3.web.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -15,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import rs.levi9.socbook3.domain.Bookmark;
+import rs.levi9.socbook3.domain.Role;
+import rs.levi9.socbook3.domain.Role.RoleType;
 import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.service.BookmarkService;
 import rs.levi9.socbook3.service.UserService;
@@ -24,9 +25,10 @@ import rs.levi9.socbook3.service.UserService;
 public class BookmarkController {
 	private BookmarkService bookmarkService;
 	private UserService userService;
-
+	private Role role;
+	
 	@Autowired
-	public BookmarkController(BookmarkService bookmarkService, UserService userService) {
+	public BookmarkController(BookmarkService bookmarkService, UserService userService ) {
 		this.userService = userService;
 		this.bookmarkService = bookmarkService;
 	}
@@ -62,22 +64,28 @@ public class BookmarkController {
 	}
 
 	// pretraga po korisnickom imenu, vraca sve bookmarke javne i privatne
-	  @RequestMapping(path = "/username/{user}", method = RequestMethod.GET)
-	    public List<Bookmark> findByUser(@PathVariable("user") String username) {
-		  	User foundUser = userService.findByUsername(username);
-	    	return bookmarkService.findByUser(foundUser);
-	    }
-	  
-	  // pretraga po vidljivosti, vraca  javne 
-	  @RequestMapping(path = "/visible", method = RequestMethod.GET)
-	  public List<Bookmark> findByVisible (){
-		  return bookmarkService.findByVisible();
-	  }
-	  
-	  // pretraga po korisniku, vraca samo njegove javne bookmark-e
-	  @RequestMapping(path = "/user/{user}", method = RequestMethod.GET)
-	  public List<Bookmark> findByUserAndVisible(@PathVariable("user") String username){
-		  User foundUser = userService.findByUsername(username);
-		  return bookmarkService.findByUserAndVisible(foundUser);
-	  }
+	@RequestMapping(path = "/username/{user}", method = RequestMethod.GET)
+	public List<Bookmark> findByUser(@PathVariable("user") String username) {
+		User foundUser = userService.findByUsername(username);
+		for (Role role : foundUser.getRoles()) {
+			if (role.getType().equals(RoleType.ROLE_ADMIN)) {
+				return bookmarkService.findAll();
+			}
+		}
+		
+		return bookmarkService.findByUser(foundUser);
+	}
+
+	// pretraga po vidljivosti, vraca javne
+	@RequestMapping(path = "/visible", method = RequestMethod.GET)
+	public List<Bookmark> findByVisible() {
+		return bookmarkService.findByVisible();
+	}
+
+	// pretraga po korisniku, vraca samo njegove javne bookmark-e
+	@RequestMapping(path = "/user/{user}", method = RequestMethod.GET)
+	public List<Bookmark> findByUserAndVisible(@PathVariable("user") String username) {
+		User foundUser = userService.findByUsername(username);
+		return bookmarkService.findByUserAndVisible(foundUser);
+	}
 }
