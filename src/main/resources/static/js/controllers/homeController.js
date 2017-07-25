@@ -2,9 +2,9 @@
     angular.module('app')
             .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['CategoryService', 'BookmarkService', '$location', '$http'];
+    HomeController.$inject = ['$rootScope','CategoryService', 'BookmarkService', '$location', '$http'];
 
-    function HomeController(CategoryService, BookmarkService, $location) {
+    function HomeController($rootScope, CategoryService, BookmarkService, $location) {
 
         var vm = this;
         vm.isActive = isActive;
@@ -53,6 +53,7 @@
             }, function(error){
 
             });
+        	
         }
 
         
