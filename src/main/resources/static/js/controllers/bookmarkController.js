@@ -104,8 +104,6 @@ angular.module('app')
             UserService.getUserByUsername($rootScope.user.username).then(function(response){
                 bookmark.user = response.data;
                 addTagsToBookmark(bookmark);
-            }, function(error){
-
             });
         }
         
@@ -113,16 +111,21 @@ angular.module('app')
             if(typeof vm.newTags !== "undefined") {
                 if(typeof bookmark.tags === "undefined")
                     bookmark.tags = [];
-
+                
+                var i = 0;
                 angular.forEach(vm.newTags, function(tag){
-                    TagService.saveTag(tag).then(function(response){
-                        bookmark.tags.push(response.data);
-                        saveBookmarkToDatabase(bookmark);
-                    }, function(error){
+                	
+                	TagService.saveTag(tag).then(function(response){
+                		i++;
+                		bookmark.tags.push(response.data);
+                		if (i === vm.newTags.length){
+                			saveBookmarkToDatabase(bookmark);
+	                		delete vm.newTags;
+                		}
+                	}, function(error){
 
-                    });
+                    });                	                        	 
                 });
-                delete vm.newTags;
             }
             else {
                 saveBookmarkToDatabase(bookmark);
