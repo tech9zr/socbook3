@@ -16,7 +16,7 @@
             <tbody ng-repeat="bookmark in vm.bookmarks track by $index">
                 <tr>
                     <td>{{$index + 1}}</td>
-                    <td><a href="pub.html">{{bookmark.user.username}}</a></td>
+                    <td><a href="#/pub"">{{bookmark.user.username}}</a></td>
                     <td>{{bookmark.category.name}}</td>
                     <td>{{bookmark.title}}</td>
                     <td>{{bookmark.description}}</td>
