@@ -13,7 +13,7 @@
                     <th>Date</th>
                 </tr>
             </thead>
-            <tbody ng-repeat="bookmark in vm.bookmarks track by $index">
+            <tbody ng-repeat="bookmark in vm.bookmarks track by $index" ng-if="!bookmark.user.username">
                 <tr>
                     <td>{{$index + 1}}</td>
                     <td><a href="#/pub"">{{bookmark.user.username}}</a></td>

@@ -2,11 +2,12 @@
 angular.module('app')
     .controller('PubController', PubController);
     
-    PubController.$inject = ['$rootScope', 'BookmarkService', 'CategoryService'];
+    PubController.$inject = ['$rootScope', 'BookmarkService', 'CategoryService', 'UserService'];
    
-    function PubController($rootScope, BookmarkService, CategoryService) {
+    function PubController($rootScope, BookmarkService, CategoryService, UserService) {
     	 var vm = this;
     	 vm.getBookmarkByUsernameAndVisible=getBookmarkByUsernameAndVisible;
+    	 vm.importBookmark = importBookmark;
     	 
     	 init();
     	 
@@ -37,6 +38,14 @@ angular.module('app')
              }, function(error){
 
              });
+         }
+         
+         function importBookmark(bookmark){
+        	 UserService.getUserByUsername($rootScope.user.username).then(function(response) {
+        		 bookmark.user = response.data;
+        		 delete bookmark.id;
+                 console.log(bookmark);
+			 });
          }
     
 };
