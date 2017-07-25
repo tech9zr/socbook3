@@ -84,12 +84,11 @@ public class BookmarkController {
 	@RequestMapping(path = "/user/{user}", method = RequestMethod.GET)
 	public List<Bookmark> finByUserAndVisible(@PathVariable("user") String username) {
 		User foundUser = userService.findByUsername(username);
-
-		for (Role role : foundUser.getRoles()) {
-			if (role.getType().equals(RoleType.ROLE_ADMIN)) {
-				return bookmarkService.findAll();
-			}
-		}
+//		for (Role role : foundUser.getRoles()) {
+//			if (role.getType().equals(RoleType.ROLE_ADMIN)) {
+//				return bookmarkService.findAll();
+//			}
+//		}
 		return bookmarkService.findByUserAndVisible(foundUser);
 
 	}

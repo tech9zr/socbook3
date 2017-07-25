@@ -2,21 +2,24 @@
     angular.module('app')
             .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$rootScope','CategoryService', 'BookmarkService', '$location', '$http'];
+    HomeController.$inject = ['$rootScope', '$scope', 'CategoryService', 'BookmarkService', '$location' ];
 
-    function HomeController($rootScope, CategoryService, BookmarkService, $location) {
+    function HomeController($rootScope, $scope, CategoryService, BookmarkService, $location) {
 
         var vm = this;
         vm.isActive = isActive;
         vm.categories;
         vm.bookmarks;
         vm.getBookmarkByVisible= getBookmarkByVisible;
+        vm.sendUsername = sendUsername;
+      
        
         init();
 
         function init() {
             getCategories();
             getBookmarkByVisible();
+            vm.user = $rootScope.user;
             
         }
 
@@ -53,11 +56,13 @@
             }, function(error){
 
             });
-        	
         }
-
         
+        function sendUsername(username){
+        	$rootScope.$broadcast('usernameClick', username);
+        	console.log("Username radi: " + username);
+        };
      
-        }
+     }
 
 })();

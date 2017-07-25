@@ -2,9 +2,9 @@
 angular.module('app')
     .controller('PubController', PubController);
     
-    PubController.$inject = ['$rootScope', 'BookmarkService', 'CategoryService', 'UserService'];
+    PubController.$inject = ['$rootScope', '$scope', 'BookmarkService', 'CategoryService', 'UserService','SharedService', '$routeParams'];
    
-    function PubController($rootScope, BookmarkService, CategoryService, UserService) {
+    function PubController($rootScope, $scope, BookmarkService, CategoryService, UserService, SharedService, $routeParams) {
     	 var vm = this;
     	 vm.getBookmarkByUsernameAndVisible=getBookmarkByUsernameAndVisible;
     	 vm.importBookmark = importBookmark;
@@ -13,7 +13,7 @@ angular.module('app')
     	 
          function init() {
         	 getCategories();
-        	 getBookmarkByUsernameAndVisible($rootScope.user.username)
+        	 getBookmarkByUsernameAndVisible($routeParams.username);
          }
          function getCategories(){
              CategoryService.getCategories().then(handleSuccessCategories);
@@ -44,9 +44,16 @@ angular.module('app')
         	 UserService.getUserByUsername($rootScope.user.username).then(function(response) {
         		 bookmark.user = response.data;
         		 delete bookmark.id;
-                 console.log(bookmark);
+                 BookmarkService.saveBookmark(bookmark);
 			 });
          }
+         
+         $rootScope.$on('usernameClick', function(event, data) {
+         	console.log("Radi pub: " + data + " " + event);
+         	getBookmarkByUsernameAndVisible(SharedService.message);
+         });
+         
+         
     
 };
 })();

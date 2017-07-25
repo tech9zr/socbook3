@@ -51,6 +51,7 @@
                 return def.reject("Failed to get bookmark");
             });
         }
+  
         
         this.getBookmarkByUsernameAndVisible = function (username) {
             var def = $q.defer();
