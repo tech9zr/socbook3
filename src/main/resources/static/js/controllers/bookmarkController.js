@@ -15,7 +15,7 @@ angular.module('app')
         vm.selectBookmark = selectBookmark;
         vm.addTag = addTag;
         vm.operation;
-        vm.getBookmarkByUsername=getBookmarkByUsername;
+        vm.getBookmarkByUsername=getBookmarkByUsername; 
         vm.user;
        
 
@@ -179,5 +179,8 @@ angular.module('app')
 
             });
         }
+        
+        
+    
     };
 })();

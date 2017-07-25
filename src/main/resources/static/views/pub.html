@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr class="success">
+                    <th>#</th>
+                    <th>Category</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Tags</th>
+                    <th>URL</th>
+                    <th>Date</th>
+                    <th>Visible</th>
+                    <th>Import</th>
+                </tr>
+            </thead>
+            <tbody ng-repeat="bookmark in vm.bookmarks track by $index" >
+                <tr>
+                    <td>{{$index + 1}}</td>
+                    <td>{{bookmark.category.name}}</td>
+                    <td>{{bookmark.title}}</td>
+                    <td>{{bookmark.description}}</td>
+                    <td>
+                    	<span ng-repeat="tag in bookmark.tags">
+	                    	<label class="label-primary">{{tag.name}}</label>
+                    	</span>
+                    </td>
+                    <td>
+                    	<a href="http://{{bookmark.url}}">{{bookmark.url}}</a>
+                    </td>
+                    <td>{{bookmark.creationDate | date : "d MMM y"}}</td>
+                    <td>
+                    	<input type="checkbox" class="form-control" ng-model="bookmark.visible" ng-true-value="true" ng-false-value="false" disabled></input>	 
+                    	</td>
+                      <td><button class="btn btn-primary" ng-click="vm.importBookmark(bookmark)">grab this now</button></td>
+               </tr>
+            </tbody>
+        </table>
+        </div>
+        </div>

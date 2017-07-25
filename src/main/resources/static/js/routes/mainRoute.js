@@ -21,6 +21,11 @@
                 controller: 'CategoryController',
                 controllerAs: 'vm'
             })
+               .when('/pub/:username', {
+                templateUrl: '/views/pub.html',
+                controller: 'PubController',
+                controllerAs: 'vm'
+            })
             .otherwise('/');
     }
 }());

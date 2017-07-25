@@ -51,6 +51,20 @@
                 return def.reject("Failed to get bookmark");
             });
         }
+  
+        
+        this.getBookmarkByUsernameAndVisible = function (username) {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: "bookmarks/user/" + username
+            }
+            return $http(req).success(function (response) {
+                return bookmarksList = response.data;
+            }).error(function () {
+                return def.reject("Failed to get bookmark");
+            });
+        }
         
         this.saveBookmark = function (bookmark) {
             var def = $q.defer();

@@ -60,5 +60,8 @@ public class BookmarkService {
 		return bookmarkRepository.findByCategoryAndVisibleIsTrue(category);
 	}
 
+	public List<Bookmark>findByVisibleIsTrueAndUserIdIsNot(Long id){
+		return bookmarkRepository.findByVisibleIsTrueAndUserIdIsNot(id);
+	}
 	
 }

@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rs.levi9.socbook3.domain.Bookmark;
 
-
 import rs.levi9.socbook3.domain.Role;
 
 import rs.levi9.socbook3.domain.Role.RoleType;
@@ -29,9 +28,9 @@ public class BookmarkController {
 	private BookmarkService bookmarkService;
 	private UserService userService;
 	private Role role;
-	
+
 	@Autowired
-	public BookmarkController(BookmarkService bookmarkService, UserService userService ) {
+	public BookmarkController(BookmarkService bookmarkService, UserService userService) {
 		this.userService = userService;
 		this.bookmarkService = bookmarkService;
 	}
@@ -65,7 +64,7 @@ public class BookmarkController {
 	public Bookmark put(@Valid @RequestBody Bookmark bookmark) {
 		return bookmarkService.save(bookmark);
 	}
-    
+
 	@RequestMapping(path = "/username/{user}", method = RequestMethod.GET)
 	public List<Bookmark> findByUser(@PathVariable("user") String username) {
 		User foundUser = userService.findByUsername(username);
@@ -76,22 +75,27 @@ public class BookmarkController {
 		}
 		return bookmarkService.findByUser(foundUser);
 	}
-	
 
 	@RequestMapping(path = "/visible", method = RequestMethod.GET)
-	public List<Bookmark> findByVisble(){
+	public List<Bookmark> findByVisble() {
 		return bookmarkService.findByVisible();
 	}
-	
+
 	@RequestMapping(path = "/user/{user}", method = RequestMethod.GET)
-    public List<Bookmark> finByUserAndVisible(@PathVariable("user") String username){
+	public List<Bookmark> finByUserAndVisible(@PathVariable("user") String username) {
 		User foundUser = userService.findByUsername(username);
-		
+//		for (Role role : foundUser.getRoles()) {
+//			if (role.getType().equals(RoleType.ROLE_ADMIN)) {
+//				return bookmarkService.findAll();
+//			}
+//		}
 		return bookmarkService.findByUserAndVisible(foundUser);
-    	
-    }
 
+	}
 
-
+	@RequestMapping(path = "exeptions/{id}", method = RequestMethod.GET)
+	public List<Bookmark> findAllWithExeptions(@PathVariable("id") Long id) {
+		return bookmarkService.findByVisibleIsTrueAndUserIdIsNot(id);
+	}
 
 }
