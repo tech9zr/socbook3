@@ -24,5 +24,6 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
 	
 	public List<Bookmark> findByCategoryAndVisibleIsTrue(Category category);
 	
-
+	public List<Bookmark> findByVisibleIsTrueAndUserIdIsNot(Long user_id);
+	
 }
