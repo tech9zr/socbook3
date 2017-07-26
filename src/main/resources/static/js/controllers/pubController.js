@@ -41,11 +41,7 @@ angular.module('app')
          }
          
          function importBookmark(bookmark){
-        	 UserService.getUserByUsername($rootScope.user.username).then(function(response) {
-        		 bookmark.user = response.data;
-        		 delete bookmark.id;
-                 BookmarkService.saveBookmark(bookmark);
-			 });
+        	 BookmarkService.importBookmarkFromUser(bookmark.id, $rootScope.user.username);
          }
          
          $rootScope.$on('usernameClick', function(event, data) {

@@ -1,10 +1,10 @@
 (function(){
 angular.module('app')
-    .controller('BookmarkController', BookmarkController);
+    .controller('AdminBookmarksController', AdminBookmarksController);
     
-    BookmarkController.$inject = ['$rootScope', '$filter', 'CategoryService', 'BookmarkService', 'uibDateParser', 'TagService', 'UserService'];
+    AdminBookmarksController.$inject = ['$rootScope', '$filter', 'CategoryService', 'BookmarkService', 'uibDateParser', 'TagService', 'UserService'];
    
-    function BookmarkController($rootScope, $filter, CategoryService, BookmarkService, uibDateParser, TagService, UserService) {
+    function AdminBookmarksController($rootScope, $filter, CategoryService, BookmarkService, uibDateParser, TagService, UserService) {
         
         var vm = this;
         vm.addBookmark = addBookmark;
@@ -23,7 +23,7 @@ angular.module('app')
 
         function init() {
             getCategories();
-            getBookmarkByUsername($rootScope.user.username);
+            getBookmarks();
             vm.error = {};
             //Create new book
             vm.bookmark = {
@@ -90,21 +90,48 @@ angular.module('app')
         }
 
         function saveBookmark(bookmark){
-        	bookmark.creationDate = bookmark.creationDate.getTime();
-        	bookmark.user = $rootScope.user;
-        	if(typeof vm.newTags !== "undefined") {
+            //bookmark.creationDate = $filter('date')(bookmark.creationDate, "yyyy-MM-dd");  
+            if(typeof bookmark.id === "undefined") {
+                addUserToBookmark(bookmark);
+            }
+            else {
+                addTagsToBookmark(bookmark);
+            }
+        }
+        
+        function addUserToBookmark(bookmark) {
+            bookmark.creationDate = bookmark.creationDate.getTime();
+            UserService.getUserByUsername($rootScope.user.username).then(function(response){
+                bookmark.user = response.data;
+                addTagsToBookmark(bookmark);
+            }, function(error){
+
+            });
+        }
+        
+        function addTagsToBookmark(bookmark) {
+            if(typeof vm.newTags !== "undefined") {
                 if(typeof bookmark.tags === "undefined")
                     bookmark.tags = [];
-        	bookmark.tags = bookmark.tags.concat(vm.newTags);
-        	console.log(bookmark);
-        	}
-        	
-        	saveBookmarkToDatabase(bookmark);
+
+                angular.forEach(vm.newTags, function(tag){
+                    TagService.saveTag(tag).then(function(response){
+                        bookmark.tags.push(response.data);
+                        saveBookmarkToDatabase(bookmark);
+                    }, function(error){
+
+                    });
+                });
+                delete vm.newTags;
+            }
+            else {
+                saveBookmarkToDatabase(bookmark);
+            }
         }
         
         function saveBookmarkToDatabase(bookmark) {
             BookmarkService.saveBookmark(bookmark).then(function(response){
-            	getBookmarkByUsername($rootScope.user.username);
+                getBookmarks();
                 $('#add-bookmark-modal').modal('hide');
             }, function(error){
                 vm.error = {};
@@ -154,3 +181,4 @@ angular.module('app')
     
     };
 })();
+       

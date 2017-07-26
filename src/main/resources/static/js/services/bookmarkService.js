@@ -95,5 +95,20 @@
             });
             return def.promise;
         }
+        
+        this.importBookmarkFromUser = function (bookmarkId, username) {
+            var def = $q.defer();
+            var req = {
+                method: 'POST',
+                url: "bookmarks/import/bookmark/" + bookmarkId + "/username/" + username,
+                data: bookmarkId, username
+            }
+            return $http(req).success(function (response) {
+                return response;
+            }).error(function () {
+                def.reject("Failed");
+            });
+            return def.promise;
+        }
     };
 }());
