@@ -64,4 +64,11 @@ public class BookmarkService {
 		return bookmarkRepository.findByVisibleIsTrueAndUserIdIsNot(id);
 	}
 	
+	public Bookmark deleteByTitle(String title){
+		return bookmarkRepository.deleteByTitle(title);
+	}
+	
+	public List<Bookmark> findByTitle(String title){
+		return bookmarkRepository.findByTitle(title);
+	}
 }

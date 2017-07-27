@@ -61,11 +61,7 @@ public class UserController {
 	        return userService.save(user);
 	    }
 	    
-	    @RequestMapping(path = "{id}", method = RequestMethod.DELETE)
-	    public ResponseEntity delete(@PathVariable("id") Long id) {
-	        userService.delete(id);
-	        return new ResponseEntity(HttpStatus.OK);
-	    }
+	   
 	    
 	    @RequestMapping(path = "/username/{username}", method = RequestMethod.GET)
 	    public User findByUsername(@PathVariable("username") String username) {
