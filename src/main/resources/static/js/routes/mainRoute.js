@@ -6,11 +6,11 @@
 
     function config($routeProvider) {
         $routeProvider
-        .when('/home', {
-            templateUrl: '/views/home.html',
-            controller: 'HomeController',
-            controllerAs: 'vm'
-        })
+	        .when('/home', {
+	            templateUrl: '/views/home.html',
+	            controller: 'HomeController',
+	            controllerAs: 'vm'
+	        })
             .when('/', {
                 templateUrl: '/views/bookmark.html',
                 controller: 'BookmarkController',
@@ -34,6 +34,11 @@
                     .when('/users', {
                 templateUrl: '/views/user.html',
                 controller: 'UserController',
+                controllerAs: 'vm'
+            })
+            .when('/search', {
+                templateUrl: '/views/search.html',
+                controller: 'SearchController',
                 controllerAs: 'vm'
             })
          

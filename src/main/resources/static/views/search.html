@@ -1,0 +1,78 @@
+<div>
+	<div class="row">
+		<div class="col-sm-2">
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control" placeholder="Search category..." ng-model="vm.searchByCategory"></input>
+				<span class="input-group-btn">
+	       			<button class="btn btn-default" type="button" ng-click="vm.searchByCategory = ''"><span class="glyphicon glyphicon-remove"></span></button>
+	   			</span>
+   			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control" placeholder="Search user..." ng-model="vm.searchByUsername"></input>
+				<span class="input-group-btn">
+	       			<button class="btn btn-default" type="button" ng-click="vm.searchByUsername = ''"><span class="glyphicon glyphicon-remove"></span></button>
+	   			</span>
+   			</div>
+   		</div>
+		<div class="col-sm-2">
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control" placeholder="Search description..." ng-model="vm.searchByDescription"></input>
+				<span class="input-group-btn">
+	       			<button class="btn btn-default" type="button" ng-click="vm.searchByDescription = ''"><span class="glyphicon glyphicon-remove"></span></button>
+	   			</span>
+   			</div>
+		</div>
+		<div class="col-sm-2">
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control" placeholder="Search tag..." ng-model="vm.searchByTag"></input>
+				<span class="input-group-btn">
+	       			<button class="btn btn-default" type="button" ng-click="vm.searchByTag = ''"><span class="glyphicon glyphicon-remove"></span></button>
+	   			</span>
+   			</div>
+		</div>
+   		<div class="col-sm-2">
+			<div class="input-group input-group-sm">
+				<span class="input-group-btn">
+	       			<button class="btn btn-default" type="button" ng-click="vm.clearAll()">Clear All</button>
+	   			</span>
+   			</div>
+   		</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class="col-sm-12">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr class="success">
+						<th>Category</th>
+						<th>User</th>
+						<th>URL</th>
+						<th>Description</th>
+						<th>Tags</th>
+						<th>Details</th>
+					</tr>
+				</thead>
+				<tbody ng-repeat="bookmark in vm.bookmarks | filter:{category:{name:vm.searchByCategory}} | filter:{tags:{name:vm.searchByTag}} | filter:{description:vm.searchByDescription}  | filter:{user:{username:vm.searchByUsername}}">
+					<tr ng-if="bookmark.user.username !== vm.user.username">
+						<td>{{bookmark.category.name}}</td>
+						<td>{{bookmark.user.username}}</td>
+						<td>
+							<a href="http://{{bookmark.url}}" target="_blank">{{bookmark.url}}</a>
+						</td>
+						<td>{{bookmark.description}}</td>
+						<td>
+							<span ng-repeat="tag in bookmark.tags"> 
+								<label class="label-primary">{{tag.name}}</label>
+							</span>
+						</td>
+						<td>
+							<button class="btn btn-default"><span class="glyphicon glyphicon-modal-window"></span></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
