@@ -31,6 +31,8 @@ public class BookmarkController {
 	private BookmarkService bookmarkService;
 	private UserService userService;
 	private Role role;
+	
+	
 
 	@Autowired
 	public BookmarkController(BookmarkService bookmarkService, UserService userService) {
@@ -125,5 +127,5 @@ public class BookmarkController {
 		
 		return bookmarkService.save(newBookmark);
 	}
-
+     
 }
