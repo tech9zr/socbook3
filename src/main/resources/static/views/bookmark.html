@@ -10,9 +10,9 @@
                     <th>Tags</th>
                     <th>URL</th>
                     <th>Date</th>
-                    <th>Visible</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Public</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody ng-repeat="bookmark in vm.bookmarks track by $index" >
@@ -141,7 +141,7 @@
                                 </div>
                                 <span class="input-group error "input-group"" ng-show="vm.addBookmarkForm.datePicker.$invalid && !vm.addBookmarkForm.$pristine">* Date is in wrong format!</span>
                                   
-                                <span class="label label-primary">Visible</span>
+                                <span class="label label-primary">Public</span>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.visible.$invalid && !vm.addBookmarkForm.visible.$pristine }">
                                     <input name="visible" type="checkbox" class="form-control" ng-model="vm.bookmark.visible" ng-true-value="true" ng-false-value="false"/>
                                 </div>

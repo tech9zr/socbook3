@@ -10,9 +10,9 @@
                     <th>Tags</th>
                     <th>URL</th>
                     <th>Date</th>
-                    <th>Visible</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th>Public</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody ng-repeat="bookmark in vm.bookmarks track by $index" >
@@ -46,15 +46,6 @@
                 </tr>
             </tbody>
         </table>
-        <div>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#add-bookmark-modal" ng-click="vm.addBookmark()">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
-                </div>
-            </div>
-        </div>
 
         <!-- Modal -->
         <!-- Delete book -->
@@ -141,7 +132,7 @@
                                 </div>
                                 <span class="input-group error "input-group"" ng-show="vm.addBookmarkForm.datePicker.$invalid && !vm.addBookmarkForm.$pristine">* Date is in wrong format!</span>
                                   
-                                <span class="label label-primary">Visible</span>
+                                <span class="label label-primary">Public</span>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.visible.$invalid && !vm.addBookmarkForm.visible.$pristine }">
                                     <input name="visible" type="checkbox" class="form-control" ng-model="vm.bookmark.visible" ng-true-value="true" ng-false-value="false"/>
                                 </div>
@@ -156,4 +147,4 @@
             </div>
         </div>
     </div>
-</div>+
+</div>

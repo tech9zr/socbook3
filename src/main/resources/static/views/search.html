@@ -52,6 +52,7 @@
 						<th>Description</th>
 						<th>Tags</th>
 						<th>Details</th>
+						<th>Import</th>
 					</tr>
 				</thead>
 				<tbody ng-repeat="bookmark in vm.bookmarks | filter:{category:{name:vm.searchByCategory}} | filter:{tags:{name:vm.searchByTag}} | filter:{description:vm.searchByDescription}  | filter:{user:{username:vm.searchByUsername}}">
@@ -69,6 +70,9 @@
 						</td>
 						<td>
 							<button class="btn btn-default"><span class="glyphicon glyphicon-modal-window"></span></button>
+						</td>
+						<td>
+							<button class="btn btn-default" ng-click="vm.importBookmark(bookmark)"><span class="glyphicon glyphicon-import"></span></button>
 						</td>
 					</tr>
 				</tbody>

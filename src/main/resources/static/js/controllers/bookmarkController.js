@@ -90,18 +90,58 @@ angular.module('app')
             return '* ' + error[0].toUpperCase() + error.slice(1); 
         }
 
+//        function saveBookmark(bookmark){
+//        	if(vm.operation == "Add")
+//        		bookmark.creationDate = bookmark.creationDate.getTime();
+//        	bookmark.user = $rootScope.user;
+//        	if(typeof vm.newTags !== "undefined") {
+//                if(typeof bookmark.tags === "undefined")
+//                    bookmark.tags = [];
+//        	bookmark.tags = bookmark.tags.concat(vm.newTags);
+//        	console.log(bookmark);
+//        	}
+//        	
+//        	saveBookmarkToDatabase(bookmark);
+//        }
+        
         function saveBookmark(bookmark){
-        	if(vm.operation == "Add")
-        		bookmark.creationDate = bookmark.creationDate.getTime();
-        	bookmark.user = $rootScope.user;
-        	if(typeof vm.newTags !== "undefined") {
+            //bookmark.creationDate = $filter('date')(bookmark.creationDate, "yyyy-MM-dd");  
+            if(typeof bookmark.id === "undefined") {
+                addUserToBookmark(bookmark);
+            }
+            else {
+                addTagsToBookmark(bookmark);
+            }
+        }
+        
+        function addUserToBookmark(bookmark) {
+            bookmark.creationDate = bookmark.creationDate.getTime();
+            UserService.getUserByUsername($rootScope.user.username).then(function(response){
+                bookmark.user = response.data;
+                addTagsToBookmark(bookmark);
+            }, function(error){
+
+            });
+        }
+        
+        function addTagsToBookmark(bookmark) {
+            if(typeof vm.newTags !== "undefined") {
                 if(typeof bookmark.tags === "undefined")
                     bookmark.tags = [];
-        	bookmark.tags = bookmark.tags.concat(vm.newTags);
-        	console.log(bookmark);
-        	}
-        	
-        	saveBookmarkToDatabase(bookmark);
+
+                angular.forEach(vm.newTags, function(tag){
+                    TagService.saveTag(tag).then(function(response){
+                        bookmark.tags.push(response.data);
+                        saveBookmarkToDatabase(bookmark);
+                    }, function(error){
+
+                    });
+                });
+                delete vm.newTags;
+            }
+            else {
+                saveBookmarkToDatabase(bookmark);
+            }
         }
         
         function saveBookmarkToDatabase(bookmark) {

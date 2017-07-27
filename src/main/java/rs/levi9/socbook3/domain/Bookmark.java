@@ -42,7 +42,7 @@ public class Bookmark extends BaseEntity implements Serializable {
 	@JoinColumn(name = "category_id", nullable = false, unique = false)
 	private Category category;
 
-	@Cascade(CascadeType.PERSIST)
+	//@Cascade(CascadeType.PERSIST)
 	@ManyToMany
 	@Column(name = "tags")
 	@JoinTable(joinColumns = @JoinColumn(name = "bookmark_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))

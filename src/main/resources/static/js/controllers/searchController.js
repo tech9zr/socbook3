@@ -11,6 +11,7 @@
         vm.bookmarks;
         vm.getBookmarkByVisible = getBookmarkByVisible; 
         vm.clearAll = clearAll;
+        vm.importBookmark = importBookmark;
        
         init();
 
@@ -38,6 +39,10 @@
         	vm.searchByTag = "";
         	vm.searchByDescription = "";
         	vm.searchByUsername = "";
+        }
+        
+        function importBookmark(bookmark){
+       	 BookmarkService.importBookmarkFromUser(bookmark.id, $rootScope.user.username);
         }
      }
 
