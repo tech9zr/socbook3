@@ -49,10 +49,11 @@ angular.module('app')
 
         function deleteBookmark(){
             BookmarkService.deleteBookmark(vm.bookmark.id).then(function(response){
-                getBookmarks();
+            	 getBookmarkByUsername($rootScope.user.username);
             }, function(error){
 
             });
+            vm.operation = "Delete";
             vm.bookmark= {};
         }
 
@@ -90,7 +91,8 @@ angular.module('app')
         }
 
         function saveBookmark(bookmark){
-        	bookmark.creationDate = bookmark.creationDate.getTime();
+        	if(vm.operation == "Add")
+        		bookmark.creationDate = bookmark.creationDate.getTime();
         	bookmark.user = $rootScope.user;
         	if(typeof vm.newTags !== "undefined") {
                 if(typeof bookmark.tags === "undefined")

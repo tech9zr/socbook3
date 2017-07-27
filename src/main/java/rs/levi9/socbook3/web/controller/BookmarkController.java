@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import rs.levi9.socbook3.domain.Bookmark;
-
-import rs.levi9.socbook3.domain.Role;
-
-import rs.levi9.socbook3.domain.Role.RoleType;
 import rs.levi9.socbook3.domain.Tag;
 import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.service.BookmarkService;
@@ -30,7 +26,7 @@ import rs.levi9.socbook3.service.UserService;
 public class BookmarkController {
 	private BookmarkService bookmarkService;
 	private UserService userService;
-	private Role role;
+
 
 	@Autowired
 	public BookmarkController(BookmarkService bookmarkService, UserService userService) {
@@ -71,11 +67,6 @@ public class BookmarkController {
 	@RequestMapping(path = "/username/{user}", method = RequestMethod.GET)
 	public List<Bookmark> findByUser(@PathVariable("user") String username) {
 		User foundUser = userService.findByUsername(username);
-	//	for (Role role : foundUser.getRoles()) {
-			//if (role.getType().equals(RoleType.ROLE_ADMIN)) {
-			//	return bookmarkService.findAll();
-			//}
-	//	}
 		return bookmarkService.findByUser(foundUser);
 	}
 
@@ -87,34 +78,25 @@ public class BookmarkController {
 	@RequestMapping(path = "/user/{user}", method = RequestMethod.GET)
 	public List<Bookmark> finByUserAndVisible(@PathVariable("user") String username) {
 		User foundUser = userService.findByUsername(username);
-//		for (Role role : foundUser.getRoles()) {
-//			if (role.getType().equals(RoleType.ROLE_ADMIN)) {
-//				return bookmarkService.findAll();
-//			}
-//		}
 		return bookmarkService.findByUserAndVisible(foundUser);
 
 	}
 
-	@RequestMapping(path = "exeptions/{id}", method = RequestMethod.GET)
-	public List<Bookmark> findAllWithExeptions(@PathVariable("id") Long id) {
-		return bookmarkService.findByVisibleIsTrueAndUserIdIsNot(id);
-	}
-	
 	@RequestMapping(path = "/import/bookmark/{bookmarkId}/username/{username}", method = RequestMethod.POST)
 	public Bookmark importBookmarkFromUser(@Valid @PathVariable("bookmarkId") Long bookmarkId,
-										   @PathVariable("username") String username) {
+			@PathVariable("username") String username) {
 		Bookmark sourceBookmark = bookmarkService.findOne(bookmarkId);
 		// handle source bookmark
 		Bookmark newBookmark = new Bookmark();
 		User newAuthor = userService.findByUsername(username);
 		if (newAuthor == null) {
-			
 		}
-		
+
 		newBookmark.setCategory(sourceBookmark.getCategory());
+
 		Set<Tag> newTags = new HashSet<>();
 		newTags.addAll(sourceBookmark.getTags());
+
 		newBookmark.setTags(newTags);
 		newBookmark.setUser(newAuthor);
 		newBookmark.setUrl(sourceBookmark.getUrl());
@@ -122,8 +104,22 @@ public class BookmarkController {
 		newBookmark.setCreationDate(sourceBookmark.getCreationDate());
 		newBookmark.setVisible(sourceBookmark.isVisible());
 		newBookmark.setDescription(sourceBookmark.getDescription());
-		
+
 		return bookmarkService.save(newBookmark);
 	}
+
+
+	@RequestMapping(path = "/search/{title}", method = RequestMethod.GET)
+	public List<Bookmark> findByTitle(@PathVariable("title") String title) {
+		return bookmarkService.findByTitle(title);
+
+	}
+
+	@RequestMapping(path = "/delete/{title}", method = RequestMethod.DELETE)
+	public ResponseEntity delteByTitle(@PathVariable("title") String title) {
+		bookmarkService.deleteByTitle(title);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+
 
 }

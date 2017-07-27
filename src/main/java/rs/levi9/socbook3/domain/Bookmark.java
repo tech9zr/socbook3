@@ -21,11 +21,11 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "bookmark")
 public class Bookmark extends BaseEntity implements Serializable {
 
-
 	private static final long serialVersionUID = 817056055809397349L;
 
 	@NotNull
 	@ManyToOne
+
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
@@ -39,19 +39,19 @@ public class Bookmark extends BaseEntity implements Serializable {
 
 	@NotNull()
 	@ManyToOne
-	@JoinColumn(name = "category_id", nullable = false,unique = false)
+	@JoinColumn(name = "category_id", nullable = false, unique = false)
 	private Category category;
 
-	@Cascade(CascadeType.ALL)
+	@Cascade(CascadeType.PERSIST)
 	@ManyToMany
-	@Column (name= "tags")
+	@Column(name = "tags")
 	@JoinTable(joinColumns = @JoinColumn(name = "bookmark_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	private Set<Tag> tags;
 
 	@NotNull()
 	@Column(unique = false, nullable = false, name = "url")
 	private String url;
-	
+
 	@NotNull()
 	@Column(unique = false, nullable = false, name = "visible")
 	private boolean visible;
@@ -87,8 +87,6 @@ public class Bookmark extends BaseEntity implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	
 
 	public Set<Tag> getTags() {
 		return tags;
@@ -129,6 +127,5 @@ public class Bookmark extends BaseEntity implements Serializable {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
 
 }

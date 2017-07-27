@@ -21,12 +21,12 @@
                        <td>{{user.email}}</td>
                
                     <td class="option">
-                        <button class="btn btn-default" data-toggle="modal" data-target="#add-bookmark-modal" type="button" ng-click="vm.editBookmark(bookmark)">
+                        <button class="btn btn-default" data-toggle="modal" data-target="#add-user-modal" type="button" ng-click="vm.editUser(user)">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
                     </td>
                     <td class="option">
-                        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#delete-bookmark-modal" ng-click="vm.selectBookmark(bookmark)">
+                        <button class="btn btn-default" type="button" data-toggle="modal" data-target="#delete-user-modal" ng-click="vm.selectUser(user)">
                             <span class="glyphicon glyphicon-remove"></span>
                         </button>
                     </td>
@@ -34,32 +34,91 @@
             </tbody>
         </table>
         <div>
-            <div class="panel panel-default">
+
+        <!-- Modal -->
+        <!-- Delete user -->
+        <div class="modal fade" id="delete-user-modal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn btn-primary" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete User</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Do you want to delete <i>{{vm.user.username}}</i> ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="vm.deleteUser(vm.selectedUser.id)">OK</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+ <div class="panel panel-default">
                 <div class="panel-body">
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#add-bookmark-modal" ng-click="vm.addBookmark()">
+                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#add-user-modal" ng-click="vm.addUser()">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </div>
             </div>
         </div>
 
+
         <!-- Modal -->
-        <!-- Delete book -->
-        <div class="modal fade" id="delete-bookmark-modal" role="dialog">
+        <!-- Add/Edit user -->
+        <div class="modal fade" id="add-user-modal" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="btn btn-primary" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Delete bookmark</h4>
+                        <button type="button" class="btn btn-primary"  class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{vm.operation}} User</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Do you want to delete <i>{{vm.bookmark.title}}</i> ?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="vm.deleteBookmark(vm.selectedBookmark.id)">OK</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        <!-- Category Form -->
+                        <form name="vm.addBUserForm" novalidate>
+                         <div class="form-group">
+                                <span class="label label-primary">Username: </span>
+                                <div class="modal-item" ng-class="{ 'has-error' : vm.addUserForm.username.$invalid && !vm.addUserForm.username.$pristine }">
+                                    <input name="username" type="text" class="form-control" required ng-model="vm.user.username"/>
+                                    <span class="error" ng-show="vm.addUserForm.username.$invalid && !vm.addUserForm.username.$pristine">* Username is required!</span>
+                                </div>
+                                     <span class="label label-primary">Password: </span>
+                                <div class="modal-item" ng-class="{ 'has-error' : vm.addUserForm.password.$invalid && !vm.addUserForm.password.$pristine }">
+                                    <input name="password" type="text" class="form-control" required ng-model="vm.user.password"/>
+                                    <span class="error" ng-show="vm.addUserForm.password.$invalid && !vm.addUserForm.password.$pristine">* Password is required!</span>
+                                </div>
+                                       <span class="label label-primary">Firstname: </span>
+                                <div class="modal-item" ng-class="{ 'has-error' : vm.addUserForm.firstName.$invalid && !vm.addUserForm.firstName.$pristine }">
+                                    <input name="firstName" type="text" class="form-control" required ng-model="vm.user.firstName"/>
+                                    <span class="error" ng-show="vm.addUserForm.firstName.$invalid && !vm.addUserForm.firstName.$pristine">* Firstname is required!</span>
+                                </div>
+                                          <span class="label label-primary">Lastname: </span>
+                                <div class="modal-item" ng-class="{ 'has-error' : vm.addUserForm.lastName.$invalid && !vm.addUserForm.lastName.$pristine }">
+                                    <input name="lastName" type="text" class="form-control" required ng-model="vm.user.lastName"/>
+                                    <span class="error" ng-show="vm.addUserForm.lastName.$invalid && !vm.addUserForm.lastName.$pristine">* Lastname is required!</span>
+                                </div>
+                                           <span class="label label-primary">Email: </span>
+                                <div class="modal-item" ng-class="{ 'has-error' : vm.addUserForm.email.$invalid && !vm.addUserForm.email.$pristine }">
+                                    <input name="email" type="text" class="form-control" required ng-model="vm.email.lastName"/>
+                                    <span class="error" ng-show="vm.addUserForm.email.$invalid && !vm.addUserForm.email.$pristine">*Email is required!</span>
+                                </div>
+           
+                                      <span class="label label-primary">Status</span>
+                                <div class="modal-item" ng-class="{ 'has-error' : vm.addUserForm.status.$invalid && !vm.addUserForm.status.$pristine }">
+                                    <input name="status" type="checkbox" class="form-control" ng-model="vm.user.status" ng-true-value="true" ng-false-value="false"/>
+                                </div>
+                           </div>
+		               	
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" ng-disabled="vm.addBookmarkForm.$invalid" data-dismiss="modal" class="btn btn-primary" ng-click="vm.saveBookmark(vm.bookmark)">OK</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
