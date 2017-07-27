@@ -49,7 +49,7 @@ angular.module('app')
 
         function deleteBookmark(){
             BookmarkService.deleteBookmark(vm.bookmark.id).then(function(response){
-                getBookmarks();
+            getBookmarkByUsername($rootScope.user.username);
             }, function(error){
 
             });
