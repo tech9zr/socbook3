@@ -39,7 +39,7 @@
             });
         }
         
-        this.getBookmarkByUsername = function (username) {
+        this.getBookmarksByUsername = function (username) {
             var def = $q.defer();
             var req = {
                 method: 'GET',

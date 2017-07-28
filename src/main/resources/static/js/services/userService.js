@@ -6,7 +6,12 @@
 
     function UserService($http, $q) {
 
-        var UsersList = [];
+        var usersList = [];
+        var loggedInUser;
+
+        this.loggedInUser = function() {
+            return loggedInUser;
+        }
 
         this.getUsers = function () {
             var def = $q.defer();
@@ -30,7 +35,20 @@
             return $http(req).success(function (response) {
                 return response.data;
             }).error(function () {
-                return def.reject("Failed to get bookmark");
+                return def.reject("Failed to get user");
+            });
+        }
+
+        this.getLoggedInUserByUsername = function (username) {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: "users/username/" + username
+            }
+            return $http(req).success(function (response) {
+                loggedInUser = response;
+            }).error(function () {
+                return def.reject("Failed to get user");
             });
         }
 

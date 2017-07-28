@@ -1,13 +1,5 @@
 <div>
-	<div class="row">
-		<div class="col-sm-2">
-			<div class="input-group input-group-sm">
-				<input type="text" class="form-control" placeholder="Search category..." ng-model="vm.searchByCategory"></input>
-				<span class="input-group-btn">
-	       			<button class="btn btn-default" type="button" ng-click="vm.searchByCategory = ''"><span class="glyphicon glyphicon-remove"></span></button>
-	   			</span>
-   			</div>
-		</div>
+	<div class="row">		
 		<div class="col-sm-2">
 			<div class="input-group input-group-sm">
 				<input type="text" class="form-control" placeholder="Search user..." ng-model="vm.searchByUsername"></input>
@@ -16,6 +8,14 @@
 	   			</span>
    			</div>
    		</div>
+   		<div class="col-sm-2">
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control" placeholder="Search category..." ng-model="vm.searchByCategory"></input>
+				<span class="input-group-btn">
+	       			<button class="btn btn-default" type="button" ng-click="vm.searchByCategory = ''"><span class="glyphicon glyphicon-remove"></span></button>
+	   			</span>
+   			</div>
+		</div>
 		<div class="col-sm-2">
 			<div class="input-group input-group-sm">
 				<input type="text" class="form-control" placeholder="Search description..." ng-model="vm.searchByDescription"></input>
@@ -46,33 +46,35 @@
 			<table class="table table-bordered table-hover">
 				<thead>
 					<tr class="success">
-						<th>Category</th>
 						<th>User</th>
+						<th>Title</th>
 						<th>URL</th>
 						<th>Description</th>
+						<th>Category</th>
 						<th>Tags</th>
 						<th>Details</th>
 						<th>Import</th>
 					</tr>
 				</thead>
 				<tbody ng-repeat="bookmark in vm.bookmarks | filter:{category:{name:vm.searchByCategory}} | filter:{tags:{name:vm.searchByTag}} | filter:{description:vm.searchByDescription}  | filter:{user:{username:vm.searchByUsername}}">
-					<tr ng-if="bookmark.user.username !== vm.user.username">
-						<td>{{bookmark.category.name}}</td>
+					<tr ng-if="bookmark.user.username !== vm.loggedInUser.username">
 						<td>{{bookmark.user.username}}</td>
+						<td>{{bookmark.title}}</td>
 						<td>
 							<a href="http://{{bookmark.url}}" target="_blank">{{bookmark.url}}</a>
 						</td>
 						<td>{{bookmark.description}}</td>
+						<td>{{bookmark.category.name}}</td>
 						<td>
 							<span ng-repeat="tag in bookmark.tags"> 
 								<label class="label-primary">{{tag.name}}</label>
 							</span>
 						</td>
-						<td>
+						<td class="option">
 							<button class="btn btn-default"><span class="glyphicon glyphicon-modal-window"></span></button>
 						</td>
-						<td>
-							<button class="btn btn-default" ng-click="vm.importBookmark(bookmark)"><span class="glyphicon glyphicon-import"></span></button>
+						<td class="option">
+							<button class="btn btn-default" ng-click="vm.importBookmark(bookmark)" ng-disabled="vm.isImportDisabled(bookmark)"><span class="glyphicon glyphicon-import"></span></button>
 						</td>
 					</tr>
 				</tbody>

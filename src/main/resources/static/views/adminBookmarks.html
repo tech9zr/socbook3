@@ -3,12 +3,12 @@
         <table class="table table-bordered table-hover">
             <thead>
                 <tr class="success">
-                    <th>#</th>
-                    <th>Category</th>
+                    <th>User</th>
                     <th>Title</th>
+                    <th>URL</th>                    
                     <th>Description</th>
+                    <th>Category</th>
                     <th>Tags</th>
-                    <th>URL</th>
                     <th>Date</th>
                     <th>Public</th>
                     <th></th>
@@ -17,17 +17,17 @@
             </thead>
             <tbody ng-repeat="bookmark in vm.bookmarks track by $index" >
                 <tr>
-                    <td>{{$index + 1}}</td>
-                    <td>{{bookmark.category.name}}</td>
+                    <td>{{bookmark.user.username}}</td>
                     <td>{{bookmark.title}}</td>
-                    <td>{{bookmark.description}}</td>
                     <td>
-                    	<span ng-repeat="tag in bookmark.tags">
-	                    	<label class="label-primary">{{tag.name}}</label>
-                    	</span>
+                        <a href="http://{{bookmark.url}}" target="_blank">{{bookmark.url}}</a>
                     </td>
+                    <td>{{bookmark.description}}</td>
+                    <td>{{bookmark.category.name}}</td>
                     <td>
-                    	<a href="http://{{bookmark.url}}">{{bookmark.url}}</a>
+                        <span ng-repeat="tag in bookmark.tags">
+                            <label class="label-primary">{{tag.name}}</label>
+                    	</span>
                     </td>
                     <td>{{bookmark.creationDate | date : "d MMM y"}}</td>
                     <td>
@@ -75,39 +75,37 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="btn btn-primary"  class="close" data-dismiss="modal">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">{{vm.operation}} Bookmark</h4>
                     </div>
                     <div class="modal-body">
-                        <!-- Category Form -->
+
                         <form name="vm.addBookmarkForm" novalidate>
                             <div class="form-group">
-                               <span class="label label-primary">Category</span>
+                                <h4><span class="label label-primary">Category</span></h4>
                                 <div class="modal-item">
-                                    <select class="form-control" name="selectCategory" ng-options="category.name for category in vm.categories track by category.id"
-                                            ng-model="vm.bookmark.category" required>
+                                    <select class="form-control" name="selectCategory" ng-options="category.name for category in vm.categories track by category.id" ng-model="vm.bookmark.category" required>
                                         <option value="" ng-disabled="true" disabled>---Must select category---</option>
                                     </select>
                                 </div>
-                                <span class="label label-primary">Title</span>
+                                <h4><span class="label label-primary">Title</span></h4>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.title.$invalid && !vm.addBookmarkForm.title.$pristine }">
                                     <input name="title" type="text" class="form-control" required ng-model="vm.bookmark.title"/>
                                     <span class="error" ng-show="vm.addBookmarkForm.title.$invalid && !vm.addBookmarkForm.title.$pristine">* Title is required!</span>
                                     <span ng-if="vm.error.title" class="error">{{vm.error.title}}</span>
                                 </div>
-                               <span class="label label-primary">Description</span>
+                                <h4><span class="label label-primary">Description</span></h4>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.description.$invalid && !vm.addBookmarkForm.description.$pristine }">
                                     <input name="description" type="text" class="form-control" required ng-model="vm.bookmark.description"/>
                                     <span class="error" ng-show="vm.addBookmarkForm.description.$invalid && !vm.addBookmarkForm.description.$pristine">* Description is required! </span>
                                 </div>
-
-                                      <span class="label label-primary">Tags</span>
+                                <h4><span class="label label-primary">Tags</span></h4>
 								<div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.tags.$invalid && !vm.addBookmarkForm.tags.$pristine }"> 
                                 	<div class="input-group">
 	      								<input name="tags" type="text" class="form-control" placeholder="Add tag..." ng-model="vm.tag.name">
-								      <span class="input-group-btn">
-								        <button class="btn btn-primary" type="button" ng-click="vm.addTag()"><strong>Add</strong></button>
-								      </span>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" ng-click="vm.addTag()"><strong>Add</strong></button>
+                                        </span>
 								    </div>
 								    <span ng-repeat="tag in vm.bookmark.tags">
 	                    				<label class="label-primary">{{tag.name}}</label>
@@ -116,23 +114,12 @@
 		                				<label class="label-primary">{{tag.name}}</label>
 		               				</span>
                                 </div>
-                                
-                                     <span class="label label-primary">URL</span>
+                                <h4><span class="label label-primary">URL</span></h4>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.url.$invalid && !vm.addBookmarkForm.url.$pristine }">
                                     <input name="url" type="text" class="form-control" required ng-model="vm.bookmark.url"/>
                                     <span class="error" ng-show="vm.addBookmarkForm.url.$invalid && !vm.addBookmarkForm.url.$pristine">* URL is required! </span>
                                 </div>
-                                
-                               <span class="label label-primary">Date</span>
-                                <div class="modal-item input-group" ng-class="{ 'has-error' : vm.addBookMarkForm.datePicker.$invalid && !vm.addBookmarkForm.$pristine }">
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-secondary" ng-click="vm.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
-                                    </span>
-                                    <input name="datePicker" type="text" class="form-control" uib-datepicker-popup ng-model="vm.bookmark.creationDate" is-open="vm.popupCalendar.opened" datepicker-options="vm.datePickerOptions" ng-required="true" close-text="Close" date-parser disabled required/>
-                                </div>
-                                <span class="input-group error "input-group"" ng-show="vm.addBookmarkForm.datePicker.$invalid && !vm.addBookmarkForm.$pristine">* Date is in wrong format!</span>
-                                  
-                                <span class="label label-primary">Public</span>
+                                <h4><span class="label label-primary checkbox-inline">Public</span></h4>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.visible.$invalid && !vm.addBookmarkForm.visible.$pristine }">
                                     <input name="visible" type="checkbox" class="form-control" ng-model="vm.bookmark.visible" ng-true-value="true" ng-false-value="false"/>
                                 </div>

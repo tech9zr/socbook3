@@ -1,5 +1,8 @@
 INSERT INTO `user` (`user_name`,`user_password`,`first_name`,`last_name`,`status`, `email`) VALUES ("admin","admin","FirstName1","LastName1",true, "admin@admin");
 INSERT INTO `user` (`user_name`,`user_password`,`first_name`,`last_name`,`status`, `email`) VALUES ("user","user","FirstName2","LastName2",true, "user@user");
+INSERT INTO `user` (`user_name`,`user_password`,`first_name`,`last_name`,`status`, `email`) VALUES ("pera","para","FirstName3","LastName3",true, "pera@pera");
+INSERT INTO `user` (`user_name`,`user_password`,`first_name`,`last_name`,`status`, `email`) VALUES ("zika","zika","FirstName4","LastName4",true, "zika@zika");
+INSERT INTO `user` (`user_name`,`user_password`,`first_name`,`last_name`,`status`, `email`) VALUES ("mika","mika","FirstName5","LastName5",true, "mika@mika");
 
 INSERT INTO `role` (`type`) values("ROLE_USER");
 INSERT INTO `role` (`type`) values("ROLE_ADMIN");	
@@ -7,6 +10,9 @@ INSERT INTO `role` (`type`) values("ROLE_ADMIN");
 INSERT INTO `user_roles` (`user_id`,`role_id`) values (1,1);
 INSERT INTO `user_roles` (`user_id`,`role_id`) values (1,2);
 INSERT INTO `user_roles` (`user_id`,`role_id`) values (2,1);
+INSERT INTO `user_roles` (`user_id`,`role_id`) values (3,1);
+INSERT INTO `user_roles` (`user_id`,`role_id`) values (4,1);
+INSERT INTO `user_roles` (`user_id`,`role_id`) values (5,1);
 
 INSERT INTO `category`(`name`) values ("Kuvanje");
 INSERT INTO `category`(`name`) values ("Sport");

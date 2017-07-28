@@ -6,34 +6,9 @@
 
     function config($routeProvider) {
         $routeProvider
-	        .when('/home', {
-	            templateUrl: '/views/home.html',
-	            controller: 'HomeController',
-	            controllerAs: 'vm'
-	        })
             .when('/', {
-                templateUrl: '/views/bookmark.html',
+                templateUrl: '/views/bookmarks.html',
                 controller: 'BookmarkController',
-                controllerAs: 'vm'
-            })
-            .when('/categories', {
-                templateUrl: '/views/categories.html',
-                controller: 'CategoryController',
-                controllerAs: 'vm'
-            })
-               .when('/pub/:username', {
-                templateUrl: '/views/pub.html',
-                controller: 'PubController',
-                controllerAs: 'vm'
-            })
-                 .when('/adminBookmarks', {
-                templateUrl: '/views/adminBookmarks.html',
-                controller: 'AdminBookmarksController',
-                controllerAs: 'vm'
-            })
-                    .when('/users', {
-                templateUrl: '/views/user.html',
-                controller: 'UserController',
                 controllerAs: 'vm'
             })
             .when('/search', {
@@ -41,7 +16,31 @@
                 controller: 'SearchController',
                 controllerAs: 'vm'
             })
-         
+            .when('/adminCategories', {
+                templateUrl: '/views/adminCategories.html',
+                controller: 'CategoryController',
+                controllerAs: 'vm'
+            })
+            .when('/adminBookmarks', {
+                templateUrl: '/views/adminBookmarks.html',
+                controller: 'AdminBookmarksController',
+                controllerAs: 'vm'
+            })
+            .when('/adminUsers', {
+                templateUrl: '/views/adminUser.html',
+                controller: 'UserController',
+                controllerAs: 'vm'
+            })
+//          .when('/home', {
+//	            templateUrl: '/views/home.html',
+//	            controller: 'HomeController',
+//	            controllerAs: 'vm'
+//	        })
+//	        .when('/pub/:username', {
+//                templateUrl: '/views/pub.html',
+//                controller: 'PubController',
+//                controllerAs: 'vm'
+//            })
             .otherwise('/');
     }
 }());
