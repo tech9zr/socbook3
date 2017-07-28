@@ -8,18 +8,20 @@
                     <th>Firstname</th>
                     <th>Lastname</th>
                     <th>Email</th>
+                    <th>Status</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
             </thead>
             <tbody ng-repeat="user in vm.users track by $index" >
                 <tr>
-                 
-                    <td>{{user.username}}</td>
-                     <td>{{user.firstName}}</td>
-                      <td>{{user.lastName}}</td>
-                       <td>{{user.email}}</td>
-               
+                	<td>{{user.username}}</td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.email}}</td>
+                  	<td>
+						<input type="checkbox" class="form-control" ng-model="user.status" ng-true-value="true" ng-false-value="false" disabled>
+                    </td>
                     <td class="option">
                         <button class="btn btn-default" data-toggle="modal" data-target="#add-user-modal" type="button" ng-click="vm.editUser(user)">
                             <span class="glyphicon glyphicon-pencil"></span>
