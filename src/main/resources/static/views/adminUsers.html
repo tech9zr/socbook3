@@ -9,8 +9,8 @@
                     <th>Lastname</th>
                     <th>Email</th>
                     <th>Status</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody ng-repeat="user in vm.users track by $index" >
@@ -113,6 +113,10 @@
 	                            <span class="error" ng-show="vm.adminRegisterUserForm.email.$invalid && !vm.adminRegisterUserForm.email.$pristine">* Email is required!</span>
 	                            <span ng-if="vm.registrationError.email" class="error">* {{vm.registrationError.email}}</span>
 	                        </div>
+	                          <h4><span class="label label-primary checkbox-inline">Status</span></h4>
+                                <div class="modal-item" ng-class="{ 'has-error' : vm.adminRegisterUserForm.status.$invalid && !vm.adminRegisterUserForm.status.$pristine }">
+                                    <input name="status" type="checkbox" class="form-control" ng-model="vm.user.status" ng-true-value="true" ng-false-value="false"/>
+                                </div>
                         </div>
 		
 						<div class="alert alert-danger" ng-if="vm.registrationError">Registration failed!</div>

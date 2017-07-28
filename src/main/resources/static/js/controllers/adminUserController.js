@@ -26,7 +26,6 @@ angular.module('app')
         }
 
         function register(user) {
-        	user.status = true;
         	user.roles = [{"id":1,"type":"ROLE_USER"}];
         	console.log(user);
         	RegisterService.saveUser(user).then(function(response){
