@@ -10,14 +10,18 @@
         vm.isActive = isActive;
         vm.importBookmark = importBookmark;
         vm.isImportDisabled = isImportDisabled;
+        vm.detailsBookmark = detailsBookmark;
+        vm.closeDetailsBookmark = closeDetailsBookmark;
         vm.clearAll = clearAll;
         vm.bookmarks;
 
         init();
 
         function init() {
-            getBookmarkByVisible();
-            vm.loggedInUser = UserService.loggedInUser();
+        	vm.loggedInUser = UserService.loggedInUser();
+	        if(vm.loggedInUser) {
+	            getBookmarkByVisible();
+	        }
         }
 
         //nav-bar
@@ -50,6 +54,14 @@
             return SearchService.getDisabledImportBookmarks().some(function(val){
                 return val.bookmarkId === bookmark.id && val.username === vm.loggedInUser.username;
             });
+        }
+
+        function detailsBookmark(bookmark) {
+            vm.bookmark = bookmark;
+        }
+
+        function closeDetailsBookmark() {
+            vm.bookmark = {};
         }
      }
 

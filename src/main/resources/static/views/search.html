@@ -71,7 +71,7 @@
 							</span>
 						</td>
 						<td class="option">
-							<button class="btn btn-default"><span class="glyphicon glyphicon-modal-window"></span></button>
+							<button class="btn btn-default" data-toggle="modal" data-target="#details-bookmark-modal" type="button" ng-click="vm.detailsBookmark(bookmark)"><span class="glyphicon glyphicon-modal-window"></span></button>
 						</td>
 						<td class="option">
 							<button class="btn btn-default" ng-click="vm.importBookmark(bookmark)" ng-disabled="vm.isImportDisabled(bookmark)"><span class="glyphicon glyphicon-import"></span></button>
@@ -79,6 +79,46 @@
 					</tr>
 				</tbody>
 			</table>
+        </div>
+
+        <div class="modal fade" id="details-bookmark-modal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Bookmark Details</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <form name="vm.detailsBookmarkForm" novalidate>
+							<fieldset>
+								<legend>{{vm.bookmark.title}}</legend>
+								<div class="container" style="width: 100%;">
+									<div><a href="http://{{vm.bookmark.url}}" target="_blank">{{vm.bookmark.url}}</a></div>
+									<div>{{vm.bookmark.description}}</div>
+									<div>{{vm.bookmark.category.name}}</div>
+									<div>
+										<span ng-repeat="tag in vm.bookmark.tags"> 
+											<label class="label-primary">{{tag.name}}</label>
+										</span>
+									</div>
+									<br>
+									<div class="col-md-12">
+										<label for="comment">Add Comment:</label>
+										<textarea class="form-control" style="max-width: 100%;" id="comment"></textarea>
+										<button class="btn btn-primary btn-sm">Post</button>
+									</div>
+									<br>
+								</div>
+							</fieldset>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="vm.closeDetailsBookmark()">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 		</div>
 	</div>
 </div>
