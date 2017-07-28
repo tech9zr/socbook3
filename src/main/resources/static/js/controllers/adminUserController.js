@@ -1,10 +1,10 @@
 (function(){
 angular.module('app')
-    .controller('UserController', UserController);
+    .controller('AdminUserController', AdminUserController);
     
-    UserController.$inject = ['UserService'];
+    AdminUserController.$inject = ['UserService', 'RegisterService'];
    
-    function UserController(UserService) {
+    function AdminUserController(UserService, RegisterService) {
         
         var vm = this;
         vm.addUser = addUser;
@@ -12,18 +12,37 @@ angular.module('app')
         vm.editUser = editUser;     
         vm.saveUser = saveUser;
         vm.selectUser = selectUser;
+        vm.register=register;
         vm.operation;
-
+        
+        vm.registerInput = {};
         init();
 
         function init() {
             getUsers();
+            vm.user={};
+            vm.error = {};   
             vm.closeModal = false;
         }
 
+        function register(user) {
+        	user.status = true;
+        	user.roles = [{"id":1,"type":"ROLE_USER"}];
+        	console.log(user);
+        	RegisterService.saveUser(user).then(function(response){
+        		getUsers();
+            }, function(error){
+            	vm.registrationError = {};
+                angular.forEach(error.data.exceptions, function(e){
+                    errorHandler(e);
+                });
+            })
+           
+            vm.adminRegisterUserForm.$setPristine();
+        }
 
         function addUser() {
-            vm.addUserForm.$setPristine();
+            vm.adminRegisterUserForm.$setPristine();
             vm.operation = "Add";
             init();
         }
@@ -38,10 +57,10 @@ angular.module('app')
         }
 
         function editUser(user){
+        	vm.user = user;
         	vm.error = {};
             vm.operation = "Edit";
             vm.user = angular.copy(user);
-            //vm.bookmark.creationDate = new Date(vm.bookmark.creationDate.split('-').join(' '));
         }
 
     
@@ -65,13 +84,29 @@ angular.module('app')
                 });
             })
             //remove input value after submit
-            vm.addUserForm.$setPristine();
+            vm.adminRegisterUserForm.$setPristine();
             vm.error = {};
         }
         
         
         function selectUser(user){
             vm.user = user;
+        }
+        
+        function capitalize(error){
+            return '* ' + error[0].toUpperCase() + error.slice(1); 
+        }
+ 
+        function errorHandler(error){
+            switch(error.field){
+                case 'username':
+                    vm.registrationError.username = error.message;
+                    break;
+                case 'email':
+                    vm.registrationError.email = error.message;
+                    break;
+                    }
+        
         }
         
   

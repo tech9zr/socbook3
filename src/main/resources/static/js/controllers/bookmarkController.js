@@ -2,44 +2,33 @@
 angular.module('app')
     .controller('BookmarkController', BookmarkController);
     
-    BookmarkController.$inject = ['$rootScope', '$filter', 'CategoryService', 'BookmarkService', 'uibDateParser', 'TagService', 'UserService'];
+    BookmarkController.$inject = ['$filter', 'CategoryService', 'BookmarkService', 'uibDateParser', 'TagService', 'UserService'];
    
-    function BookmarkController($rootScope, $filter, CategoryService, BookmarkService, uibDateParser, TagService, UserService) {
+    function BookmarkController($filter, CategoryService, BookmarkService, uibDateParser, TagService, UserService) {
         
         var vm = this;
         vm.addBookmark = addBookmark;
         vm.deleteBookmark = deleteBookmark;
         vm.editBookmark = editBookmark;
-        vm.openCalendar = openCalendar;
         vm.saveBookmark = saveBookmark;
         vm.selectBookmark = selectBookmark;
         vm.addTag = addTag;
         vm.operation;
-        vm.getBookmarkByUsername=getBookmarkByUsername; 
-        vm.user;
-       
 
         init();
 
         function init() {
-            getCategories();
-            getBookmarkByUsername($rootScope.user.username);
-            vm.error = {};
-            //Create new book
+            vm.loggedInUser = UserService.loggedInUser();
+            if(vm.loggedInUser) {
+                getCategories();
+                getBookmarks();
+            }
             vm.bookmark = {
                 creationDate: new Date()
             };
+            vm.error = {};
             vm.closeModal = false;
         }
-
-        vm.datePickerOptions = {
-            formatYear: 'yy',
-            maxDate : new Date()
-        };
-
-        vm.popupCalendar = {
-           opened: false
-        }; 
 
         function addBookmark() {
             vm.addBookmarkForm.$setPristine();
@@ -49,9 +38,7 @@ angular.module('app')
 
         function deleteBookmark(){
             BookmarkService.deleteBookmark(vm.bookmark.id).then(function(response){
-            	 getBookmarkByUsername($rootScope.user.username);
-            }, function(error){
-
+            	 getBookmarks();
             });
             vm.operation = "Delete";
             vm.bookmark= {};
@@ -61,9 +48,12 @@ angular.module('app')
         	vm.error = {};
             vm.operation = "Edit";
             vm.bookmark = angular.copy(bookmark);
-            //vm.bookmark.creationDate = new Date(vm.bookmark.creationDate.split('-').join(' '));
         }
 
+//        function getBookmarksByUsername(username) {
+//            BookmarkService.getBookmarksByUsername(username).then(handleSuccessBookmarks) 
+//        }
+        
         function getCategories(){
             CategoryService.getCategories().then(handleSuccessCategories);
         }
@@ -77,36 +67,33 @@ angular.module('app')
             vm.categories = data;
         }
         
-        //Get all books
+        //Get all bookmarks
         function handleSuccessBookmarks(data, status){
             vm.bookmarks = data.data;
         }
-
-        function openCalendar() {
-            vm.popupCalendar.opened = true;
-        };
 
         function capitalize(error){
             return '* ' + error[0].toUpperCase() + error.slice(1); 
         }
 
         function saveBookmark(bookmark){
-        	if(vm.operation == "Add")
-        		bookmark.creationDate = bookmark.creationDate.getTime();
-        	bookmark.user = $rootScope.user;
-        	if(typeof vm.newTags !== "undefined") {
-                if(typeof bookmark.tags === "undefined")
+            if(vm.operation == "Add") {
+                bookmark.creationDate = bookmark.creationDate.getTime();
+                bookmark.user = vm.loggedInUser;
+            }
+            if(vm.newTags) {
+                if(!bookmark.tags)
                     bookmark.tags = [];
-        	bookmark.tags = bookmark.tags.concat(vm.newTags);
-        	console.log(bookmark);
-        	}
-        	
-        	saveBookmarkToDatabase(bookmark);
+                bookmark.tags = bookmark.tags.concat(vm.newTags);
+                delete vm.newTags;
+            }
+       	
+       	saveBookmarkToDatabase(bookmark);
         }
         
         function saveBookmarkToDatabase(bookmark) {
             BookmarkService.saveBookmark(bookmark).then(function(response){
-            	getBookmarkByUsername($rootScope.user.username);
+            	getBookmarks();
                 $('#add-bookmark-modal').modal('hide');
             }, function(error){
                 vm.error = {};
@@ -120,7 +107,7 @@ angular.module('app')
         }
         
         function addTag() {
-        	if(typeof vm.newTags === "undefined")
+        	if(!vm.newTags)
         		vm.newTags = [];
         	vm.newTags.push({"name":vm.tag.name});
         	delete vm.tag;
@@ -135,24 +122,7 @@ angular.module('app')
                 case 'title':
                     vm.error.title = capitalize(error.message);
                     break;
-                case 'isbn':
-                    vm.error.isbn = capitalize(error.message);
-                    break;
             }
-        }
-        
-        
-        function getBookmarkByUsername(username)
-        {
-            BookmarkService.getBookmarkByUsername(username).then(function(response)
-           {
-               vm.bookmarks=response.data;
-            }, function(error){
-
-            });
-        }
-        
-        
-    
+        }    
     };
 })();

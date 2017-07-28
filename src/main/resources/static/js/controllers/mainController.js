@@ -2,9 +2,9 @@
     angular.module('app')
             .controller('MainController', MainController);
 
-    MainController.$inject = ['$rootScope', 'RegisterService', '$location', '$http', '$route', 'UserService' ];
+    MainController.$inject = ['RegisterService', '$location', '$http', '$route', 'UserService' ];
 
-    function MainController($rootScope, RegisterService, $location, $http, $route, UserService) {
+    function MainController(RegisterService, $location, $http, $route, UserService) {
 
         var self = this;
         self.isActive = isActive;
@@ -64,10 +64,9 @@
                 // setting the same header value for all request calling from this app
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + base64Credential;
                 self.user = res;
-                UserService.getUserByUsername(self.user.username).then(function(response){
-                	$rootScope.user = response.data;
+                UserService.getLoggedInUserByUsername(self.user.username).then(function(){
+                    init();
                 });
-                init();
             }).error(function (error) {
                 self.loginError = 'Bad credentials!';
             });

@@ -9,7 +9,7 @@
         this.saveUser = function (user) {
             var def = $q.defer();
             var req = {
-                method: 'POST',
+                method: user.id ? 'PUT': 'POST',
                 url: "users",
                 data: user
             }

@@ -60,8 +60,11 @@ public class UserController {
 	 		}
 	        return userService.save(user);
 	    }
-	    
-	   
+		@RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
+		public ResponseEntity delete(@PathVariable("id") Long id) {
+			userService.delete(id);
+			return new ResponseEntity(HttpStatus.OK);
+		}   
 	    
 	    @RequestMapping(path = "/username/{username}", method = RequestMethod.GET)
 	    public User findByUsername(@PathVariable("username") String username) {
@@ -72,6 +75,7 @@ public class UserController {
 	    public User put(@Valid @RequestBody User user) {
 	        return userService.save(user);
 	    }
+	    
 	    @RequestMapping("/user")
 	    public Map<String, Object> user(Authentication user) {
 	      Map<String, Object> map = new LinkedHashMap<String, Object>();
