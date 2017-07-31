@@ -59,7 +59,7 @@ public class Bookmark extends BaseEntity implements Serializable {
 	private Date creationDate;
 	
 	
-	@OneToMany
+	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinColumn(name="bookmark_id", nullable = false, unique = false)
 	private Set<Comment> comments;
 	

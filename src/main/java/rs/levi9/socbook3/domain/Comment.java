@@ -10,13 +10,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
+
 @Entity
 @Table(name = "comment")
 public class Comment extends BaseEntity implements Serializable {
 	private static final long serialVersionUID = -5348636843163171472L;
 
-	@NotNull()
-	@Column(unique = false, nullable = false, name = "content")
+	@Column(unique = false, nullable = true, name = "content")
 	private String content;
 
 	@NotNull()
@@ -26,7 +27,11 @@ public class Comment extends BaseEntity implements Serializable {
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
-	private User authorId;
+	private User author;
+	
+	@Range(min=0, max=5)
+	@Column(unique = false, nullable = true, name = "rate")
+	private int rate;
 
 	public String getContent() {
 		return content;
@@ -44,15 +49,22 @@ public class Comment extends BaseEntity implements Serializable {
 		this.creationDate = creationDate;
 	}
 
-	public User getAuthorId() {
-		return authorId;
+	public User getAuthor() {
+		return author;
 	}
 
-	public void setAuthorId(User authorId) {
-		this.authorId = authorId;
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+
+	public int getRate() {
+		return rate;
+	}
+
+	public void setRate(int rate) {
+		this.rate = rate;
 	}
 
 	public Comment() {
 	}
-
 }

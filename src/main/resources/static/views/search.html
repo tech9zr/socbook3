@@ -106,9 +106,30 @@
 									<br>
 									<div class="col-md-12">
 										<label for="comment">Add Comment:</label>
-										<textarea class="form-control" style="max-width: 100%;" id="comment"></textarea>
-										<button class="btn btn-primary btn-sm">Post</button>
+										<div class="pull-right">
+											<label>Rate: </label>
+											<span uib-rating ng-model="comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
+										</div>
+										<textarea class="form-control" style="max-width: 100%;" id="comment" ng-model="vm.comment.content"></textarea>
+										<button class="btn btn-primary btn-sm" ng-click="vm.postComment(vm.comment.content)">Post</button>
+										<br>
+										<br>
+										<!--Comments List-->
+										<div ng-repeat="comment in vm.bookmark.comments | orderBy:'creationDate':true">
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<span><u><i>{{comment.author.username}}</i></u></span>
+													<span class="pull-right"><small>{{comment.creationDate | date : "d MMM y"}}</small></span>
+													<div ng-if="comment.rate">
+														<span uib-rating read-only="true" ng-model="comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
+													</div>
+												</div>
+												<div class="panel-body">
+													{{comment.content}}
+												</div>
+											</div>									
 									</div>
+									</div>									
 									<br>
 								</div>
 							</fieldset>

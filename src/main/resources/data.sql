@@ -65,6 +65,9 @@ INSERT INTO `bookmark_tags` (`bookmark_id`,`tag_id`) values (4,14);
 INSERT INTO `bookmark_tags` (`bookmark_id`,`tag_id`) values (4,15);
 INSERT INTO `bookmark_tags` (`bookmark_id`,`tag_id`) values (4,16);
 
+insert into comment ( content, rate, creation_date, user_id, bookmark_id) values ( "Ovo je neki komentar, on valjda radi kako treba", 5, NOW(), 1,1);
+insert into comment ( content, rate, creation_date, user_id, bookmark_id) values ( "Ovo je neki drugi komentar", 2, NOW(), 3,1);
+
 
 
 

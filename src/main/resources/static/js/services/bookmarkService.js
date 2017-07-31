@@ -11,7 +11,19 @@
 
         var bookmarksList = [];
      
-
+        this.getBookmark = function (id) {
+            var def = $q.defer();
+            var req = {
+                method: 'GET',
+                url: "bookmarks/" + id
+            }
+            $http(req).success(function (data) {
+                def.resolve(data);
+            }).error(function () {
+                def.reject("Failed");
+            });
+            return def.promise;
+        }
 
         this.getBookmarks = function () {
             var def = $q.defer();
@@ -26,7 +38,7 @@
             });
         } 
         
-        this.getBookmarkByVisible = function () {
+        this.getBookmarksByVisible = function () {
             var def = $q.defer();
             var req = {
                 method: 'GET',

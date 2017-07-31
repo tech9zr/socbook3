@@ -23,9 +23,9 @@
             $http(req).success(function (data) {
                 def.resolve(data);
             })
-                    .error(function () {
-                        def.reject("Failed");
-                    });
+            .error(function () {
+                def.reject("Failed");
+            });
             return def.promise;
         }
 
@@ -38,9 +38,9 @@
             $http(req).success(function (data) {
                 def.resolve(data);
             })
-                    .error(function () {
-                        def.reject("Failed");
-                    });
+            .error(function () {
+                def.reject("Failed");
+            });
             return def.promise;
         }
 

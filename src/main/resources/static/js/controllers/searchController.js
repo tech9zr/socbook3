@@ -13,6 +13,7 @@
         vm.detailsBookmark = detailsBookmark;
         vm.closeDetailsBookmark = closeDetailsBookmark;
         vm.clearAll = clearAll;
+        vm.postComment = postComment;
         vm.bookmarks;
 
         init();
@@ -20,7 +21,7 @@
         function init() {
         	vm.loggedInUser = UserService.loggedInUser();
 	        if(vm.loggedInUser) {
-	            getBookmarkByVisible();
+	            getBookmarksByVisible();
 	        }
         }
 
@@ -30,8 +31,8 @@
             return viewLocation === $location.path();
         }
         
-        function getBookmarkByVisible(){
-            BookmarkService.getBookmarkByVisible().then(handleSuccessBookmarks)
+        function getBookmarksByVisible(){
+            BookmarkService.getBookmarksByVisible().then(handleSuccessBookmarks)
         }  
 
         function handleSuccessBookmarks(data, status){
@@ -62,6 +63,18 @@
 
         function closeDetailsBookmark() {
             vm.bookmark = {};
+        }
+
+        function postComment(commentContent, rate) {
+            var bookmark = angular.copy(vm.bookmark);
+            bookmark.comments = [];
+            bookmark.comments.push({content:commentContent, author:vm.loggedInUser, creationDate:(new Date()).getTime()});
+            BookmarkService.saveBookmark(bookmark).then(function(){
+                BookmarkService.getBookmark(bookmark.id).then(function(response){
+                    vm.bookmark = response;
+                    getBookmarksByVisible();
+                });
+            });
         }
      }
 
