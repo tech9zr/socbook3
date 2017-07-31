@@ -21,6 +21,7 @@ angular.module('app')
             if(vm.loggedInUser) {
             	getUsers();
             }
+            vm.user = {};
             vm.closeModal = false;
         }
 
@@ -70,23 +71,7 @@ angular.module('app')
            //remove input value after submit
             vm.adminAddUserForm.$setPristine();
         	vm.error = {};
-        }
-
-//       function saveUser(user){
-//        UserService.saveUser(user).then(function(response){
-//            getUsers();
-//            $('#add-user-modal').modal('hide');
-//        }, function(error){
-//            vm.error = {};
-//            angular.forEach(error.data.exceptions, function(e){
-//                errorHandler(e);
-//            });
-//        })
-//        //remove input value after submit
-//        vm.adminRegisterUserForm.$setPristine();
-//        vm.error = {};
-//        }
-        
+        }        
         
         function selectUser(user){
             vm.user = user;

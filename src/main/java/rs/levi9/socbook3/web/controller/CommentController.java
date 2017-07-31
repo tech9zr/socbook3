@@ -54,7 +54,8 @@ public class CommentController {
     }
 	
 	 @RequestMapping(method = RequestMethod.PUT)
-	    public Comment put(@Valid @RequestBody Comment comment) {
+	 public Comment put(@Valid @RequestBody Comment comment) {
 	        return commentService.save(comment);
 	    }
+	 
 }

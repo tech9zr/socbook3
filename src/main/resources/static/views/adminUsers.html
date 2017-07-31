@@ -48,7 +48,7 @@
                         <h4 class="modal-title">Delete User</h4>
                     </div>
                     <div class="modal-body">
-                        <p>Do you want to delete <i>{{vm.user.username}}</i> ?</p>
+                        <p>Do you want to delete <i>{{vm.user.username}}</i>  with all user bookmarks?</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="vm.deleteUser(vm.selectedUser.id)">OK</button>
@@ -92,7 +92,7 @@
 							<label for="password">Password:</label>
 							
 	                   <div class="modal-item" ng-class="{ 'has-error' : vm.adminAddUserForm.password.$invalid && !vm.adminAddUserForm.password.$pristine }">
-	                            <input name="password" type="text" class="form-control" required ng-model="vm.user.password"/>
+	                            <input name="password" type="password" class="form-control" required ng-model="vm.user.password"/>
 	                            <span class="error" ng-show="vm.adminAddUserForm.password.$invalid && !vm.adminAddUserForm.password.$pristine">* Password is required!</span>
 	                        </div>
                         </div>
@@ -109,7 +109,7 @@
 							<label for="email">Email:</label>
 							
 	                        <div class="modal-item" ng-class="{ 'has-error' : vm.adminAddUserForm.email.$invalid && !vm.adminAddUserForm.email.$pristine }">
-	                            <input name="email" type="text" class="form-control" required ng-model="vm.user.email"/>
+	                            <input name="email" type="email" class="form-control" required ng-model="vm.user.email"/>
 	                            <span class="error" ng-show="vm.adminAddUserForm.email.$invalid && !vm.adminAddUserForm.email.$pristine">* Email is required!</span>
 	                            <span ng-if="vm.error.email" class="error">* {{vm.error.email}}</span>
 	                        </div>
@@ -119,7 +119,7 @@
                                 </div>
                         </div>
 		
-						<div class="alert alert-danger" ng-if="vm.error">Failed to add user!</div>
+						 <div class="alert alert-danger" ng-if="vm.error">Failed to add user!</div> 
 		
 					</form>
                         <div class="modal-footer">

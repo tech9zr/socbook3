@@ -71,4 +71,9 @@ public class BookmarkService {
 	public List<Bookmark> findByTitle(String title){
 		return bookmarkRepository.findByTitle(title);
 	}
+	
+	public List<Bookmark> findByCategory(Category category){
+		return bookmarkRepository.findByCategory(category);
+	}
+	
 }

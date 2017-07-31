@@ -2,9 +2,9 @@
     angular.module('app')
     .controller('CategoryController', CategoryController);   
     
-    CategoryController.$inject = ['CategoryService'];
+    CategoryController.$inject = ['CategoryService', 'BookmarkService'];
     
-    function CategoryController(CategoryService) {
+    function CategoryController(CategoryService, BookmarkService) {
         
         var vm = this;
         vm.addCategory = addCategory;
@@ -13,6 +13,7 @@
         vm.saveCategory = saveCategory;
         vm.selectCategory = selectCategory;
         vm.operation;
+        
         
         //Create new category
         vm.category = {};
@@ -29,7 +30,7 @@
             CategoryService.deleteCategory(vm.category.id).then(function(response){
                 getCategories();
             }, function(error){
-
+            	$('#categoryModal').modal('show');
             });
             vm.category = {};
         }
@@ -61,5 +62,8 @@
         function selectCategory(category){
             vm.category = category;
         }
+        
+        
+     
     };
 })();

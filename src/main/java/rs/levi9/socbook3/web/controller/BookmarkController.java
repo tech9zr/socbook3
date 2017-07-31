@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import rs.levi9.socbook3.domain.Bookmark;
+import rs.levi9.socbook3.domain.Category;
 import rs.levi9.socbook3.domain.Tag;
 import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.service.BookmarkService;
+import rs.levi9.socbook3.service.CategoryService;
 import rs.levi9.socbook3.service.UserService;
 
 @RestController
@@ -26,12 +28,14 @@ import rs.levi9.socbook3.service.UserService;
 public class BookmarkController {
 	private BookmarkService bookmarkService;
 	private UserService userService;
-
+	private CategoryService categoryService;
 
 	@Autowired
-	public BookmarkController(BookmarkService bookmarkService, UserService userService) {
-		this.userService = userService;
+	public BookmarkController(BookmarkService bookmarkService, UserService userService,
+			CategoryService categoryService) {
 		this.bookmarkService = bookmarkService;
+		this.userService = userService;
+		this.categoryService = categoryService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -108,18 +112,18 @@ public class BookmarkController {
 		return bookmarkService.save(newBookmark);
 	}
 
-
+	
 	@RequestMapping(path = "/search/{title}", method = RequestMethod.GET)
 	public List<Bookmark> findByTitle(@PathVariable("title") String title) {
 		return bookmarkService.findByTitle(title);
 
 	}
 
-	@RequestMapping(path = "/delete/{title}", method = RequestMethod.DELETE)
-	public ResponseEntity delteByTitle(@PathVariable("title") String title) {
-		bookmarkService.deleteByTitle(title);
-		return new ResponseEntity(HttpStatus.OK);
+	@RequestMapping(path = "/category/{category}", method = RequestMethod.GET)
+	public List<Bookmark> findByCategory(@PathVariable("category") Long category){
+			Category foundCategory = categoryService.findOne(category);
+			
+		return bookmarkService.findByCategory(foundCategory);
 	}
-
 
 }
