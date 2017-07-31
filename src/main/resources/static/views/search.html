@@ -66,7 +66,7 @@
 						<td>{{bookmark.description}}</td>
 						<td>{{bookmark.category.name}}</td>
 						<td>
-							<span ng-repeat="tag in bookmark.tags"> 
+							<span ng-repeat="tag in bookmark.tags | orderBy:'id'"> 
 								<label class="label-primary">{{tag.name}}</label>
 							</span>
 						</td>
@@ -93,45 +93,54 @@
 
                         <form name="vm.detailsBookmarkForm" novalidate>
 							<fieldset>
-								<legend>{{vm.bookmark.title}}</legend>
-								<div class="container" style="width: 100%;">
+								<div class="well container" style="width: 100%;">
+									<legend>{{vm.bookmark.title}}</legend>
 									<div><a href="http://{{vm.bookmark.url}}" target="_blank">{{vm.bookmark.url}}</a></div>
 									<div>{{vm.bookmark.description}}</div>
+									
 									<div>{{vm.bookmark.category.name}}</div>
 									<div>
-										<span ng-repeat="tag in vm.bookmark.tags"> 
+										<span ng-repeat="tag in vm.bookmark.tags | orderBy:'id'"> 
 											<label class="label-primary">{{tag.name}}</label>
 										</span>
 									</div>
-									<br>
-									<div class="col-md-12">
-										<label for="comment">Add Comment:</label>
+								</div>
+								<br>
+								<div class="col-md-12">
+									<h4>	
+										<span>Add Comment:</span>
 										<div class="pull-right">
-											<label>Rate: </label>
-											<span uib-rating ng-model="comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
+											<span>Rate:&nbsp;&nbsp;&nbsp;</span>
+											<span uib-rating class="text-primary" ng-model="vm.comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
 										</div>
-										<textarea class="form-control" style="max-width: 100%;" id="comment" ng-model="vm.comment.content"></textarea>
-										<button class="btn btn-primary btn-sm" ng-click="vm.postComment(vm.comment.content)">Post</button>
-										<br>
-										<br>
-										<!--Comments List-->
-										<div ng-repeat="comment in vm.bookmark.comments | orderBy:'creationDate':true">
-											<div class="panel panel-default">
-												<div class="panel-heading">
-													<span><u><i>{{comment.author.username}}</i></u></span>
-													<span class="pull-right"><small>{{comment.creationDate | date : "d MMM y"}}</small></span>
-													<div ng-if="comment.rate">
-														<span uib-rating read-only="true" ng-model="comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
+									</h4>
+									<textarea class="form-control" style="max-width: 100%;" id="comment" ng-model="vm.comment.content"></textarea>
+									<button class="btn btn-primary btn-md" ng-click="vm.postComment(vm.comment)">Post</button>
+									<br>
+									<br>
+									<!--Comments List-->
+									<div ng-repeat="comment in vm.bookmark.comments | orderBy:'creationDate':true">
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<div class="row">
+													<div class="col-md-6">
+														<span><u><i>{{comment.author.username}}</i></u></span>
+													</div>
+													<div class="col-md-6">
+														<span uib-rating ng-if="comment.rate" class="text-primary pull-right" read-only="true" ng-model="comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
 													</div>
 												</div>
-												<div class="panel-body">
-													{{comment.content}}
+											</div>
+											<div class="panel-body">
+												<span ng-if="comment.content">{{comment.content}}</span>
+												<div>
+													<h6><small class="pull-right">{{comment.creationDate | date : "d MMM y"}}</small></h6>													
 												</div>
-											</div>									
+											</div>
+										</div>									
 									</div>
-									</div>									
-									<br>
-								</div>
+								</div>									
+								<br>
 							</fieldset>
                         </form>
                         <div class="modal-footer">

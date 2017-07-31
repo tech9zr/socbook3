@@ -25,7 +25,7 @@
                     <td>{{bookmark.description}}</td>
                     <td>{{bookmark.category.name}}</td>
                     <td>
-                        <span ng-repeat="tag in bookmark.tags">
+                        <span ng-repeat="tag in bookmark.tags | orderBy:'id'">
                             <label class="label-primary">{{tag.name}}</label>
                     	</span>
                     </td>
@@ -107,12 +107,12 @@
                                             <button class="btn btn-primary" type="button" ng-click="vm.addTag()"><strong>Add</strong></button>
                                         </span>
 								    </div>
-								    <span ng-repeat="tag in vm.bookmark.tags">
-	                    				<label class="label-primary">{{tag.name}}</label>
+								    <span ng-repeat="tag in vm.bookmark.tags | orderBy:'id'">
+	                    				<label ng-click="vm.deleteTag(tag)" ng-style="del" ng-class="dan" title="Delete Tag"
+                                        ng-mouseenter="del={'text-decoration':'line-through'};dan='label-danger'"
+                                        ng-mouseleave="del={'text-decoration':'none'};dan='label-primary'"  
+                                        class="label label-primary label-md" style="cursor: pointer;">{{tag.name}}</label>
                     				</span>
-                                    <span ng-repeat="tag in vm.newTags">
-		                				<label class="label-primary">{{tag.name}}</label>
-		               				</span>
                                 </div>
                                 <h4><span class="label label-primary">URL</span></h4>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.url.$invalid && !vm.addBookmarkForm.url.$pristine }">

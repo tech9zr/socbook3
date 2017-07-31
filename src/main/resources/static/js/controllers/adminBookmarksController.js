@@ -13,6 +13,7 @@ angular.module('app')
         vm.saveBookmark = saveBookmark;
         vm.selectBookmark = selectBookmark;
         vm.addTag = addTag;
+        vm.deleteTag = deleteTag;
         vm.operation;
 
         init();
@@ -34,6 +35,10 @@ angular.module('app')
             vm.addBookmarkForm.$setPristine();
             vm.operation = "Add";
             init();
+        }
+
+        function selectBookmark(bookmark){
+            vm.bookmark = bookmark;
         }
 
         function deleteBookmark(){
@@ -77,14 +82,8 @@ angular.module('app')
                 bookmark.creationDate = bookmark.creationDate.getTime();
                 bookmark.user = vm.loggedInUser;
             }
-            if(vm.newTags) {
-                if(!bookmark.tags)
-                    bookmark.tags = [];
-                bookmark.tags = bookmark.tags.concat(vm.newTags);
-                delete vm.newTags;
-            }
-       	
-       	saveBookmarkToDatabase(bookmark);
+            bookmark.tags = vm.bookmark.tags;       	
+            saveBookmarkToDatabase(bookmark);
         }
         
         function saveBookmarkToDatabase(bookmark) {
@@ -103,14 +102,14 @@ angular.module('app')
         }
         
         function addTag() {
-        	if(typeof vm.newTags === "undefined")
-        		vm.newTags = [];
-        	vm.newTags.push({"name":vm.tag.name});
+        	if(!vm.bookmark.tags)
+        		vm.bookmark.tags = [];
+        	vm.bookmark.tags.push(vm.tag);
         	delete vm.tag;
         }
-        
-        function selectBookmark(bookmark){
-            vm.bookmark = bookmark;
+
+        function deleteTag(tag) {
+            vm.bookmark.tags.splice(vm.bookmark.tags.indexOf(tag), 1);
         }
         
         function errorHandler(error){

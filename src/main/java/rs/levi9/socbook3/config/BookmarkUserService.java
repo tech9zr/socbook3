@@ -15,8 +15,6 @@ import rs.levi9.socbook3.domain.Role;
 import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.repository.UserRepository;
 
-
-
 @Transactional
 @Service
 public class BookmarkUserService implements UserDetailsService

@@ -65,16 +65,17 @@
             vm.bookmark = {};
         }
 
-        function postComment(commentContent, rate) {
+        function postComment(comment) {
             var bookmark = angular.copy(vm.bookmark);
             bookmark.comments = [];
-            bookmark.comments.push({content:commentContent, author:vm.loggedInUser, creationDate:(new Date()).getTime()});
+            bookmark.comments.push({content:comment.content, rate:comment.rate, author:vm.loggedInUser, creationDate:(new Date()).getTime()});
             BookmarkService.saveBookmark(bookmark).then(function(){
                 BookmarkService.getBookmark(bookmark.id).then(function(response){
                     vm.bookmark = response;
                     getBookmarksByVisible();
                 });
             });
+            delete vm.comment;
         }
      }
 
