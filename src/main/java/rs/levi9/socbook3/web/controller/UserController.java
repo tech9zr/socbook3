@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import rs.levi9.socbook3.domain.Bookmark;
 import rs.levi9.socbook3.domain.User;
+import rs.levi9.socbook3.service.BookmarkService;
 import rs.levi9.socbook3.service.UserService;
 import rs.levi9.socbook3.web.validation.exceptions.EmailAlreadyExistsException;
 import rs.levi9.socbook3.web.validation.exceptions.UsernameAlreadyExistsException;
@@ -28,13 +29,16 @@ import rs.levi9.socbook3.web.validation.exceptions.UsernameAlreadyExistsExceptio
 public class UserController {
 
 	private UserService userService;
+	private BookmarkService bookmarkService; 
 
-	@Autowired
-	public UserController(UserService userService) {
-		this.userService = userService;
-	}
 	
-	 	@RequestMapping(method = RequestMethod.GET)
+		@Autowired
+	 	public UserController(UserService userService, BookmarkService bookmarkService) {
+		this.userService = userService;
+		this.bookmarkService = bookmarkService;
+	}
+
+		@RequestMapping(method = RequestMethod.GET)
 	    public List<User> findAll() {
 	        return userService.findAll();
 	    }
@@ -62,6 +66,11 @@ public class UserController {
 	    }
 		@RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
 		public ResponseEntity delete(@PathVariable("id") Long id) {
+			User foundUser = userService.findOne(id);
+			List<Bookmark> userBookmarks = bookmarkService.findByUser(foundUser);
+			for (Bookmark bookmark : userBookmarks) {
+				bookmarkService.delete(bookmark.getId());
+			}
 			userService.delete(id);
 			return new ResponseEntity(HttpStatus.OK);
 		}   
