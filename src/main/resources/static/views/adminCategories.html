@@ -20,6 +20,7 @@
                             </button>
                         </td>
                         <td>
+                            
                             <button class="btn btn-default " data-toggle="modal" data-target="#deleteCategoryModal" type="button" ng-click="vm.selectCategory(category)">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
@@ -59,7 +60,7 @@
             </div>
         </div>
         
-        <div class="modal fade" id="CategoryModal" role="dialog">
+        <div class="modal fade" id="categoryModal" role="dialog">
                     <div class="modal-dialog">
                          <div class="modal-content">
                               <div class="modal-header">
@@ -68,13 +69,13 @@
                               </div>
                      <div class="modal-body">
                            <p>You can't delete <i>{{vm.category.name}}</i> because some bookmarks contain  that category</p>
-                     </div>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                    </div>
-                  </div>
                  </div>
-                 </div>
+               </div>
+             </div>
 
         <!-- Modal -->
         <!-- Add/Edit category -->
