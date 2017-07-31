@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody ng-repeat="user in vm.users track by $index" >
-                <tr>
+                <tr ng-if="user.id != vm.loggedInUser.id">
                 	<td>{{user.username}}</td>
                     <td>{{user.firstName}}</td>
                     <td>{{user.lastName}}</td>
@@ -57,13 +57,13 @@
                 </div>
             </div>
         </div>
- <div class="panel panel-default">
-                <div class="panel-body">
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#add-user-modal" ng-click="vm.addUser()">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </button>
+ 		<div class="panel panel-default">
+			<div class="panel-body">
+				<button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#add-user-modal" ng-click="vm.addUser()">
+					<span class="glyphicon glyphicon-plus"></span>
+				</button>
                 </div>
-            </div>
+          	</div>
         </div>
 
 
@@ -74,26 +74,26 @@
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="btn btn-primary"  class="close" data-dismiss="modal">&times;</button>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                         <h4 class="modal-title">{{vm.operation}} User</h4>
                     </div>
                     <div class="modal-body">  
- 	                <form name="vm.adminRegisterUserForm" novalidate>	
+ 	                <form name="vm.adminAddUserForm" novalidate>	
 						<div class="form-group">
 							<label for="username">Username:</label>	
-	                        <div class="modal-item" ng-class="{ 'has-error' : vm.adminRegisterUserForm.username.$invalid && !vm.adminRegisterUserForm.username.$pristine }">
+	                        <div class="modal-item" ng-class="{ 'has-error' : vm.adminAddUserForm.username.$invalid && !vm.adminAddUserForm.username.$pristine }">
 	                            <input name="username" type="text" class="form-control" required ng-model="vm.user.username"/>
-	                            <span class="error" ng-show="vm.adminRegisterUserForm.username.$invalid && !vm.adminRegisterUserForm.username.$pristine">* Username is required!</span>
-	                            <span ng-if="vm.registrationError.username" class="error">* {{vm.registrationError.username}}</span>
+	                            <span class="error" ng-show="vm.adminAddUserForm.username.$invalid && !vm.adminAddUserForm.username.$pristine">* Username is required!</span>
+	                            <span ng-if="vm.error.username" class="error">* {{vm.error.username}}</span>
 	                        </div>
                          </div>
 						
 						<div class="form-group">
 							<label for="password">Password:</label>
 							
-	                   <div class="modal-item" ng-class="{ 'has-error' : vm.adminRegisterUserForm.password.$invalid && !vm.adminRegisterUserForm.password.$pristine }">
+	                   <div class="modal-item" ng-class="{ 'has-error' : vm.adminAddUserForm.password.$invalid && !vm.adminAddUserForm.password.$pristine }">
 	                            <input name="password" type="text" class="form-control" required ng-model="vm.user.password"/>
-	                            <span class="error" ng-show="vm.adminRegisterUserForm.password.$invalid && !vm.adminRegisterUserForm.password.$pristine">* Password is required!</span>
+	                            <span class="error" ng-show="vm.adminAddUserForm.password.$invalid && !vm.adminAddUserForm.password.$pristine">* Password is required!</span>
 	                        </div>
                         </div>
 		
@@ -108,22 +108,22 @@
 						<div class="form-group">
 							<label for="email">Email:</label>
 							
-	                        <div class="modal-item" ng-class="{ 'has-error' : vm.adminRegisterUserForm.email.$invalid && !vm.adminRegisterUserForm.email.$pristine }">
+	                        <div class="modal-item" ng-class="{ 'has-error' : vm.adminAddUserForm.email.$invalid && !vm.adminAddUserForm.email.$pristine }">
 	                            <input name="email" type="text" class="form-control" required ng-model="vm.user.email"/>
-	                            <span class="error" ng-show="vm.adminRegisterUserForm.email.$invalid && !vm.adminRegisterUserForm.email.$pristine">* Email is required!</span>
-	                            <span ng-if="vm.registrationError.email" class="error">* {{vm.registrationError.email}}</span>
+	                            <span class="error" ng-show="vm.adminAddUserForm.email.$invalid && !vm.adminAddUserForm.email.$pristine">* Email is required!</span>
+	                            <span ng-if="vm.error.email" class="error">* {{vm.error.email}}</span>
 	                        </div>
 	                          <h4><span class="label label-primary checkbox-inline">Status</span></h4>
-                                <div class="modal-item" ng-class="{ 'has-error' : vm.adminRegisterUserForm.status.$invalid && !vm.adminRegisterUserForm.status.$pristine }">
+                                <div class="modal-item" ng-class="{ 'has-error' : vm.adminAddUserForm.status.$invalid && !vm.adminAddUserForm.status.$pristine }">
                                     <input name="status" type="checkbox" class="form-control" ng-model="vm.user.status" ng-true-value="true" ng-false-value="false"/>
                                 </div>
                         </div>
 		
-						<div class="alert alert-danger" ng-if="vm.registrationError">Registration failed!</div>
+						<div class="alert alert-danger" ng-if="vm.error">Failed to add user!</div>
 		
 					</form>
                         <div class="modal-footer">
-                            <button type="button" ng-disabled="vm.adminRegisterUserForm.$invalid" data-dismiss="modal" class="btn btn-primary" ng-click="vm.register(vm.user)">OK</button>
+                            <button type="button" ng-disabled="vm.adminAddUserForm.$invalid" class="btn btn-primary" ng-click="vm.saveUser(vm.user)">OK</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>

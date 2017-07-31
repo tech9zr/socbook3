@@ -2,9 +2,9 @@
 angular.module('app')
     .controller('AdminUserController', AdminUserController);
     
-    AdminUserController.$inject = ['UserService', 'RegisterService'];
+    AdminUserController.$inject = ['UserService'];
    
-    function AdminUserController(UserService, RegisterService) {
+    function AdminUserController(UserService) {
         
         var vm = this;
         vm.addUser = addUser;
@@ -12,36 +12,20 @@ angular.module('app')
         vm.editUser = editUser;     
         vm.saveUser = saveUser;
         vm.selectUser = selectUser;
-        vm.register=register;
         vm.operation;
         
-        vm.registerInput = {};
         init();
 
         function init() {
-            getUsers();
-            vm.user={};
-            vm.error = {};   
+            vm.loggedInUser = UserService.loggedInUser();
+            if(vm.loggedInUser) {
+            	getUsers();
+            }
             vm.closeModal = false;
         }
 
-        function register(user) {
-        	user.roles = [{"id":1,"type":"ROLE_USER"}];
-        	console.log(user);
-        	RegisterService.saveUser(user).then(function(response){
-        		getUsers();
-            }, function(error){
-            	vm.registrationError = {};
-                angular.forEach(error.data.exceptions, function(e){
-                    errorHandler(e);
-                });
-            })
-           
-            vm.adminRegisterUserForm.$setPristine();
-        }
-
         function addUser() {
-            vm.adminRegisterUserForm.$setPristine();
+            vm.adminAddUserForm.$setPristine();
             vm.operation = "Add";
             init();
         }
@@ -71,21 +55,37 @@ angular.module('app')
         function handleSuccessUsers(data, status){
             vm.users = data.data;
         }
-
-           function saveUser(user){
-            UserService.saveUser(user).then(function(response){
-                getUsers();
-                $('#add-user-modal').modal('hide');
+        
+        function saveUser(user) {
+        	user.roles = [{"id":1,"type":"ROLE_USER"}];
+        	UserService.saveUser(user).then(function(response){
+        		getUsers();
+        		$('#add-user-modal').modal('hide');
             }, function(error){
-                vm.error = {};
+            	vm.error = {};
                 angular.forEach(error.data.exceptions, function(e){
                     errorHandler(e);
                 });
             })
-            //remove input value after submit
-            vm.adminRegisterUserForm.$setPristine();
-            vm.error = {};
+           //remove input value after submit
+            vm.adminAddUserForm.$setPristine();
+        	vm.error = {};
         }
+
+//       function saveUser(user){
+//        UserService.saveUser(user).then(function(response){
+//            getUsers();
+//            $('#add-user-modal').modal('hide');
+//        }, function(error){
+//            vm.error = {};
+//            angular.forEach(error.data.exceptions, function(e){
+//                errorHandler(e);
+//            });
+//        })
+//        //remove input value after submit
+//        vm.adminRegisterUserForm.$setPristine();
+//        vm.error = {};
+//        }
         
         
         function selectUser(user){
@@ -99,10 +99,10 @@ angular.module('app')
         function errorHandler(error){
             switch(error.field){
                 case 'username':
-                    vm.registrationError.username = error.message;
+                    vm.error.username = error.message;
                     break;
                 case 'email':
-                    vm.registrationError.email = error.message;
+                    vm.error.email = error.message;
                     break;
                     }
         

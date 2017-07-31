@@ -59,8 +59,8 @@
                 url: "users",
                 data: user
             }
-            return $http(req).success(function (data) {
-                def.resolve(data);
+            return $http(req).success(function (response) {
+            	return response;
             }).error(function () {
                 def.reject("Failed");
             });

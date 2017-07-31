@@ -2,9 +2,9 @@
     angular.module('app')
             .controller('MainController', MainController);
 
-    MainController.$inject = ['RegisterService', '$location', '$http', '$route', 'UserService' ];
+    MainController.$inject = ['$location', '$http', '$route', 'UserService' ];
 
-    function MainController(RegisterService, $location, $http, $route, UserService) {
+    function MainController($location, $http, $route, UserService) {
 
         var self = this;
         self.isActive = isActive;
@@ -15,12 +15,8 @@
         self.user;
         self.loginError;
         self.registrationError;
-        
-        //Create new user
-        self.registerInput = {};
 
         init();
-
 
         function init() {
             if (self.user) {
@@ -36,7 +32,7 @@
         function register(user) {
         	user.status = true;
         	user.roles = [{"id":1,"type":"ROLE_USER"}];
-        	RegisterService.saveUser(user).then(function(response){
+        	UserService.saveUser(user).then(function(response){
         	self.toggleLoginRegister = "login";
             }, function(error){
             	self.registrationError = {};
