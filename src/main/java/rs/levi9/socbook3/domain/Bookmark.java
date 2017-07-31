@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -23,7 +24,6 @@ public class Bookmark extends BaseEntity implements Serializable {
 
 	@NotNull
 	@ManyToOne
-
 	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
 
@@ -57,7 +57,12 @@ public class Bookmark extends BaseEntity implements Serializable {
 	@NotNull()
 	@Column(unique = false, nullable = false, name = "creation_date")
 	private Date creationDate;
-
+	
+	
+	@OneToMany
+	@JoinColumn(name="bookmark_id", nullable = false, unique = false)
+	private Set<Comment> comments;
+	
 	public Bookmark() {
 
 	}
@@ -124,6 +129,14 @@ public class Bookmark extends BaseEntity implements Serializable {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public Set<Comment> getComments() {
+		return comments;
+	}
+
+	public void setComments(Set<Comment> comments) {
+		this.comments = comments;
 	}
 
 }

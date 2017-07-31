@@ -19,7 +19,6 @@ INSERT INTO `category`(`name`) values ("Sport");
 INSERT INTO `category`(`name`) values ("Stream");
 INSERT INTO `category`(`name`) values ("Vocarstvo");
 
-
 INSERT INTO `tag` (`name`) values("Corba");
 INSERT INTO `tag` (`name`) values("Supa");
 INSERT INTO `tag` (`name`) values("Paprikas");
