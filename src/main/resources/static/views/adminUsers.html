@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody ng-repeat="user in vm.users track by $index" >
-                <tr ng-if="user.id != vm.loggedInUser.id">
+                <tr ng-if="user.username != vm.loggedInUser.username">
                 	<td>{{user.username}}</td>
                     <td>{{user.firstName}}</td>
                     <td>{{user.lastName}}</td>
