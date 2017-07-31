@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import rs.levi9.socbook3.domain.Bookmark;
 import rs.levi9.socbook3.domain.Category;
 import rs.levi9.socbook3.domain.Tag;
 import rs.levi9.socbook3.repository.CategoryRepository;
@@ -39,5 +40,6 @@ public class CategoryService {
 	public Category findByName(String name){
 		return categoryRepository.findByName(name);
 	}
+
 	
 }

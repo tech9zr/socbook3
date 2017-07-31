@@ -28,4 +28,7 @@ public interface BookmarkRepository extends JpaRepository<Bookmark, Long> {
 	public Bookmark deleteByTitle(String title);
 
 	public List<Bookmark> findByTitle (String title);
+	
+	public List<Bookmark> findByCategory (Category category);
+	
 }
