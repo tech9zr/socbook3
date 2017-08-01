@@ -1,3 +1,4 @@
+
 <div class="row">
 	<div class="col-md-4 col-md-offset-4">
 		<div class="page-header">
@@ -50,10 +51,6 @@
 							<input name="email" type="text" class="form-control" required ng-model="vm.registerInput.email" />
 							<span class="error" ng-show="vm.registerUserForm.email.$invalid && !vm.registerUserForm.email.$pristine">* Email is required!</span>
 							<span ng-if="vm.registrationError.email" class="error">* {{vm.registrationError.email}}</span>
-						</div>
-					</div>
-					<div class='captcher-box'>
-						<div class='box'>
 						</div>
 					</div>
 					<div class="alert alert-danger" ng-if="vm.registrationError">Registration failed!</div>
