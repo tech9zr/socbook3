@@ -92,4 +92,10 @@ public class UserController {
 	      map.put("roles", AuthorityUtils.authorityListToSet((user).getAuthorities()));
 	      return map;
 	    }
+	    
+	    @RequestMapping(path ="/captcha", method = RequestMethod.POST)
+	    public String getSomethingSomething( @RequestBody Object object){
+	    	System.out.println(object.toString());
+	    	return null;
+	    }
 }

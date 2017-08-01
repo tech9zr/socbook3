@@ -40,8 +40,8 @@ public class Bookmark extends BaseEntity implements Serializable {
 	@JoinColumn(name = "category_id", nullable = false, unique = false)
 	private Category category;
 
-	//@Cascade(CascadeType.PERSIST)
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	// @Cascade(CascadeType.PERSIST)
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@Column(name = "tags")
 	@JoinTable(joinColumns = @JoinColumn(name = "bookmark_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	private Set<Tag> tags;
@@ -57,14 +57,24 @@ public class Bookmark extends BaseEntity implements Serializable {
 	@NotNull()
 	@Column(unique = false, nullable = false, name = "creation_date")
 	private Date creationDate;
-	
-	
-	@OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name="bookmark_id", nullable = false, unique = false)
+
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "bookmark_id", nullable = false, unique = false)
 	private Set<Comment> comments;
-	
+
+	@Column(name = "source_bookmark_id")
+	private Long sourceBookmarkId;
+
 	public Bookmark() {
 
+	}
+
+	public Long getSourceBookmarkId() {
+		return sourceBookmarkId;
+	}
+
+	public void setSourceBookmarkId(Long sourceBookmarkId) {
+		this.sourceBookmarkId = sourceBookmarkId;
 	}
 
 	public User getUser() {
