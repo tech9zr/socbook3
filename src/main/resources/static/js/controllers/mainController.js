@@ -37,10 +37,23 @@
         }
 
         function register(user) {
+            if(vcRecaptchaService.getResponse() === ""){ //if string is empty
+                alert("Please resolve the captcha and submit!")
+            } else {
+                var data = {
+                    'g-recaptcha-response': vcRecaptchaService.getResponse()  //send g-captcah-reponse to our server        
+                }
+                UserService.sendCaptcha(data).then(function(response){
+                    alert("Successfully verified and signed up the user");
+                }, function(error) {
+                    alert("User verification failed");
+                })
+            }
+        
         	user.status = true;
         	user.roles = [{"id":1,"type":"ROLE_USER"}];
         	UserService.saveUser(user).then(function(response){
-        	self.toggleLoginRegister = "login";
+        	//self.toggleLoginRegister = "login";
             }, function(error){
             	self.registrationError = {};
                 angular.forEach(error.data.exceptions, function(e){
