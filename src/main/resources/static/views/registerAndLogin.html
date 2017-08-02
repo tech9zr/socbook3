@@ -53,6 +53,8 @@
 							<span ng-if="vm.registrationError.email" class="error">* {{vm.registrationError.email}}</span>
 						</div>
 					</div>
+
+		     		<div vc-recaptcha key="vm.publicKey" theme="'lite'"></div>
 					<div class="alert alert-danger" ng-if="vm.registrationError">Registration failed!</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
 					<a href="javascript:void(0)" ng-click="vm.toggleLoginRegister = 'login'" class=pull-right>Login</a>

@@ -2,9 +2,9 @@
     angular.module('app')
             .controller('MainController', MainController);
 
-    MainController.$inject = ['$location', '$http', '$route', 'UserService' ];
+    MainController.$inject = ['$location', '$http', '$route', 'UserService', 'vcRecaptchaService'];
 
-    function MainController($location, $http, $route, UserService) {
+    function MainController($location, $http, $route, UserService, vcRecaptchaService) {
 
         var self = this;
         self.isActive = isActive;
@@ -15,14 +15,21 @@
         self.user;
         self.loginError;
         self.registrationError;
+        
+        //reCaptcha
+        self.publicKey = "6LdBOCsUAAAAAApZH8xQDF78JM5e-4bFMdY1LYaK";     
 
+        
+        
+        
+        
         init();
 
         function init() {
             if (self.user) {
                 $route.reload();
             }
-        }
+        }        
 
         //nav-bar
         function isActive(viewLocation) {
