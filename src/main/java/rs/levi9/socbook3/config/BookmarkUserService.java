@@ -34,7 +34,12 @@ public class BookmarkUserService implements UserDetailsService
             if (user == null) {
                 return null;
             }
-            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user));
+            if (user.isStatus()) {
+            	return new  org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user));
+            }
+            return org.springframework.security.core.userdetails.User.
+            		withUsername(user.getUsername()).password(user.getPassword()).roles(getAuthorities(user).toString()).accountLocked(!user.isStatus()).build();
+//            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), true, true, true, user.isStatus(), getAuthorities(user));
         } catch (Exception e) {
             throw new UsernameNotFoundException("User not found");
         }

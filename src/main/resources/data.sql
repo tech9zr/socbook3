@@ -2,7 +2,7 @@ INSERT INTO `user` (`user_name`,`user_password`,`first_name`,`last_name`,`status
 INSERT INTO `user` (`user_name`,`user_password`,`first_name`,`last_name`,`status`, `email`) VALUES ("user","user","FirstName2","LastName2",true, "user@user");
 INSERT INTO `user` (`user_name`,`user_password`,`first_name`,`last_name`,`status`, `email`) VALUES ("pera","para","FirstName3","LastName3",true, "pera@pera");
 INSERT INTO `user` (`user_name`,`user_password`,`first_name`,`last_name`,`status`, `email`) VALUES ("zika","zika","FirstName4","LastName4",true, "zika@zika");
-INSERT INTO `user` (`user_name`,`user_password`,`first_name`,`last_name`,`status`, `email`) VALUES ("mika","mika","FirstName5","LastName5",true, "mika@mika");
+INSERT INTO `user` (`user_name`,`user_password`,`first_name`,`last_name`,`status`, `email`) VALUES ("mika","mika","FirstName5","LastName5",false, "mika@mika");
 
 INSERT INTO `role` (`type`) values("ROLE_USER");
 INSERT INTO `role` (`type`) values("ROLE_ADMIN");	
