@@ -15,9 +15,4 @@ public class Socbook3Application
 	public static void main(String[] args) {
 		 SpringApplication.run(Socbook3Application.class, args);
 	}
-	
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
 }
