@@ -1,11 +1,14 @@
 package rs.levi9.socbook3.web.controller;
 
+import java.net.URI;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestOperations;
 
 import rs.levi9.socbook3.domain.Bookmark;
 import rs.levi9.socbook3.domain.User;
@@ -30,6 +34,9 @@ public class UserController {
 
 	private UserService userService;
 	private BookmarkService bookmarkService; 
+	
+	@Autowired
+	private RestOperations restTemplate;
 
 	
 		@Autowired
@@ -91,5 +98,15 @@ public class UserController {
 	      map.put("username", user.getName());
 	      map.put("roles", AuthorityUtils.authorityListToSet((user).getAuthorities()));
 	      return map;
+	    }
+	    
+	    @RequestMapping(path ="/captcha", method = RequestMethod.POST)
+	    public String getSomethingSomething(@RequestBody Map<String, String> request){
+	    	String response = request.get("g-recaptcha-response");
+	    	String secret = "6LdBOCsUAAAAALm08B68C_poDY9IgIVIs1ZY2ll3";
+	    	URI verifyUri = URI.create(String.format("https://www.google.com/recaptcha/api/siteverify?secret=%s&response=%s", secret, response));
+	    	String googleResponse = restTemplate.getForObject(verifyUri, String.class);
+	    	System.out.println(googleResponse);
+	    	return googleResponse;
 	    }
 }

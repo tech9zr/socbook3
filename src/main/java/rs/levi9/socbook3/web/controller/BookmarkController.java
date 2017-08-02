@@ -108,6 +108,7 @@ public class BookmarkController {
 		newBookmark.setCreationDate(sourceBookmark.getCreationDate());
 		newBookmark.setVisible(sourceBookmark.isVisible());
 		newBookmark.setDescription(sourceBookmark.getDescription());
+		newBookmark.setSourceBookmarkId(sourceBookmark.getId());
 
 		return bookmarkService.save(newBookmark);
 	}
@@ -119,11 +120,5 @@ public class BookmarkController {
 
 	}
 
-	@RequestMapping(path = "/category/{category}", method = RequestMethod.GET)
-	public List<Bookmark> findByCategory(@PathVariable("category") Long category){
-			Category foundCategory = categoryService.findOne(category);
-			
-		return bookmarkService.findByCategory(foundCategory);
-	}
 
 }

@@ -45,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             // ignore the static files
             .antMatchers("/", "/bower_components/**", "/css/**", "/js/**", "/views/**", "/images/**").permitAll()
             .antMatchers(HttpMethod.POST, "/users").permitAll()
+            .antMatchers(HttpMethod.POST, "/users/captcha").permitAll()
             // authenticate all remaining URLS
             .anyRequest().fullyAuthenticated().and()
             // enabling the basic authentication

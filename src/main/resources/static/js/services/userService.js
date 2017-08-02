@@ -13,6 +13,21 @@
             return loggedInUser;
         }
 
+        this.sendCaptcha = function (data) {
+            var def = $q.defer();
+            var req = {
+                method: 'POST',
+                url: "users/captcha",
+                data: data
+            }
+            return $http(req).success(function (response) {
+            	return response;
+            }).error(function () {
+                def.reject("Failed");
+            });
+            return def.promise;
+        }
+
         this.getUsers = function () {
             var def = $q.defer();
             var req = {

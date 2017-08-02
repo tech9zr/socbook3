@@ -15,6 +15,8 @@
         self.user;
         self.loginError;
         self.registrationError;
+        self.captchaMessage;
+        self.selectedTheme = "/superhero";
         
         //reCaptcha
         self.publicKey = "6LdBOCsUAAAAAApZH8xQDF78JM5e-4bFMdY1LYaK";     
@@ -37,10 +39,36 @@
         }
 
         function register(user) {
-        	user.status = true;
+            if(vcRecaptchaService.getResponse() === ""){ //if string is empty
+                self.captchaMessage = "Please resolve the captcha and submit!"
+                $('#captchaModal').modal('show');
+            } else {
+                var data = {
+                    'g-recaptcha-response': vcRecaptchaService.getResponse()  //send g-captcah-reponse to our server        
+                }
+                UserService.sendCaptcha(data).then(function(response){
+                    console.log(response.data);
+                    if(response.data.success){
+                        saveUser(user);
+                        self.captchaMessage = user.username + " is registered!";
+                        $('#captchaModal').modal('show');
+                    }
+                    else{
+                        self.captchaMessage = "You are a robot!";
+                        $('#captchaModal').modal('show');
+                    }
+                }, function(error) {
+                    self.captchaMessage = "User registration failed!";
+                    $('#captchaModal').modal('show');
+                })
+            }
+        }
+
+        function saveUser(user){
+            user.status = true;
         	user.roles = [{"id":1,"type":"ROLE_USER"}];
         	UserService.saveUser(user).then(function(response){
-        	self.toggleLoginRegister = "login";
+        	//self.toggleLoginRegister = "login";
             }, function(error){
             	self.registrationError = {};
                 angular.forEach(error.data.exceptions, function(e){
