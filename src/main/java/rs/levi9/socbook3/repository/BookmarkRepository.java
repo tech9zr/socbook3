@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import rs.levi9.socbook3.domain.Bookmark;
 import rs.levi9.socbook3.domain.Category;
+import rs.levi9.socbook3.domain.Comment;
 import rs.levi9.socbook3.domain.User;
 
 @Repository

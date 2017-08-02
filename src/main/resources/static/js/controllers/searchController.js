@@ -14,6 +14,7 @@
         vm.closeDetailsBookmark = closeDetailsBookmark;
         vm.clearAll = clearAll;
         vm.postComment = postComment;
+        vm.deleteComment = deleteComment;
         vm.bookmarks;
 
         init();
@@ -83,6 +84,9 @@
                 });
             });
             delete vm.comment;
+        }
+        
+        function deleteComment(comment) {
         }
      }
 

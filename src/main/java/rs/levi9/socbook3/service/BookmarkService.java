@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import rs.levi9.socbook3.domain.Bookmark;
 import rs.levi9.socbook3.domain.Category;
+import rs.levi9.socbook3.domain.Comment;
 import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.repository.BookmarkRepository;
 
@@ -71,6 +72,6 @@ public class BookmarkService {
 	public List<Bookmark> findByTitle(String title){
 		return bookmarkRepository.findByTitle(title);
 	}
-	
+
 	
 }
