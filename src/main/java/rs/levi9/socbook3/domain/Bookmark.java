@@ -40,7 +40,6 @@ public class Bookmark extends BaseEntity implements Serializable {
 	@JoinColumn(name = "category_id", nullable = false, unique = false)
 	private Category category;
 
-	// @Cascade(CascadeType.PERSIST)
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@Column(name = "tags")
 	@JoinTable(joinColumns = @JoinColumn(name = "bookmark_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
@@ -64,6 +63,10 @@ public class Bookmark extends BaseEntity implements Serializable {
 
 	@Column(name = "source_bookmark_id")
 	private Long sourceBookmarkId;
+
+	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "bookmark_id", nullable = true, unique = false)
+	private Set<User> importedUsersList;
 
 	public Bookmark() {
 
@@ -149,4 +152,14 @@ public class Bookmark extends BaseEntity implements Serializable {
 		this.comments = comments;
 	}
 
+	public Set<User> getImportedUsersList() {
+		return importedUsersList;
+	}
+
+	public void setImportedUsersList(Set<User> importedUsersList) {
+		this.importedUsersList = importedUsersList;
+	}
+
+
+	
 }

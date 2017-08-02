@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="app">
+<html lang="en" ng-app="app" ng-controller="MainController as vm" >
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,7 @@
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<title>Social Bookmarks</title>
 
-		<link rel="stylesheet" href="https://bootswatch.com/superhero/bootstrap.min.css">
+		<link rel="stylesheet" ng-href="https://bootswatch.com{{vm.selectedTheme}}/bootstrap.min.css">
 		<link rel="stylesheet" href="css/main.css">
 		<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -18,7 +18,7 @@
 			<![endif]-->
 	</head>
 
-	<body ng-controller="MainController as vm" class="ng-cloak">
+	<body class="ng-cloak">
 		<div class="wrapper">
 			<!-- login page -->
 			<div class="container" ng-show="!vm.user" ng-include src="'views/registerAndLogin.html'"></div>
@@ -55,11 +55,37 @@
  										</ul>
  									</li>
  								</ul>
-								<ul class="nav navbar-nav navbar-right">
+ 								<ul class="nav navbar-nav navbar-right">
 									<li class="dropdown">
 										<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{vm.user.username}} <span class="caret"></span></a>
 										<ul class="dropdown-menu">
 											<li><a href="#" ng-click="vm.logout()">Log out</a></li>
+										</ul>
+									</li>
+								</ul>
+								<ul class="nav navbar-nav navbar-right">
+									<li class="dropdown">
+	 									<a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
+										<ul class="dropdown-menu">
+											<li>
+											    <a href="" ng-click="vm.selectedTheme = '/cerulean'">Cerulean</a>
+											    <a href="" ng-click="vm.selectedTheme = '/cosmo'">Cosmo</a>
+											    <a href="" ng-click="vm.selectedTheme = '/cyborg'">Cyborg</a>
+											    <a href="" ng-click="vm.selectedTheme = '/darkly'">Darkly</a>
+											    <a href="" ng-click="vm.selectedTheme = '/flatly'">Flatly</a>
+											    <a href="" ng-click="vm.selectedTheme = '/journal'">Journal</a>
+											    <a href="" ng-click="vm.selectedTheme = '/lumen'">Lumen</a>
+											    <a href="" ng-click="vm.selectedTheme = '/paper'">Paper</a>
+											    <a href="" ng-click="vm.selectedTheme = '/readable'">Readable</a>
+											    <a href="" ng-click="vm.selectedTheme = '/sandstone'">Sandstone</a>
+											    <a href="" ng-click="vm.selectedTheme = '/simplex'">Simplex</a>
+											    <a href="" ng-click="vm.selectedTheme = '/slate'">Slate</a>
+											    <a href="" ng-click="vm.selectedTheme = '/solar'">Solar</a>
+											    <a href="" ng-click="vm.selectedTheme = '/spacelab'">Spacelab</a>
+											    <a href="" ng-click="vm.selectedTheme = '/superhero'">Superhero</a>
+											    <a href="" ng-click="vm.selectedTheme = '/united'">United</a>
+											    <a href="" ng-click="vm.selectedTheme = '/yeti'">Yeti</a>											    
+											</li>
 										</ul>
 									</li>
 								</ul>

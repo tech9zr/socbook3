@@ -16,6 +16,7 @@
         self.loginError;
         self.registrationError;
         self.captchaMessage;
+        self.selectedTheme = "/superhero";
         
         //reCaptcha
         self.publicKey = "6LdBOCsUAAAAAApZH8xQDF78JM5e-4bFMdY1LYaK";     
