@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import rs.levi9.socbook3.domain.Bookmark;
 import rs.levi9.socbook3.domain.Category;
+import rs.levi9.socbook3.domain.Comment;
 import rs.levi9.socbook3.domain.Tag;
 import rs.levi9.socbook3.domain.User;
 import rs.levi9.socbook3.service.BookmarkService;
 import rs.levi9.socbook3.service.CategoryService;
+import rs.levi9.socbook3.service.CommentService;
 import rs.levi9.socbook3.service.UserService;
 
 @RestController
@@ -29,13 +31,16 @@ public class BookmarkController {
 	private BookmarkService bookmarkService;
 	private UserService userService;
 	private CategoryService categoryService;
-
+	private CommentService commentService;
+	
+	
 	@Autowired
-	public BookmarkController(BookmarkService bookmarkService, UserService userService,
-			CategoryService categoryService) {
+	public BookmarkController(BookmarkService bookmarkService, UserService userService, CategoryService categoryService,
+			CommentService commentService) {
 		this.bookmarkService = bookmarkService;
 		this.userService = userService;
 		this.categoryService = categoryService;
+		this.commentService = commentService;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -69,7 +74,9 @@ public class BookmarkController {
 			Set<User> importedUsersList = sourceBookmark.getImportedUsersList();
 			importedUsersList.remove(bookmark.getUser());
 		}
+		
 			
+		
 		bookmarkService.delete(id);
 
 		return new ResponseEntity(HttpStatus.OK);
@@ -132,5 +139,6 @@ public class BookmarkController {
 		return bookmarkService.findByTitle(title);
 
 	}
+
 
 }
