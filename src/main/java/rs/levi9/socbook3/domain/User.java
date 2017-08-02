@@ -5,37 +5,36 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-
 
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity implements Serializable {
 
 	public static final long seralVersionUID = 5128632882797623323L;
-	
 
 	@NotNull()
 	@Column(unique = true, nullable = false, name = "user_name")
 	private String username;
-	
+
 	@NotNull()
 	@Column(name = "user_password")
 	private String password;
 
 	@Column(name = "first_name")
 	private String firstName;
-	
+
 	@Column(name = "last_name")
 	private String lastName;
-	
+
 	@NotNull()
 	@Column(unique = true, nullable = false, name = "email")
 	private String email;
@@ -43,7 +42,7 @@ public class User extends BaseEntity implements Serializable {
 	@ManyToMany
 	@JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<Role> roles;
-	
+
 	@Column(name = "status")
 	private boolean status;
 
@@ -94,7 +93,7 @@ public class User extends BaseEntity implements Serializable {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
+
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
@@ -102,7 +101,5 @@ public class User extends BaseEntity implements Serializable {
 	public String getUsername() {
 		return username;
 	}
-
-
 
 }

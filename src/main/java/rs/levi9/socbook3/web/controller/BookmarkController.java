@@ -59,7 +59,19 @@ public class BookmarkController {
 
 	@RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity delete(@PathVariable("id") Long id) {
+
+		Bookmark bookmark = bookmarkService.findOne(id);
+
+		Long sourceBookmarkId = bookmark.getSourceBookmarkId();
+
+		if (sourceBookmarkId != null) {
+			Bookmark sourceBookmark = bookmarkService.findOne(sourceBookmarkId);
+			Set<User> importedUsersList = sourceBookmark.getImportedUsersList();
+			importedUsersList.remove(bookmark.getUser());
+		}
+			
 		bookmarkService.delete(id);
+
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
@@ -90,11 +102,8 @@ public class BookmarkController {
 	public Bookmark importBookmarkFromUser(@Valid @PathVariable("bookmarkId") Long bookmarkId,
 			@PathVariable("username") String username) {
 		Bookmark sourceBookmark = bookmarkService.findOne(bookmarkId);
-		// handle source bookmark
 		Bookmark newBookmark = new Bookmark();
 		User newAuthor = userService.findByUsername(username);
-		if (newAuthor == null) {
-		}
 
 		newBookmark.setCategory(sourceBookmark.getCategory());
 
@@ -110,15 +119,18 @@ public class BookmarkController {
 		newBookmark.setDescription(sourceBookmark.getDescription());
 		newBookmark.setSourceBookmarkId(sourceBookmark.getId());
 
+		Set<User> importedUsersList = sourceBookmark.getImportedUsersList();
+		importedUsersList.add(newAuthor);
+		sourceBookmark.setImportedUsersList(importedUsersList);
+
+		bookmarkService.save(sourceBookmark);
 		return bookmarkService.save(newBookmark);
 	}
 
-	
 	@RequestMapping(path = "/search/{title}", method = RequestMethod.GET)
 	public List<Bookmark> findByTitle(@PathVariable("title") String title) {
 		return bookmarkService.findByTitle(title);
 
 	}
-
 
 }
