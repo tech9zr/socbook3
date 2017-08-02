@@ -66,6 +66,10 @@ angular.module('app')
         function getBookmarks(){
             BookmarkService.getBookmarks().then(handleSuccessBookmarks);
         }
+        
+        function getBookmarksByVisible() {
+        	BookmarkService.getBookmarksByVisible().then(handleSuccessBookmarks);
+        }
 
         //Get all category
         function handleSuccessCategories(data, status){
