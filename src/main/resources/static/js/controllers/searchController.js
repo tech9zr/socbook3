@@ -47,14 +47,21 @@
         }
         
         function importBookmark(bookmark){
-            BookmarkService.importBookmarkFromUser(bookmark.id, vm.loggedInUser.username);
-            SearchService.addDisabledImportBookmark(bookmark.id, vm.loggedInUser.username);
+            BookmarkService.importBookmarkFromUser(bookmark.id, vm.loggedInUser.username).then(function(){
+                getBookmarksByVisible();
+            });
+            //SearchService.addDisabledImportBookmark(bookmark.id, vm.loggedInUser.username);
         }
 
         function isImportDisabled(bookmark){
-            return SearchService.getDisabledImportBookmarks().some(function(val){
-                return val.bookmarkId === bookmark.id && val.username === vm.loggedInUser.username;
-            });
+            if(bookmark.importedUsersList.length > 0)
+                return bookmark.importedUsersList.some(function(val){
+                    return vm.loggedInUser.username === val.username;
+                })
+            return false;
+            // return SearchService.getDisabledImportBookmarks().some(function(val){
+            //     return val.bookmarkId === bookmark.id && val.username === vm.loggedInUser.username;
+            // });
         }
 
         function detailsBookmark(bookmark) {
