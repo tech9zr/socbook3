@@ -33,7 +33,7 @@
 					<div class="form-group">
 						<label for="password">Password:</label>
 						<div ng-class="{ 'has-error' : vm.registerUserForm.password.$invalid && !vm.registerUserForm.password.$pristine }">
-							<input name="password" type="text" class="form-control" required ng-model="vm.registerInput.password" />
+							<input name="password" type="password" class="form-control" required ng-model="vm.registerInput.password" />
 							<span class="error" ng-show="vm.registerUserForm.password.$invalid && !vm.registerUserForm.password.$pristine">* Password is required!</span>
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 					<div class="form-group">
 						<label for="email">Email:</label>
 						<div ng-class="{ 'has-error' : vm.registerUserForm.email.$invalid && !vm.registerUserForm.email.$pristine }">
-							<input name="email" type="text" class="form-control" required ng-model="vm.registerInput.email" />
+							<input name="email" type="email" class="form-control" required ng-model="vm.registerInput.email" />
 							<span class="error" ng-show="vm.registerUserForm.email.$invalid && !vm.registerUserForm.email.$pristine">* Email is required!</span>
 							<span ng-if="vm.registrationError.email" class="error">* {{vm.registrationError.email}}</span>
 						</div>
