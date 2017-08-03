@@ -64,15 +64,15 @@
 					<button type="submit" class="btn btn-primary">Submit</button>
 					<a href="javascript:void(0)" ng-click="vm.toggleLoginRegister = 'login'" class=pull-right>Login</a>
 				</form>
-				<div class="modal fade" id="captchaModal" role="dialog">
+				<div class="modal fade" id="registrationModal" role="dialog">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-								<h4 class="modal-title">Captcha</h4>
+								<h4 class="modal-title">Registration</h4>
 							</div>
 							<div class="modal-body">
-								<p>{{vm.captchaMessage}}</p>
+								<p>{{vm.registrationMessage}}</p>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>

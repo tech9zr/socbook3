@@ -15,7 +15,7 @@
         self.user;
         self.loginError;
         self.registrationError;
-        self.captchaMessage;
+        self.registrationMessage;
         self.selectedTheme = "/superhero";
         
         //reCaptcha
@@ -40,26 +40,23 @@
 
         function register(user) {
             if(vcRecaptchaService.getResponse() === ""){ //if string is empty
-                self.captchaMessage = "Please resolve the captcha and submit!"
-                $('#captchaModal').modal('show');
+                self.registrationMessage = "Please resolve the captcha and submit!"
+                $('#registrationModal').modal('show');
             } else {
                 var data = {
                     'g-recaptcha-response': vcRecaptchaService.getResponse()  //send g-captcah-reponse to our server        
                 }
                 UserService.sendCaptcha(data).then(function(response){
-                    console.log(response.data);
                     if(response.data.success){
                         saveUser(user);
-                        self.captchaMessage = user.username + " is registered!";
-                        $('#captchaModal').modal('show');
                     }
                     else{
-                        self.captchaMessage = "You are a robot!";
-                        $('#captchaModal').modal('show');
+                        self.registrationMessage = "You are a robot!";
+                        $('#registrationModal').modal('show');
                     }
                 }, function(error) {
-                    self.captchaMessage = "User registration failed!";
-                    $('#captchaModal').modal('show');
+                    self.registrationMessage = "User registration failed!";
+                    $('#registrationModal').modal('show');
                 })
             }
         }
@@ -68,7 +65,8 @@
             user.status = true;
         	user.roles = [{"id":1,"type":"ROLE_USER"}];
         	UserService.saveUser(user).then(function(response){
-        	//self.toggleLoginRegister = "login";
+                self.registrationMessage = user.username + " is registered!";
+                $('#registrationModal').modal('show');
             }, function(error){
             	self.registrationError = {};
                 angular.forEach(error.data.exceptions, function(e){

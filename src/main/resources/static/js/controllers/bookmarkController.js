@@ -2,9 +2,9 @@
 angular.module('app')
     .controller('BookmarkController', BookmarkController);
     
-    BookmarkController.$inject = ['$filter', 'CategoryService', 'BookmarkService', 'uibDateParser', 'TagService', 'UserService'];
+    BookmarkController.$inject = ['$filter', 'CategoryService', 'BookmarkService', 'uibDateParser', 'TagService', 'UserService', 'CommentService'];
    
-    function BookmarkController($filter, CategoryService, BookmarkService, uibDateParser, TagService, UserService) {
+    function BookmarkController($filter, CategoryService, BookmarkService, uibDateParser, TagService, UserService, CommentService) {
         
         var vm = this;
         vm.addBookmark = addBookmark;
@@ -12,6 +12,8 @@ angular.module('app')
         vm.editBookmark = editBookmark;
         vm.saveBookmark = saveBookmark;
         vm.selectBookmark = selectBookmark;
+        vm.detailsBookmark = detailsBookmark;
+        vm.closeDetailsBookmark = closeDetailsBookmark;
         vm.addTag = addTag;
         vm.deleteTag = deleteTag;
         vm.operation;
@@ -40,6 +42,7 @@ angular.module('app')
         function selectBookmark(bookmark){
             vm.bookmark = bookmark;
         }
+            
 
         function deleteBookmark(){
             BookmarkService.deleteBookmark(vm.bookmark.id).then(function(response){
@@ -118,6 +121,14 @@ angular.module('app')
 
         function deleteTag(tag) {
             vm.bookmark.tags.splice(vm.bookmark.tags.indexOf(tag), 1);
+        }
+        
+        function detailsBookmark(bookmark) {
+            vm.bookmark = bookmark;
+        }
+        
+        function closeDetailsBookmark() {
+            vm.bookmark = {};
         }
         
         function errorHandler(error){

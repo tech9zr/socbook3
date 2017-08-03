@@ -2,9 +2,9 @@
     angular.module('app')
             .controller('SearchController', SearchController);
 
-    SearchController.$inject = ['$location', 'BookmarkService', 'UserService', 'SearchService'];
+    SearchController.$inject = ['$location', 'BookmarkService', 'UserService', 'SearchService', 'CommentService'];
 
-    function SearchController($location, BookmarkService, UserService, SearchService) {
+    function SearchController($location, BookmarkService, UserService, SearchService, CommentService) {
 
         var vm = this;
         vm.isActive = isActive;
@@ -86,7 +86,23 @@
             delete vm.comment;
         }
         
-        function deleteComment(comment) {
+        function deleteComment(commentId){
+            CommentService.deleteComment(commentId).then(function(response){
+            	BookmarkService.getBookmark(vm.bookmark.id).then(function(response){
+            		vm.bookmark = response;
+            	})
+            	getBookmarksByVisible();            
+           });
+            vm.operation = "Delete";
+            vm.comment= {};
+        }
+        
+        function getComments(){
+            CommentService.getComments().then(handleSuccessComments);
+        }
+        
+        function handleSuccessComments(data, status){
+            vm.comment = data.data;
         }
      }
 

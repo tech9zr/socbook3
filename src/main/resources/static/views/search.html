@@ -127,7 +127,7 @@
 														<span><u><i>{{comment.author.username}}</i></u></span>
 													</div>
 													<div class="col-md-6">
-														<button ng-if="comment.author.username == vm.loggedInUser.username" type="button" class="close pull-right" ng-click=vm.deleteComment(comment)>&nbsp;&nbsp;&nbsp;&times;</button>
+														<button ng-if="comment.author.username == vm.loggedInUser.username" type="button" class="close pull-right" ng-click=vm.deleteComment(comment.id)>&nbsp;&nbsp;&nbsp;&times;</button>
 														<span uib-rating ng-if="comment.rate" class="text-primary pull-right" read-only="true" ng-model="comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>											
 													</div>
 												</div>

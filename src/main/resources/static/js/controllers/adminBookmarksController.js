@@ -2,9 +2,9 @@
 angular.module('app')
     .controller('AdminBookmarksController', AdminBookmarksController);
     
-    AdminBookmarksController.$inject = ['$filter', 'CategoryService', 'BookmarkService', 'uibDateParser', 'TagService', 'UserService'];
+    AdminBookmarksController.$inject = ['$filter', 'CategoryService', 'BookmarkService', 'uibDateParser', 'TagService', 'UserService', 'CommentService'];
    
-    function AdminBookmarksController($filter, CategoryService, BookmarkService, uibDateParser, TagService, UserService) {
+    function AdminBookmarksController($filter, CategoryService, BookmarkService, uibDateParser, TagService, UserService, CommentService) {
         
         var vm = this;
         vm.addBookmark = addBookmark;
@@ -12,8 +12,11 @@ angular.module('app')
         vm.editBookmark = editBookmark;
         vm.saveBookmark = saveBookmark;
         vm.selectBookmark = selectBookmark;
+        vm.detailsBookmark = detailsBookmark;
+        vm.closeDetailsBookmark = closeDetailsBookmark;
         vm.addTag = addTag;
         vm.deleteTag = deleteTag;
+        vm.deleteComment=deleteComment;
         vm.operation;
 
         init();
@@ -48,6 +51,17 @@ angular.module('app')
             vm.operation = "Delete";
             vm.bookmark= {};
         }
+        
+        function deleteComment(commentId){
+            CommentService.deleteComment(commentId).then(function(response){
+            	BookmarkService.getBookmark(vm.bookmark.id).then(function(response){
+            		vm.bookmark = response;
+            	})
+            	getBookmarks();
+            });
+            vm.operation = "Delete";
+            vm.comment= {};
+        }
 
         function editBookmark(bookmark){
         	vm.error = {};
@@ -62,6 +76,10 @@ angular.module('app')
         function getBookmarks(){
             BookmarkService.getBookmarks().then(handleSuccessBookmarks);
         }
+        
+        function getComments(){
+            CommentService.getComments().then(handleSuccessComments);
+        }
 
         //Get all category
         function handleSuccessCategories(data, status){
@@ -72,6 +90,11 @@ angular.module('app')
         function handleSuccessBookmarks(data, status){
             vm.bookmarks = data.data;
         }
+        
+        function handleSuccessComments(data, status){
+            vm.comment = data.data;
+        }
+        
 
         function capitalize(error){
             return '* ' + error[0].toUpperCase() + error.slice(1); 
@@ -106,6 +129,13 @@ angular.module('app')
         		vm.bookmark.tags = [];
         	vm.bookmark.tags.push(vm.tag);
         	delete vm.tag;
+        }
+        function detailsBookmark(bookmark) {
+            vm.bookmark = bookmark;
+        }
+        
+        function closeDetailsBookmark() {
+            vm.bookmark = {};
         }
 
         function deleteTag(tag) {
