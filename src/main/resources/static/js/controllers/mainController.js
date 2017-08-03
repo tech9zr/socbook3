@@ -11,12 +11,15 @@
         self.register = register;
         self.login = login;
         self.logout = logout;
-        self.toggleLoginRegister = "login";
+        self.toggleLoginRegister = toggleLoginRegister;
+        self.loginOrRegister = "login";
         self.user;
         self.loginError;
         self.registrationError;
         self.captchaMessage;
         self.selectedTheme = "/superhero";
+        self.loginUserForm;
+        self.registerUserForm;
         
         //reCaptcha
         self.publicKey = "6LdBOCsUAAAAAApZH8xQDF78JM5e-4bFMdY1LYaK";     
@@ -30,6 +33,7 @@
         function init() {
             if (self.user) {
                 $route.reload();
+                self.loginUserForm.$setPristine(); 
             }
         }        
 
@@ -68,7 +72,7 @@
             user.status = true;
         	user.roles = [{"id":1,"type":"ROLE_USER"}];
         	UserService.saveUser(user).then(function(response){
-        	//self.toggleLoginRegister = "login";
+        	self.loginOrRegister = "login";
             }, function(error){
             	self.registrationError = {};
                 angular.forEach(error.data.exceptions, function(e){
@@ -94,16 +98,22 @@
                 self.message = '';
                 // setting the same header value for all request calling from this app
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + base64Credential;
-                self.user = res;                
+                self.user = res;          
                 UserService.getLoggedInUserByUsername(self.user.username).then(function(response){
                 	if(!response.data.status)
                 		logout();
-                	else
-                		init();
+                	else{
+                        init();
+                        delete self.loginError;
+                    }
                 });
             }).error(function (error) {
                 self.loginError = 'Bad credentials!';
             });
+        }
+
+        function toggleLoginRegister(showForm) {
+            self.loginOrRegister = showForm;            
         }
 
         // method for logout
@@ -113,6 +123,8 @@
             // clearing all data
             delete self.user;
             delete self.error;
+            delete self.registrationError;
+            delete self.loginError;
         }
         
         function errorHandler(error){

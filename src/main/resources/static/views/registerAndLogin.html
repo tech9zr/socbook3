@@ -4,20 +4,26 @@
 		<div class="page-header">
 			<h1 class="text-center">Social Bookmarks</h1>
 		</div>
-		<div ng-switch on="vm.toggleLoginRegister">
+		<div ng-switch on="vm.loginOrRegister">
 			<div ng-switch-when="login">
 				<form name="vm.loginUserForm" role="form" ng-submit="vm.login()">
 					<div class="form-group">
-						<label for="username">Username:</label> <input type="text" class="form-control" id="username" name="username" ng-model="vm.credentials.username"
-						/>
+						<label for="username">Username:</label> 
+						<div ng-class="{ 'has-error' : vm.loginUserForm.username.$invalid && !vm.loginUserForm.username.$pristine }">
+							<input type="text" class="form-control" id="username" name="username" required ng-model="vm.credentials.username"/>
+							<span class="error" ng-show="vm.loginUserForm.username.$invalid && !vm.loginUserForm.username.$pristine">* Username is required!</span>
+						</div>
 					</div>
 					<div class="form-group">
-						<label for="password">Password:</label> <input type="password" class="form-control" id="password" name="password" ng-model="vm.credentials.password"
-						/>
+						<label for="password">Password:</label> 
+						<div ng-class="{ 'has-error' : vm.loginUserForm.password.$invalid && !vm.loginUserForm.password.$pristine }">
+							<input type="password" class="form-control" id="password" name="password" required ng-model="vm.credentials.password"/>
+							<span class="error" ng-show="vm.loginUserForm.password.$invalid && !vm.loginUserForm.password.$pristine">* Password is required!</span>
+						</div>
 					</div>
 					<div class="alert alert-danger" ng-if="vm.loginError">Bad credentials!</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
-					<a href="javascript:void(0)" ng-click="vm.toggleLoginRegister = 'register'" class=pull-right>Register</a>
+					<a href="javascript:void(0)" ng-click="vm.toggleLoginRegister('register')" class=pull-right>Register</a>
 				</form>
 			</div>
 			<div ng-switch-when="register">
@@ -62,7 +68,7 @@
 					<br>
 					<div class="alert alert-danger" ng-if="vm.registrationError">Registration failed!</div>
 					<button type="submit" class="btn btn-primary">Submit</button>
-					<a href="javascript:void(0)" ng-click="vm.toggleLoginRegister = 'login'" class=pull-right>Login</a>
+					<a href="javascript:void(0)" ng-click="vm.toggleLoginRegister('login')" class=pull-right>Login</a>
 				</form>
 				<div class="modal fade" id="captchaModal" role="dialog">
 					<div class="modal-dialog">
