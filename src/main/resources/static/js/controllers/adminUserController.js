@@ -28,6 +28,7 @@ angular.module('app')
         function addUser() {
             vm.adminAddUserForm.$setPristine();
             vm.operation = "Add";
+            delete vm.error;
             init();
         }
 
@@ -42,7 +43,7 @@ angular.module('app')
 
         function editUser(user){
         	vm.user = user;
-        	vm.error = {};
+        	delete vm.error;
             vm.operation = "Edit";
             vm.user = angular.copy(user);
         }
@@ -70,7 +71,7 @@ angular.module('app')
             })
            //remove input value after submit
             vm.adminAddUserForm.$setPristine();
-        	vm.error = {};
+        	delete vm.error;
         }        
         
         function selectUser(user){
