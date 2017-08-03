@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -64,9 +65,9 @@ public class Bookmark extends BaseEntity implements Serializable {
 	@Column(name = "source_bookmark_id")
 	private Long sourceBookmarkId;
 
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(name = "bookmark_id", nullable = true, unique = false)
-	private Set<User> importedUsersList;
+	@ElementCollection
+	@Column(name = "imported_users_list", nullable = true, unique = false)
+	private Set<String> importedUsersList;
 
 	public Bookmark() {
 
@@ -152,13 +153,15 @@ public class Bookmark extends BaseEntity implements Serializable {
 		this.comments = comments;
 	}
 
-	public Set<User> getImportedUsersList() {
+	public Set<String> getImportedUsersList() {
 		return importedUsersList;
 	}
 
-	public void setImportedUsersList(Set<User> importedUsersList) {
+	public void setImportedUsersList(Set<String> importedUsersList) {
 		this.importedUsersList = importedUsersList;
 	}
+
+
 
 
 	

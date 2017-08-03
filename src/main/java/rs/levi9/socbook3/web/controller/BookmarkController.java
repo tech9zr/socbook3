@@ -71,8 +71,8 @@ public class BookmarkController {
 
 		if (sourceBookmarkId != null) {
 			Bookmark sourceBookmark = bookmarkService.findOne(sourceBookmarkId);
-			Set<User> importedUsersList = sourceBookmark.getImportedUsersList();
-			importedUsersList.remove(bookmark.getUser());
+			Set<String> importedUsersList = sourceBookmark.getImportedUsersList();
+			importedUsersList.remove(bookmark.getUser().getUsername());
 		}
 		
 			
@@ -126,8 +126,8 @@ public class BookmarkController {
 		newBookmark.setDescription(sourceBookmark.getDescription());
 		newBookmark.setSourceBookmarkId(sourceBookmark.getId());
 
-		Set<User> importedUsersList = sourceBookmark.getImportedUsersList();
-		importedUsersList.add(newAuthor);
+		Set<String> importedUsersList = sourceBookmark.getImportedUsersList();
+		importedUsersList.add(newAuthor.getUsername());
 		sourceBookmark.setImportedUsersList(importedUsersList);
 
 		bookmarkService.save(sourceBookmark);

@@ -57,7 +57,7 @@
         function isImportDisabled(bookmark){
             if(bookmark.importedUsersList.length > 0)
                 return bookmark.importedUsersList.some(function(val){
-                    return vm.loggedInUser.username === val.username;
+                    return vm.loggedInUser.username === val;
                 })
             return false;
             // return SearchService.getDisabledImportBookmarks().some(function(val){
