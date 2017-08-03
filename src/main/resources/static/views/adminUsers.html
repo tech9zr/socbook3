@@ -19,7 +19,7 @@
                     <td>{{user.lastName}}</td>
                     <td>{{user.email}}</td>
                     <td class="option">
-                        <input type="checkbox" class="form-control" ng-model="user.status" ng-true-value="true" ng-false-value="false" disabled>
+                        <input style="width: 40%" type="checkbox" class="form-control" ng-model="user.status" ng-true-value="true" ng-false-value="false" disabled>
                     </td>
                     <td class="option">
                         <button class="btn btn-default" data-toggle="modal" data-target="#add-user-modal" type="button" ng-click="vm.editUser(user)">
@@ -79,7 +79,7 @@
                     <div class="modal-body">
                         <form name="vm.adminAddUserForm" novalidate>
                             <div class="form-group">
-                                <label for="username">Username:</label>
+                                <label for="username"><h5>Username:</h5></label>
                                 <div ng-class="{ 'has-error' : vm.adminAddUserForm.username.$invalid && !vm.adminAddUserForm.username.$pristine }">
                                     <input name="username" type="text" class="form-control" required ng-model="vm.user.username" />
                                     <span class="error" ng-show="vm.adminAddUserForm.username.$invalid && !vm.adminAddUserForm.username.$pristine">* Username is required!</span>
@@ -88,7 +88,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="password">Password:</label>
+                                <label for="password"><h5>Password:</h5></label>
 
                                 <div ng-class="{ 'has-error' : vm.adminAddUserForm.password.$invalid && !vm.adminAddUserForm.password.$pristine }">
                                     <input name="password" type="password" class="form-control" required ng-model="vm.user.password" />
@@ -97,17 +97,17 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="firstname"> Firstname:</label>
+                                <label for="firstname"><h5>Firstname:</h5></label>
                                 <input type="text" class="form-control" id="firstname" name="firstname" ng-model="vm.user.firstName" />
                             </div>
 
                             <div class="form-group">
-                                <label for="lastname">Lastname:</label>
+                                <label for="lastname"><h5>Lastname:</h5></label>
                                 <input type="text" class="form-control" id="lastname" name="lastname" ng-model="vm.user.lastName" />
                             </div>
 
                             <div class="form-group">
-                                <label for="email">Email:</label>
+                                <label for="email"><h5>Email:</h5></label>
 
                                 <div ng-class="{ 'has-error' : vm.adminAddUserForm.email.$invalid && !vm.adminAddUserForm.email.$pristine }">
                                     <input name="email" type="email" class="form-control" required ng-model="vm.user.email" />
@@ -117,12 +117,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="status">Active</label>
+                                <label for="status"><h5>Active:</h5></label>
                                 <div ng-class="{ 'has-error' : vm.adminAddUserForm.status.$invalid && !vm.adminAddUserForm.status.$pristine }">
-                                    <input name="status" id="status" type="checkbox" class="form-control" ng-model="vm.user.status" ng-true-value="true" ng-false-value="false"
-                                    />
+                                    <input style="box-shadow: none;" name="status" id="status" type="checkbox" class="form-control" ng-model="vm.user.status" ng-true-value="true" ng-false-value="false"/>
                                 </div>
                             </div>
+                            <br>
 
                             <div class="alert alert-danger" ng-if="vm.error">Failed to add user!</div>
                         </form>

@@ -67,10 +67,23 @@
 
         function detailsBookmark(bookmark) {
             vm.bookmark = bookmark;
+            vm.averageRate = calculateAverageRate(vm.bookmark.comments);
         }
 
         function closeDetailsBookmark() {
             vm.bookmark = {};
+        }
+
+        function calculateAverageRate(comments) {
+            var sumOfRates = 0;
+            var numOfRatesNotZero = 0;
+            angular.forEach(comments, function(comment){
+                if(comment.rate && comment.rate != 0) {
+                    sumOfRates += comment.rate;
+                    numOfRatesNotZero += 1;
+                }
+            });
+            return sumOfRates / numOfRatesNotZero;
         }
 
         function postComment(comment) {
@@ -80,8 +93,9 @@
             BookmarkService.saveBookmark(bookmark).then(function(){
                 BookmarkService.getBookmark(bookmark.id).then(function(response){
                     vm.bookmark = response;
-                    getBookmarksByVisible();
+                    vm.averageRate = calculateAverageRate(vm.bookmark.comments);
                 });
+                getBookmarksByVisible();
             });
             delete vm.comment;
         }
@@ -89,8 +103,9 @@
         function deleteComment(commentId){
             CommentService.deleteComment(commentId).then(function(response){
             	BookmarkService.getBookmark(vm.bookmark.id).then(function(response){
-            		vm.bookmark = response;
-            	})
+                    vm.bookmark = response;
+                    vm.averageRate = calculateAverageRate(vm.bookmark.comments);
+                });
             	getBookmarksByVisible();            
            });
             vm.operation = "Delete";

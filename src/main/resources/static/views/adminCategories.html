@@ -92,7 +92,7 @@
                         <form name="vm.addCategoryForm" novalidate ng-class="{ 'has-error' : vm.addCategoryForm.name.$invalid && !vm.addCategoryForm.name.$pristine }">
                             <div class="form-group">
                                 <div class="modal-item">
-                                    <label>Name</label>
+                                    <label><h5>Name:</h5></label>
                                     <input name="name" type="text" class="form-control" required ng-model="vm.category.name" />
                                     <span class="error" ng-show="vm.addCategoryForm.name.$invalid && !vm.addCategoryForm.name.$pristine">* Name is required! </span>
                                     <br>

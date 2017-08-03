@@ -8,14 +8,14 @@
 			<div ng-switch-when="login">
 				<form name="vm.loginUserForm" role="form" ng-submit="vm.login()">
 					<div class="form-group">
-						<label for="username">Username:</label> 
+						<label for="username"><h5>Username:</h5></label> 
 						<div ng-class="{ 'has-error' : vm.loginUserForm.username.$invalid && !vm.loginUserForm.username.$pristine }">
 							<input type="text" class="form-control" id="username" name="username" required ng-model="vm.credentials.username"/>
 							<span class="error" ng-show="vm.loginUserForm.username.$invalid && !vm.loginUserForm.username.$pristine">* Username is required!</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="password">Password:</label> 
+						<label for="password"><h5>Password:</h5></label> 
 						<div ng-class="{ 'has-error' : vm.loginUserForm.password.$invalid && !vm.loginUserForm.password.$pristine }">
 							<input type="password" class="form-control" id="password" name="password" required ng-model="vm.credentials.password"/>
 							<span class="error" ng-show="vm.loginUserForm.password.$invalid && !vm.loginUserForm.password.$pristine">* Password is required!</span>
@@ -29,7 +29,7 @@
 			<div ng-switch-when="register">
 				<form name="vm.registerUserForm" role="form" ng-submit="vm.register(vm.registerInput)">
 					<div class="form-group">
-						<label for="username">Username:</label>
+						<label for="username"><h5>Username:</h5></label>
 						<div ng-class="{ 'has-error' : vm.registerUserForm.username.$invalid && !vm.registerUserForm.username.$pristine }">
 							<input name="username" type="text" class="form-control" required ng-model="vm.registerInput.username" />
 							<span class="error" ng-show="vm.registerUserForm.username.$invalid && !vm.registerUserForm.username.$pristine">* Username is required!</span>
@@ -37,22 +37,22 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="password">Password:</label>
+						<label for="password"><h5>Password:</h5></label>
 						<div ng-class="{ 'has-error' : vm.registerUserForm.password.$invalid && !vm.registerUserForm.password.$pristine }">
 							<input name="password" type="password" class="form-control" required ng-model="vm.registerInput.password" />
 							<span class="error" ng-show="vm.registerUserForm.password.$invalid && !vm.registerUserForm.password.$pristine">* Password is required!</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="firstname"> Firstname:</label> <input type="text" class="form-control" id="firstname" name="firstname"
+						<label for="firstname"><h5>Firstname:</h5></label> <input type="text" class="form-control" id="firstname" name="firstname"
 						 ng-model="vm.registerInput.firstName" />
 					</div>
 					<div class="form-group">
-						<label for="lastname">Lastname:</label> <input type="text" class="form-control" id="lastname" name="lastname" ng-model="vm.registerInput.lastName"
+						<label for="lastname"><h5>Lastname:</h5></label> <input type="text" class="form-control" id="lastname" name="lastname" ng-model="vm.registerInput.lastName"
 						/>
 					</div>
 					<div class="form-group">
-						<label for="email">Email:</label>
+						<label for="email"><h5>Email:</h5></label>
 						<div ng-class="{ 'has-error' : vm.registerUserForm.email.$invalid && !vm.registerUserForm.email.$pristine }">
 							<input name="email" type="email" class="form-control" required ng-model="vm.registerInput.email" />
 							<span class="error" ng-show="vm.registerUserForm.email.$invalid && !vm.registerUserForm.email.$pristine">* Email is required!</span>
