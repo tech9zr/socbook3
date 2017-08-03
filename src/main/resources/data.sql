@@ -18,6 +18,7 @@ INSERT INTO `category`(`name`) values ("Kuvanje");
 INSERT INTO `category`(`name`) values ("Sport");
 INSERT INTO `category`(`name`) values ("Stream");
 INSERT INTO `category`(`name`) values ("Vocarstvo");
+INSERT INTO `category`(`name`) values ("Uncategorised");
 
 INSERT INTO `category`(`name`) values ("Home & Garden");
 INSERT INTO `category`(`name`) values ("Jobs & Education");
@@ -118,7 +119,7 @@ INSERT INTO `bookmark_tags` (`bookmark_id`,`tag_id`) values (7,27);
 INSERT INTO `bookmark_tags` (`bookmark_id`,`tag_id`) values (7,28);
 
 
-INSERT INTO `comment` (`content`, `rate`,`creation_date`,`bookmark_id`,`user_id`) values ("Ovo je komentar, bla bla bla", 2, NOW(),1,2);
+
 INSERT INTO `comment` (`content`, `rate`,`creation_date`,`bookmark_id`,`user_id`) values ("I ovo je komentar, bla bla bla", 5, NOW(),1,3);
 INSERT INTO `comment` (`content`, `rate`,`creation_date`,`bookmark_id`,`user_id`) values ("Ponovo  komentar, bla bla bla", 3, NOW(),1,4);
 

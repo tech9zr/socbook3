@@ -11,6 +11,7 @@
                     <th>Tags</th>
                     <th>Date</th>
                     <th>Public</th>
+                    <th>Details</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -34,6 +35,9 @@
                     	<input type="checkbox" class="form-control" ng-model="bookmark.visible" ng-true-value="true" ng-false-value="false" disabled>
                     </td>
                     <td class="option">
+						<button class="btn btn-default" data-toggle="modal" data-target="#details-bookmark-modal" type="button" ng-click="vm.detailsBookmark(bookmark)"><span class="glyphicon glyphicon-modal-window"></span></button>
+					</td>
+                    <td class="option">
                         <button class="btn btn-default" data-toggle="modal" data-target="#add-bookmark-modal" type="button" ng-click="vm.editBookmark(bookmark)">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </button>
@@ -46,6 +50,64 @@
                 </tr>
             </tbody>
         </table>
+         <div class="modal fade" id="details-bookmark-modal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Bookmark Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form name="vm.detailsBookmarkForm" novalidate>
+							<fieldset>
+								<div class="well container" style="width: 100%;">
+									<legend>{{vm.bookmark.title}}</legend>
+									<div><a href="http://{{vm.bookmark.url}}" target="_blank">{{vm.bookmark.url}}</a></div>
+									<div>{{vm.bookmark.description}}</div>
+									
+									<div>{{vm.bookmark.category.name}}</div>
+									<div>
+										<span ng-repeat="tag in vm.bookmark.tags | orderBy:'id'"> 
+											<label class="label-primary">{{tag.name}}</label>
+										</span>
+									</div>
+								</div>
+								<br>
+								<div class="col-md-12">
+									<!--Comments List-->
+									<div ng-repeat="comment in vm.bookmark.comments | orderBy:'creationDate':true">
+										<div class="panel panel-default">
+											<div class="panel-heading">
+												<div class="row">
+													<div class="col-md-6">
+														<span><u><i>{{comment.author.username}}</i></u></span>
+													</div>
+													<div class="col-md-6">
+														<button type="button" class="close pull-right" ng-click=vm.deleteComment(comment.id)>&nbsp;&nbsp;&nbsp;&times;</button>
+														<span uib-rating ng-if="comment.rate" class="text-primary pull-right" read-only="true" ng-model="comment.rate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>											
+													</div>
+												</div>
+											</div>
+											<div class="panel-body">
+												<span ng-if="comment.content">{{comment.content}}</span>
+												<div>
+													<h6><small class="pull-right">{{comment.creationDate | date : "d MMM y"}}</small></h6>													
+												</div>
+											</div>
+										</div>									
+									</div>
+								</div>									
+								<br>
+							</fieldset>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-primary" ng-click="vm.closeDetailsBookmark()">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
 
         <!-- Modal -->
         <!-- Delete bookmark -->
