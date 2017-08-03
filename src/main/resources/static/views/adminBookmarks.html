@@ -141,27 +141,26 @@
                         <h4 class="modal-title">{{vm.operation}} Bookmark</h4>
                     </div>
                     <div class="modal-body">
-
                         <form name="vm.addBookmarkForm" novalidate>
                             <div class="form-group">
-                                <h4><span class="label label-primary">Category</span></h4>
+                                <label>Category</label>
                                 <div class="modal-item">
                                     <select class="form-control" name="selectCategory" ng-options="category.name for category in vm.categories track by category.id" ng-model="vm.bookmark.category" required>
                                         <option value="" ng-disabled="true" disabled>---Must select category---</option>
                                     </select>
                                 </div>
-                                <h4><span class="label label-primary">Title</span></h4>
+                                <label>Title</label>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.title.$invalid && !vm.addBookmarkForm.title.$pristine }">
                                     <input name="title" type="text" class="form-control" required ng-model="vm.bookmark.title"/>
                                     <span class="error" ng-show="vm.addBookmarkForm.title.$invalid && !vm.addBookmarkForm.title.$pristine">* Title is required!</span>
                                     <span ng-if="vm.error.title" class="error">{{vm.error.title}}</span>
                                 </div>
-                                <h4><span class="label label-primary">Description</span></h4>
+                                <label>Description</label>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.description.$invalid && !vm.addBookmarkForm.description.$pristine }">
                                     <input name="description" type="text" class="form-control" required ng-model="vm.bookmark.description"/>
                                     <span class="error" ng-show="vm.addBookmarkForm.description.$invalid && !vm.addBookmarkForm.description.$pristine">* Description is required! </span>
                                 </div>
-                                <h4><span class="label label-primary">Tags</span></h4>
+                                <label>Tags</label>
 								<div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.tags.$invalid && !vm.addBookmarkForm.tags.$pristine }"> 
                                 	<div class="input-group">
 	      								<input name="tags" type="text" class="form-control" placeholder="Add tag..." ng-model="vm.tag.name">
@@ -173,15 +172,15 @@
 	                    				<label ng-click="vm.deleteTag(tag)" ng-style="del" ng-class="dan" title="Delete Tag"
                                         ng-mouseenter="del={'text-decoration':'line-through'};dan='label-danger'"
                                         ng-mouseleave="del={'text-decoration':'none'};dan='label-primary'"  
-                                        class="label label-primary label-md" style="cursor: pointer;">{{tag.name}}</label>
+                                        class="label label-primary" style="cursor: pointer;">{{tag.name}}</label>
                     				</span>
                                 </div>
-                                <h4><span class="label label-primary">URL</span></h4>
+                                <label>URL</label>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.url.$invalid && !vm.addBookmarkForm.url.$pristine }">
                                     <input name="url" type="text" class="form-control" required ng-model="vm.bookmark.url"/>
                                     <span class="error" ng-show="vm.addBookmarkForm.url.$invalid && !vm.addBookmarkForm.url.$pristine">* URL is required! </span>
                                 </div>
-                                <h4><span class="label label-primary checkbox-inline">Public</span></h4>
+                                <label>Public</label>
                                 <div class="modal-item" ng-class="{ 'has-error' : vm.addBookmarkForm.visible.$invalid && !vm.addBookmarkForm.visible.$pristine }">
                                     <input name="visible" type="checkbox" class="form-control" ng-model="vm.bookmark.visible" ng-true-value="true" ng-false-value="false"/>
                                 </div>
