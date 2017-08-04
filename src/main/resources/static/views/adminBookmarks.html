@@ -171,7 +171,7 @@
                                 <label><h5>Tags:</h5></label>
                                 <div ng-class="{ 'has-error' : vm.addBookmarkForm.tags.$invalid && !vm.addBookmarkForm.tags.$pristine }">
                                     <div class="input-group">
-                                        <input name="tags" type="text" class="form-control" placeholder="Add tag..." ng-model="vm.tag.name">
+                                        <input name="tags" type="text" class="form-control" placeholder="Add tag..." ng-model="vm.tag.name" ng-keypress="($event.charCode==13)?vm.addTag():return">
                                         <span class="input-group-btn">
                                             <button class="btn btn-primary" type="button" ng-click="vm.addTag()"><strong>Add</strong></button>
                                         </span>
