@@ -1,4 +1,3 @@
-
 <div class="row">
 	<div class="col-md-4 col-md-offset-4">
 		<div class="page-header">
@@ -8,16 +7,16 @@
 			<div ng-switch-when="login">
 				<form name="vm.loginUserForm" role="form" ng-submit="vm.login()">
 					<div class="form-group">
-						<label for="username"><h5>Username:</h5></label> 
+						<label for="username"><h5>Username:</h5></label>
 						<div ng-class="{ 'has-error' : vm.loginUserForm.username.$invalid && !vm.loginUserForm.username.$pristine }">
-							<input type="text" class="form-control" id="username" name="username" required ng-model="vm.credentials.username"/>
+							<input type="text" class="form-control" id="username" name="username" required ng-model="vm.credentials.username" />
 							<span class="error" ng-show="vm.loginUserForm.username.$invalid && !vm.loginUserForm.username.$pristine">* Username is required!</span>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="password"><h5>Password:</h5></label> 
+						<label for="password"><h5>Password:</h5></label>
 						<div ng-class="{ 'has-error' : vm.loginUserForm.password.$invalid && !vm.loginUserForm.password.$pristine }">
-							<input type="password" class="form-control" id="password" name="password" required ng-model="vm.credentials.password"/>
+							<input type="password" class="form-control" id="password" name="password" required ng-model="vm.credentials.password" />
 							<span class="error" ng-show="vm.loginUserForm.password.$invalid && !vm.loginUserForm.password.$pristine">* Password is required!</span>
 						</div>
 					</div>
@@ -48,8 +47,8 @@
 						 ng-model="vm.registerInput.firstName" />
 					</div>
 					<div class="form-group">
-						<label for="lastname"><h5>Lastname:</h5></label> <input type="text" class="form-control" id="lastname" name="lastname" ng-model="vm.registerInput.lastName"
-						/>
+						<label for="lastname"><h5>Lastname:</h5></label> <input type="text" class="form-control" id="lastname" name="lastname"
+						 ng-model="vm.registerInput.lastName" />
 					</div>
 					<div class="form-group">
 						<label for="email"><h5>Email:</h5></label>
@@ -59,7 +58,7 @@
 							<span ng-if="vm.registrationError.email" class="error">* {{vm.registrationError.email}}</span>
 						</div>
 					</div>
-		     		
+
 					<!-- reCaptcha -->
 					<div class="text-center">
 						<div vc-recaptcha key="vm.publicKey" theme="dark" size="normal" style="display:inline-block"></div>
@@ -70,22 +69,22 @@
 					<button type="submit" class="btn btn-primary">Submit</button>
 					<a href="javascript:void(0)" ng-click="vm.toggleLoginRegister('login')" class=pull-right>Login</a>
 				</form>
-				<div class="modal fade" id="registrationModal" role="dialog">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-								<h4 class="modal-title">Registration</h4>
-							</div>
-							<div class="modal-body">
-								<p>{{vm.registrationMessage}}</p>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-					</div>
-				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="registrationModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.closeRegistrationConfirmation()">&times;</button>
+				<h4 class="modal-title">Registration</h4>
+			</div>
+			<div class="modal-body">
+				<p>{{vm.registrationMessage}}</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="vm.closeRegistrationConfirmation()">Close</button>
 			</div>
 		</div>
 	</div>

@@ -12,6 +12,7 @@
         self.login = login;
         self.logout = logout;
         self.toggleLoginRegister = toggleLoginRegister;
+        self.closeRegistrationConfirmation = closeRegistrationConfirmation;
         self.loginOrRegister = "login";
         self.user;
         self.loginError;
@@ -115,6 +116,13 @@
             self.loginOrRegister = showForm;            
         }
 
+        function closeRegistrationConfirmation() {
+            if(self.registrationMessage.includes("is registered!")) {
+                self.loginOrRegister = "login";
+                //$('#registrationModal').modal('hide');
+            }
+        }
+
         // method for logout
         function logout() {
             // clearing the authorization header
@@ -130,9 +138,11 @@
             switch(error.field){
                 case 'username':
                     self.registrationError.username = error.message;
+                    grecaptcha.reset();
                     break;
                 case 'email':
                     self.registrationError.email = error.message;
+                    grecaptcha.reset();                    
                     break;
             }
         }
