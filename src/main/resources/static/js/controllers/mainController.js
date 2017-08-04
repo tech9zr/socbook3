@@ -113,13 +113,30 @@
         }
 
         function toggleLoginRegister(showForm) {
-            self.loginOrRegister = showForm;            
+            if(showForm == "register") {
+                self.loginUserForm.$setPristine();
+                delete self.credentials;
+                delete self.loginError;
+            }
+            else {
+                self.registerUserForm.$setPristine();
+                delete self.registerInput;
+                delete self.registrationError;
+            }
+            delete self.error;
+            self.loginOrRegister = showForm; 
         }
 
         function closeRegistrationConfirmation() {
             if(self.registrationMessage.includes("is registered!")) {
-                self.loginOrRegister = "login";
-                //$('#registrationModal').modal('hide');
+            	self.loginUserForm.$setPristine();
+                delete self.credentials;
+                delete self.loginError;
+            	self.registerUserForm.$setPristine();
+                delete self.registerInput;
+                delete self.registrationError;
+                delete self.error;
+            	self.loginOrRegister = "login";
             }
         }
 
