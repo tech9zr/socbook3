@@ -4,7 +4,7 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr class="success">
-                        <th>#</th>
+                        
                         <th>Category</th>
                         <th>Edit</th>
                         <th>Delete</th>
@@ -12,7 +12,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="category in vm.categories track by $index">
-                        <td>{{$index}}</td>
+                       
                         <td>{{category.name}}</td>
                         <td>
                             <button class="btn btn-default " data-toggle="modal" data-target="#addCategoryModal" type="button" ng-click="vm.editCategory(category)">
@@ -52,7 +52,7 @@
                     <div class="modal-body">
                         <p>Do you want to delete <i>{{vm.category.name}}</i> ?</p>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="vm.deleteCategory()">OK</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="vm.deleteCategory(vm.category)">OK</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>

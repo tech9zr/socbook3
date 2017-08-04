@@ -26,10 +26,11 @@
             vm.category = {};
         }
 
-        function deleteCategory(){
+        function deleteCategory(category){
             CategoryService.deleteCategory(vm.category.id).then(function(response){
                 getCategories();
             }, function(error){
+            	vm.category = category;
             	$('#categoryModal').modal('show');
             });
             vm.category = {};
