@@ -123,16 +123,15 @@
                 delete self.registerInput;
                 delete self.registrationError;
             }
-            delete self.error;
-            self.loginOrRegister = showForm; 
+            self.loginOrRegister = showForm;
+            grecaptcha.reset();
         }
 
         function closeRegistrationConfirmation() {
             if(self.registrationMessage.includes("is registered!")) {
+            	grecaptcha.reset();
             	self.registerUserForm.$setPristine();
-                delete self.registerInput;
                 delete self.registrationError;
-                delete self.error;
             	self.loginOrRegister = "login";
             }
         }

@@ -62,7 +62,14 @@
                         <form name="vm.detailsBookmarkForm" novalidate>
                             <fieldset>
                                 <div class="well container" style="width: 100%;">
-                                    <legend>{{vm.bookmark.title}}</legend>
+                                    <legend>
+                                    	{{vm.bookmark.title}}
+                                    	<div class="pull-right" ng-if="vm.rateNumber != 0">
+											<div>Average Rate:&nbsp;&nbsp;&nbsp;</div>
+											<span uib-rating read-only="true" class="text-primary" ng-model="vm.averageRate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
+											<span>{{vm.rateNumber}}</span>
+										</div>
+                                    </legend>
                                     <div><a href="http://{{vm.bookmark.url}}" target="_blank">{{vm.bookmark.url}}</a></div>
                                     <div>{{vm.bookmark.description}}</div>
 
