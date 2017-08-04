@@ -129,9 +129,6 @@
 
         function closeRegistrationConfirmation() {
             if(self.registrationMessage.includes("is registered!")) {
-            	self.loginUserForm.$setPristine();
-                delete self.credentials;
-                delete self.loginError;
             	self.registerUserForm.$setPristine();
                 delete self.registerInput;
                 delete self.registrationError;
