@@ -71,7 +71,7 @@
         	user.roles = [{"id":1,"type":"ROLE_USER"}];
         	UserService.saveUser(user).then(function(response){
         		//self.loginOrRegister = "login";
-                self.registrationMessage = user.username + " is registered!";
+                self.registrationMessage = user.username + "  is registered!";
                 $('#registrationModal').modal('show');
             }, function(error){
             	self.registrationError = {};

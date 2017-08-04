@@ -15,6 +15,7 @@
         vm.clearAll = clearAll;
         vm.postComment = postComment;
         vm.deleteComment = deleteComment;
+        vm.rateCounter = rateCounter;
         vm.bookmarks;
 
         init();
@@ -68,6 +69,7 @@
         function detailsBookmark(bookmark) {
             vm.bookmark = bookmark;
             vm.averageRate = calculateAverageRate(vm.bookmark.comments);
+            vm.rateNumber = rateCounter(vm.bookmark.comments);
         }
 
         function closeDetailsBookmark() {
@@ -85,6 +87,16 @@
             });
             return sumOfRates / numOfRatesNotZero;
         }
+        
+        function rateCounter(comments) {
+            var numOfRatesNotZero = 0;
+            angular.forEach(comments, function(comment){
+                if(comment.rate && comment.rate != 0) {
+                    numOfRatesNotZero += 1;
+                }
+            });
+            return numOfRatesNotZero;
+        }
 
         function postComment(comment) {
             var bookmark = angular.copy(vm.bookmark);
@@ -94,6 +106,7 @@
                 BookmarkService.getBookmark(bookmark.id).then(function(response){
                     vm.bookmark = response;
                     vm.averageRate = calculateAverageRate(vm.bookmark.comments);
+                    vm.rateNumber = rateCounter(vm.bookmark.comments);
                 });
                 getBookmarksByVisible();
             });
@@ -105,6 +118,7 @@
             	BookmarkService.getBookmark(vm.bookmark.id).then(function(response){
                     vm.bookmark = response;
                     vm.averageRate = calculateAverageRate(vm.bookmark.comments);
+                    vm.rateNumber = rateCounter(vm.bookmark.comments);
                 });
             	getBookmarksByVisible();            
            });

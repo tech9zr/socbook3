@@ -98,7 +98,8 @@
 										{{vm.bookmark.title}}
 										<div class="pull-right">
 											<div>Average Rate:&nbsp;&nbsp;&nbsp;</div>
-											<div uib-rating read-only="true" class="text-primary" ng-model="vm.averageRate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></div>
+											<span uib-rating read-only="true" class="text-primary" ng-model="vm.averageRate" max="5" state-on="'glyphicon-star'" state-off="'glyphicon-star-empty'" aria-labelledby="custom-icons-1"></span>
+											<span>{{vm.rateNumber}}</span>
 										</div>
 									</legend>
 									<div><a href="http://{{vm.bookmark.url}}" target="_blank">{{vm.bookmark.url}}</a></div>
