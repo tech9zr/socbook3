@@ -17,6 +17,7 @@ angular.module('app')
         vm.addTag = addTag;
         vm.deleteTag = deleteTag;
         vm.operation;
+        vm.rateCounter = rateCounter;
 
         init();
 
@@ -125,6 +126,30 @@ angular.module('app')
         
         function detailsBookmark(bookmark) {
             vm.bookmark = bookmark;
+            vm.averageRate = calculateAverageRate(vm.bookmark.comments);
+            vm.rateNumber = rateCounter(vm.bookmark.comments);
+        }
+        
+        function calculateAverageRate(comments) {
+            var sumOfRates = 0;
+            var numOfRatesNotZero = 0;
+            angular.forEach(comments, function(comment){
+                if(comment.rate && comment.rate != 0) {
+                    sumOfRates += comment.rate;
+                    numOfRatesNotZero += 1;
+                }
+            });
+            return sumOfRates / numOfRatesNotZero;
+        }
+        
+        function rateCounter(comments) {
+            var numOfRatesNotZero = 0;
+            angular.forEach(comments, function(comment){
+                if(comment.rate && comment.rate != 0) {
+                    numOfRatesNotZero += 1;
+                }
+            });
+            return numOfRatesNotZero;
         }
         
         function closeDetailsBookmark() {
